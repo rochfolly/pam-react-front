@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import logo from '../Images/logoPAM.png';
 import './Accueil.css';
 import { Container, Row, Col, Form, FormGroup, Button, Input } from 'reactstrap';
+import Inscription from '../Inscription/Inscription.js';
+import { Route } from 'react-router-dom';
+
 
 
 
@@ -30,13 +33,12 @@ class Accueil extends Component {
 
   render() {
     return (
-      <Container fluid className="background">
+      <Container fluid>
         <Row>
           <img src={logo} className="Accueil-logo" alt="logoPAM" />
         </Row>
         <Row>
-          <Col sm={4}></Col>
-          <Col sm={4} className="blocCentral">
+          <Col sm={{size: 4, offset: 4}} className="blocCentral">
                <h3> Bienvenue ! </h3>
                <p> Veuillez vous identifier : </p><br/>
             <Form>
@@ -63,8 +65,11 @@ class Accueil extends Component {
         <Row className="footer">
           <Col>
           <p>Vous n'avez pas de compte et vous êtes un(e) professionnel(le) de santé ? </p>
-            <a href="/"> Créez votre compte ici !</a>
+            <a href="/inscription"> Créez votre compte ici !</a>
         </Col>
+        </Row>
+        <Row>
+          <Route path="/inscription" component={Inscription}/>
         </Row>
       </Container>
     );
