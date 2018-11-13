@@ -1,43 +1,72 @@
 import React, { Component } from 'react';
 import logo from '../Images/logoPAM.png';
 import './Accueil.css';
+import { Container, Row, Col, Form, FormGroup, Button, Input } from 'reactstrap';
+
 
 
 class Accueil extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {mail: '', mdp:''};
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeMail = this.handleChangeMail.bind(this);
+    this.handleChangeMdp = this.handleChangeMdp.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleChangeMail(event) {
+    this.setState({mail: event.target.value});
+  }
+
+  handleChangeMdp(event) {
+    this.setState({mdp: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    alert('An account was submitted: \n' + this.state.mail + '\n' + this.state.mdp);
     event.preventDefault();
   }
 
   render() {
     return (
-      <div className="Accueil">
-        <img src={logo} className="Accueil-logo" alt="logoPAM" />
-        <h1> Bienvenue ! Veuillez vous identifier : </h1>
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          <input type="mail" value={this.state.value} placeholder="Email" onChange={this.handleChange} />
-        </label>
-        <label>
-          <input type="password" value={this.state.value} placeholder="Mot de passe"onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-      <p>Vous n'avez pas de compte et vous êtes professionnel de santé ?</p>
-      <p>Créez votre compte ici ! </p>
-      </div>
+      <Container fluid className="background">
+        <Row>
+          <img src={logo} className="Accueil-logo" alt="logoPAM" />
+        </Row>
+        <Row>
+          <Col sm={4}></Col>
+          <Col sm={4} className="blocCentral">
+               <h3> Bienvenue ! </h3>
+               <p> Veuillez vous identifier : </p><br/>
+            <Form>
+              <FormGroup row>
+                <Col sm={12}>
+                  <Input type="email" value={this.state.value} name="email" id="email" placeholder="Email" onChange={this.handleChangeMail}/>
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Col sm={12}>
+                  <Input type="password" value={this.state.value} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChangeMdp} />
+                </Col>
+              </FormGroup>
+              <FormGroup check row>
+                <Col>
+                  <br/>
+                  <Button onClick={this.handleSubmit}>Submit</Button>
+                </Col>
+              </FormGroup>
+            </Form>
+          </Col>
+        </Row>
+
+        <Row className="footer">
+          <Col>
+          <p>Vous n'avez pas de compte et vous êtes un(e) professionnel(le) de santé ? </p>
+            <a href="/"> Créez votre compte ici !</a>
+        </Col>
+        </Row>
+      </Container>
     );
   }
 }
