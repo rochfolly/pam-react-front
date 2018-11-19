@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter} from 'react-router-dom';
 import Accueil from './Accueil/Accueil.js';
 
 /* var db = require('./db')
@@ -20,10 +21,13 @@ db.connect(db.MODE_PRODUCTION, function(err) {
   }
 }) */
 
+
 class App extends Component {
   render() {
     return (
-      <Accueil />
+      <BrowserRouter>
+       <Accueil />
+      </BrowserRouter>
     );
   }
 }
