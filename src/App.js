@@ -5,6 +5,8 @@ import { BrowserRouter, Route} from 'react-router-dom';
 import Accueil from './Accueil/Accueil.js';
 import ProfilPro from './Pro/Profil/Profil.js';
 import Inscription from './Pro/Inscription/Inscription.js';
+import AjoutPatient from './Pro/Profil/Ajout/Ajout.js';
+import ProfilPatient from './Pro/Profil/ProfilPatient.js';
 
 /* var db = require('./db')
 
@@ -32,6 +34,8 @@ class App extends Component {
           <Route exact path='/' component={Accueil} />
           <Route path='/inscription' component={Inscription} />
           <Route path='/profil' component={ProfilPro} />
+          <Route path='/profil/ajout' component={AjoutPatient} />
+          <Route path='/profil/user' component={ProfilPatient} />
         </div>
       </BrowserRouter>
     );
