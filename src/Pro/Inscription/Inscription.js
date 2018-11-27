@@ -5,8 +5,23 @@ import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reac
 import { Route } from 'react-router-dom';
 import ProfilPro from '../Profil/Profil.js';
 
+//modules bdd
+/*const express = require('express');
+const mysql = require('mysql');
+const cors = require('cors');
+const app = express();
 
-
+//connexion à la bdd
+const connection = mysql.createConnection({
+ host: 'localhost',
+ user: 'root',
+ password: '',
+ database: 'pam'
+});
+connection.connect(function(err) {
+  if (err) throw err
+  console.log('You are connected to the PAM database')
+}) */
 
 class Inscription extends Component {
   constructor(props) {
