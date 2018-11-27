@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import logo from '../Images/logoPAM.png';
 import './Accueil.css';
 import { Container, Row, Col, Form, FormGroup, Button, Input } from 'reactstrap';
-import Inscription from '../Inscription/Inscription.js';
+import ProfilPro from '../Pro/Profil/Profil.js';
+import Inscription from '../Pro/Inscription/Inscription.js';
 import { Route } from 'react-router-dom';
 
 
@@ -65,11 +66,11 @@ class Accueil extends Component {
         <Row className="footer">
           <Col>
           <p>Vous n'avez pas de compte et vous êtes un(e) professionnel(le) de santé ? </p>
-            <a href="/inscription"> Créez votre compte ici !</a>
+            <a href="/pro/inscription"> Créez votre compte ici !</a>
         </Col>
         </Row>
         <Row>
-          <Route path="/inscription" component={Inscription}/>
+          <Route path="/pro/inscription" component={ProfilPro}/>
         </Row>
       </Container>
     );

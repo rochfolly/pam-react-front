@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import logo from '../Images/logoPAM.png';
+import logo from '../../Images/logoPAM.png';
 import './Inscription.css';
 import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reactstrap';
+import { Route } from 'react-router-dom';
+import ProfilPro from '../Profil/Profil.js';
+
 
 
 
@@ -93,12 +96,15 @@ class Inscription extends Component {
                 <Col sm={{size:1, offset:10}}>
                   <Button onClick={this.handleSubmit} >Submit</Button>
                 </Col>
+                <a href="/pro/profil">Le profil</a>
                 </FormGroup>
             </Form>
           </Col>
         </Row>
 
-        <Row className="footer"> </Row>
+        <Row>
+          <Route path="/pro/profil" component={ProfilPro}/>
+        </Row>
       </Container>
     );
   }

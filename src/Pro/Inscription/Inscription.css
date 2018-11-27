@@ -1,0 +1,18 @@
+.Inscription-logo {
+  margin: 0 auto;
+  height: 15vmin;
+}
+
+body {
+  background-color: #f0f0ed !important;
+}
+
+.form-control:focus {
+  border-color: #f2a45c !important;
+  box-shadow: 0 0 8px rgb(242,164,92) !important;
+}
+
+button {
+  background-color: #EB7842 !important;
+  border-color: #EB7842 !important;
+}
