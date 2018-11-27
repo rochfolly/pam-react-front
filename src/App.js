@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter, Route} from 'react-router-dom';
 import Accueil from './Accueil/Accueil.js';
+import ProfilPro from './Pro/Profil/Profil.js';
+import Inscription from './Pro/Inscription/Inscription.js';
 
 /* var db = require('./db')
 
@@ -26,7 +28,11 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-       <Accueil />
+        <div>
+          <Route exact path='/' component={Accueil} />
+          <Route path='/inscription' component={Inscription} />
+          <Route path='/profil' component={ProfilPro} />
+        </div>
       </BrowserRouter>
     );
   }

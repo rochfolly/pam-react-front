@@ -66,11 +66,8 @@ class Accueil extends Component {
         <Row className="footer">
           <Col>
           <p>Vous n'avez pas de compte et vous êtes un(e) professionnel(le) de santé ? </p>
-            <a href="/pro/inscription"> Créez votre compte ici !</a>
+            <a href="/inscription"> Créez votre compte ici !</a>
         </Col>
-        </Row>
-        <Row>
-          <Route path="/pro/inscription" component={ProfilPro}/>
         </Row>
       </Container>
     );

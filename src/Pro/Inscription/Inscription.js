@@ -96,14 +96,10 @@ class Inscription extends Component {
                 <Col sm={{size:1, offset:10}}>
                   <Button onClick={this.handleSubmit} >Submit</Button>
                 </Col>
-                <a href="/pro/profil">Le profil</a>
+                <a href="/profil">Le profil</a>
                 </FormGroup>
             </Form>
           </Col>
-        </Row>
-
-        <Row>
-          <Route path="/pro/profil" component={ProfilPro}/>
         </Row>
       </Container>
     );
