@@ -20,7 +20,7 @@ class ProfilPro extends Component {
         <br/><br/>
         <Row>
         <Col sm={{size:4, offset:4}}>
-          <Button><Glyphicon glyph="star" /> Ajouter un nouveau patient</Button>
+          <Button><a href="/profil/ajout">Ajouter un nouveau patient</a></Button>
         </Col>
         </Row>
         <br/><br/>
@@ -31,17 +31,17 @@ class ProfilPro extends Component {
         </Row>
         <Row>
         <ul className="patients">
-        <a href="/profil/user/:1"><li>
+        <a href="/profil/patient"><li>
           <img src={user} className="User-logo" alt="user" />
-          <span>Pierre Dubois</span>
+          <span>Prénom Nom</span>
         </li></a>
-        <a href="/profil/user/:2"><li>
+        <a href="/profil/patient"><li>
           <img src={user} className="User-logo" alt="user" />
-          <span>Michel Dupond</span>
+          <span>Prénom Nom</span>
         </li></a>
-        <a href="/profil/user/:3"><li>
+        <a href="/profil/patient"><li>
           <img src={user} className="User-logo" alt="user" />
-          <span>Irène Rivière</span>
+          <span>Prénom Nom</span>
         </li></a>
         </ul>
         </Row>

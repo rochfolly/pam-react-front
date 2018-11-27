@@ -112,7 +112,6 @@ class Inscription extends Component {
                 <Col sm={{size:1, offset:10}}>
                   <Button onClick={this.handleSubmit} >Submit</Button>
                 </Col>
-                <a href="/profil">Le profil</a>
                 </FormGroup>
             </Form>
           </Col>
