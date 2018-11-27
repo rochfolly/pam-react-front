@@ -1,3 +1,24 @@
 #user {
   color: #EB7842;
 }
+
+.User-logo {
+  margin: 0 auto;
+  height: 40px;
+}
+
+.patients {
+  list-style-type: circle;
+}
+.patients li {
+  margin-top: 20px;
+}
+.patients span {
+  margin-left: 5px;
+}
+
+a {
+  color: black !important;
+  outline: none !important;
+  text-decoration: none !important;
+}

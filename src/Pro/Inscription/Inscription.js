@@ -34,8 +34,9 @@ class Inscription extends Component {
   render() {
     return (
       <Container>
+      <br/>
         <Row>
-        <Col sm={{size: 2}}><h3>Inscription</h3></Col>
+        <Col sm={{size: 2}}><h3 class="titlePAM">Inscription</h3></Col>
         <Col sm={{size: 2, offset: 7}}><img src={logo} className="Inscription-logo" alt="logoPAM" /></Col>
         </Row>
         <Row>
