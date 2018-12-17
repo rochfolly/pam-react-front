@@ -1,27 +1,35 @@
 const express = require('express');
-const mysql = require('mysql');
 const cors = require('cors');
+const bodyparser = require('body-parser')
 const app = express();
+const userRouter = express.Router()
+let connection = require('./database/config/connection')
 
-const SELECT_ADMINS = 'SELECT name FROM admin';
+const Doctor = require('./database/tables/doctor')
 
- const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'pam'
-});
-
-connection.connect(function(err) {
-  if (err) throw err
-  console.log('You are now connected...')
-})
+const SELECT_ADMINS = 'SELECT * from admin'
 
 app.get('/', (req, res) => {
-  res.send('go to /admins to see all the developpers')
+  res.redirect('/back')
 });
 
-app.get('/admins', (req, res) => {
+userRouter.get('/', (req, res) => {
+  res.send('go to /admins to see all the developpers')
+})
+
+userRouter.post('/doctor', (req, res) => {
+    Doctor.create(req.body, function() {
+      console.log('Docteur ' +req.body.name+ ' ajouté')
+    })
+})
+
+userRouter.get('/doctors', (req, res) => {
+    Doctor.selectAll((doctors) => {
+      res.json(doctors)
+    })
+})
+
+userRouter.get('/admins', (req, res) => {
   connection.query(SELECT_ADMINS, (err, results) => {
     if(err) {
       return res.send(err)
@@ -33,6 +41,8 @@ app.get('/admins', (req, res) => {
     }
   })
 });
+
+app.use('/back', userRouter)
 
 app.listen(8080)
 /*
