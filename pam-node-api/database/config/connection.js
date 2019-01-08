@@ -1,6 +1,13 @@
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
+function connection() {
+  mysql.createConnection({
+   host: 'localhost',
+   user: 'root',
+   password: '',
+   database: 'pam'
+  });
+} mysql.createConnection({
  host: 'localhost',
  user: 'root',
  password: '',
@@ -11,4 +18,4 @@ connection.connect((err) => {
   console.log('Connexion à la bdd PAM réussie ')
 })
 
-module.exports = connection
+export default connection
