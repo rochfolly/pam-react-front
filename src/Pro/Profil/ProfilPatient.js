@@ -13,17 +13,10 @@ class ProfilPatient extends Component {
       modal: false
     };
 
-    this.toggleProfil = this.toggleProfil.bind(this);
-    this.toggleExercices = this.toggleExercices.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
-  toggleProfil() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
-
-  toggleExercices() {
+  toggle() {
     this.setState({
       modal: !this.state.modal
     });
@@ -34,12 +27,18 @@ class ProfilPatient extends Component {
       <Container>
       <br/>
         <Row>
-        <Col sm={{size: 6}}><h3 class="titlePAM">Profil de <span id="user">Prénom Nom</span></h3></Col>
-        <Col sm={{size:2}}>
-          <Button onClick={this.toggleExercices}>Accès aux exercices</Button>
+        <Col sm={{size: 10}}><h3 class="titlePAM">Profil de <span id="user">Prénom Nom</span></h3></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-arrow-left"></i></h2></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
+        </Row>
+        <br/>
+        <Row>
+        <Col sm="2"></Col>
+        <Col sm={{size:4}}>
+          <Button><a href="/profil/patient/exercices">Modifier l'accès aux exercices</a></Button>
         </Col>
-        <Col sm={{size:2}}>
-          <Button onClick={this.toggleProfil}>Accès au profil global</Button>
+        <Col sm={{size:4}}>
+          <Button><a href="/profil/patient/global">Voir les statistiques globales</a></Button>
         </Col>
         </Row>
         <br/>
@@ -48,42 +47,21 @@ class ProfilPatient extends Component {
         </Row>
         <br/>
         <Row>
-        <Col sm="6"><ExercicePatient /></Col>
-        <Col sm="6"><ExercicePatient /></Col>
+        <Col onClick={this.toggle} sm="6"><ExercicePatient /></Col>
+        <Col onClick={this.toggle} sm="6"><ExercicePatient /></Col>
         </Row>
         <br/>
         <Row>
-        <Col sm="6"><ExercicePatient /></Col>
-        <Col sm="6"><ExercicePatient /></Col>
+        <Col onClick={this.toggle} sm="6"><ExercicePatient /></Col>
+        <Col onClick={this.toggle} sm="6"><ExercicePatient /></Col>
         </Row>
         <br/>
 
-
-        <Modal isOpen={this.state.modal} toggle={this.toggleProfil} className={this.props.className}>
-          <ModalHeader toggle={this.toggleProfil}>Profil global</ModalHeader>
+        <Modal isOpen={this.state.modal} size="lg" toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>Statistiques du jeu TITRE</ModalHeader>
           <ModalBody>
-            Appeler ici un composant avec le graphe en araignée des stat du patient
+          <Row><Col>Line ou bar chart des stat de l'exo</Col></Row>
           </ModalBody>
-        </Modal>
-
-        <Modal isOpen={this.state.modal} size="lg" toggle={this.toggleExercices} className={this.props.className}>
-          <ModalHeader toggle={this.toggleExercices}>Modifier l'accès aux exercices</ModalHeader>
-          <ModalBody>
-          <Row>
-          <Col sm="6"><ChoixExercice /></Col>
-          <Col sm="6"><ChoixExercice /></Col>
-          </Row>
-          <br/>
-          <Row>
-          <Col sm="6"><ChoixExercice /></Col>
-          <Col sm="6"><ChoixExercice /></Col>
-          </Row>
-          <br/>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={this.toggleExercices}>Valider</Button>{' '}
-            <Button onClick={this.toggleExercices}>Annuler</Button>
-          </ModalFooter>
         </Modal>
 
       </Container>

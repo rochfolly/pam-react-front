@@ -17,6 +17,15 @@ button {
   border-color: #EB7842 !important;
 }
 
+/* FOR SMALL BUTTONS ON RIGHT TOP CORNER */
+.smallButton {
+  background-color: #EB7842 !important;
+  border-color: #EB7842 !important;
+  border-radius: 50% !important;
+  width:55px;
+	height:55px;
+}
+
 /* TO GET THE ORANGE HALO AROUND INPUTS */
 .form-control:focus {
   border-color: #f2a45c !important;
