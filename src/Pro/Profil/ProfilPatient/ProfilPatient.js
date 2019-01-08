@@ -3,8 +3,7 @@ import { Container, Row, Col,
   Form, FormGroup, Button, Input, Label,
   Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import './ProfilPatient.css';
-import ExercicePatient from './ExercicePatient/ExercicePatient'
-import ChoixExercice from './AjoutPatient/ChoixExercice/ChoixExercice'
+import ExercicePatient from '../ExercicePatient/ExercicePatient'
 
 class ProfilPatient extends Component {
   constructor(props) {
