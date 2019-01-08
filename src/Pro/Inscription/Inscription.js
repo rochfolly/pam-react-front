@@ -1,29 +1,9 @@
 import React, { Component } from 'react';
-import mysql from 'mysql';
 import logo from '../../Images/logoPAM.png';
 import './Inscription.css';
 import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reactstrap';
 import { Route } from 'react-router-dom';
 import ProfilPro from '../Profil/Profil.js';
-
-//import {connection} from '..../pam-node-api/database/config/connection'
-//import { Doctor } from '..../pam-node-api/database/tables/doctor'
-//modules bdd
-/*const express = require('express');
-const cors = require('cors');
-const app = express();
-
-//connexion à la bdd
-
-
-const connexion = mysql.createConnection({
- host: 'localhost',
- user: 'root',
- password: '',
- database: 'pam'
-});
-
-connexion.connect() */
 
 class Inscription extends Component {
   constructor(props) {
