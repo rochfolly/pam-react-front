@@ -8,6 +8,7 @@ import Inscription from './Pro/Inscription/Inscription.js';
 import AjoutPatient from './Pro/Profil/AjoutPatient/AjoutPatient.js';
 import ProfilPatient from './Pro/Profil/ProfilPatient/ProfilPatient.js';
 import ModifExercices from './Pro/Profil/ProfilPatient/ModifExercices.js';
+import StatGlobales from './Pro/Profil/ProfilPatient/StatGlobales.js';
 
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
           <Route path='/profil/ajout' component={AjoutPatient} />
           <Route exact path='/profil/patient' component={ProfilPatient} />
           <Route path='/profil/patient/exercices' component={ModifExercices} />
-          <Route path='/profil/patient/global' component={ProfilPatient} />
+          <Route path='/profil/patient/global' component={StatGlobales} />
         </div>
       </BrowserRouter>
     );
