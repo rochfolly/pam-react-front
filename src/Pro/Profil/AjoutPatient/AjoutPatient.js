@@ -12,7 +12,7 @@ class AjoutPatient extends Component {
       <br/>
         <Row>
         <Col sm={{size: 10}}><h3 class="titlePAM">Nouveau patient</h3></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-arrow-left"></i></h2></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton"><a href="/profil"><h2><i class="fa fa-arrow-left"></i></h2></a></Button></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
         </Row>
         <br/>

@@ -25,6 +25,9 @@ button {
   width:55px;
 	height:55px;
 }
+.smallButton a{
+  color: white !important;
+}
 
 /* TO GET THE ORANGE HALO AROUND INPUTS */
 .form-control:focus {
