@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reactstrap';
-import Chart, {Radar } from 'chart.js';
+import { Container, Row, Col, Button } from 'reactstrap';
+import { Radar } from 'chart.js';
 
 class StatGlobales extends Component {
   constructor(props) {

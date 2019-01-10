@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reactstrap';
+import { Container, Row, Col, FormGroup, Button, Input, Label } from 'reactstrap';
 import './AjoutPatient.css';
 import ChoixExercice from './ChoixExercice/ChoixExercice'
 

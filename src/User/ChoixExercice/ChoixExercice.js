@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, FormGroup } from 'reactstrap';
-import './ExercicePatient.css';
-import game from '../../../Images/dice.png';
+import './ChoixExercice.css';
+import game from '../../Images/dice.png';
 
-class ExercicePatient extends Component {
+class ChoixExercice extends Component {
 
   render() {
     return (
@@ -12,8 +12,6 @@ class ExercicePatient extends Component {
       <Col sm={3}><img src={game} alt="jeu" class="GameLogo"/></Col>
       <Col sm={9}>
       <Row>Titre</Row>
-      <Row>Description</Row>
-      <Row>Niveau : X</Row>
       <Row>Dernière partie : 00/00/0000</Row>
       <Row>Score : X/X</Row>
       </Col>
@@ -23,4 +21,4 @@ class ExercicePatient extends Component {
   }
 }
 
-export default ExercicePatient;
+export default ChoixExercice;

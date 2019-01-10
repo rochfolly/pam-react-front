@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route} from 'react-router-dom';
 import Accueil from './Accueil/Accueil.js';
+//Component PRO
 import ProfilPro from './Pro/Profil/Profil.js';
 import Inscription from './Pro/Inscription/Inscription.js';
 import AjoutPatient from './Pro/Profil/AjoutPatient/AjoutPatient.js';
 import ProfilPatient from './Pro/Profil/ProfilPatient/ProfilPatient.js';
 import ModifExercices from './Pro/Profil/ProfilPatient/ModifExercices.js';
 import StatGlobales from './Pro/Profil/ProfilPatient/StatGlobales.js';
+//Component PATIENT
+import ProfilUser from './User/Profil.js';
+import Scores from './User/Scores/Scores.js';
+import Statistiques from './User/Statistiques/Statistiques.js'
+import UserInscription from './User/Inscription/Inscription.js'
 
 
 class App extends Component {
@@ -23,6 +28,10 @@ class App extends Component {
           <Route exact path='/profil/patient' component={ProfilPatient} />
           <Route path='/profil/patient/exercices' component={ModifExercices} />
           <Route path='/profil/patient/global' component={StatGlobales} />
+          <Route exact path='/user' component={ProfilUser} />
+          <Route exact path='/user/scores' component={Scores} />
+          <Route exact path='/user/statistiques' component={Statistiques} />
+          <Route exact path='/user/inscription' component={UserInscription} />
         </div>
       </BrowserRouter>
     );

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 //import './ModifExercices.css';
 import ChoixExercice from '.././AjoutPatient/ChoixExercice/ChoixExercice'
-
 
 
 class ModifExercices extends Component {

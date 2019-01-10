@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col,
-  Form, FormGroup, Button, Input, Label,
-  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+  Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import './ProfilPatient.css';
 import ExercicePatient from '../ExercicePatient/ExercicePatient'
 

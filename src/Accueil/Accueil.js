@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import logo from '../Images/logoPAM.png';
 import './Accueil.css';
 import { Container, Row, Col, Form, FormGroup, Button, Input } from 'reactstrap';
-import ProfilPro from '../Pro/Profil/Profil.js';
-import Inscription from '../Pro/Inscription/Inscription.js';
-import { Route } from 'react-router-dom';
-
-
 
 
 class Accueil extends Component {

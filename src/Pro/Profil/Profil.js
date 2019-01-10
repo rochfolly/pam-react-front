@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reactstrap';
-import {Glyphicon} from 'react-bootstrap';
-import logo from '../../Images/logoPAM.png';
+import { Container, Row, Col, Button } from 'reactstrap';
 import user from '../../Images/user.png';
 import './Profil.css';
 
