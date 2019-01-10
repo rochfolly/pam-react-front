@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button} from 'reactstrap';
-import user from '../Images/user.png';
 import './Profil.css';
 import ChoixExercice from './ChoixExercice/ChoixExercice.js'
 

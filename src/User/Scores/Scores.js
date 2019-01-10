@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, FormGroup, Button } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import './Scores.css';
-import game from '../../Images/dice.png';
 import ScoreJeu from './ScoreJeu.js'
 
 class Scores extends Component {

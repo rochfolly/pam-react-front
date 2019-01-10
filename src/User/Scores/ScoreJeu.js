@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, FormGroup } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import './Scores.css';
 import game from '../../Images/dice.png';
 

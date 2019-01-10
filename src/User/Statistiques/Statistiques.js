@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button} from 'reactstrap';
+import Jauge from './Jauge/Jauge.js';
 
 class Statistiques extends Component {
   render() {
@@ -22,7 +23,7 @@ class Statistiques extends Component {
               <Col sm={{size: 2}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
             </Row>
             <Row>
-              <Col><p>Insérer la jauge</p></Col>
+            <Jauge />
             </Row>
           </Col>
         </Row>
