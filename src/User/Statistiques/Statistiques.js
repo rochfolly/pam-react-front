@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button} from 'reactstrap';
 import Jauge from './Jauge/Jauge.js';
+import GraphRadar from '../../Graph/GraphRadar.js'
 
 class Statistiques extends Component {
   render() {
@@ -11,7 +12,7 @@ class Statistiques extends Component {
           <Col sm="6">
             <h3 class="titlePAM">Votre évolution</h3>
             <Row>
-              <Col><p>Insérer le graph radar ici</p></Col>
+              <Col><GraphRadar /></Col>
             </Row>
           </Col>
           <Col sm="6">

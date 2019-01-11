@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
-import { Radar } from 'chart.js';
+import GraphRadar from '../../../Graph/GraphRadar.js'
 
 class StatGlobales extends Component {
   constructor(props) {
@@ -49,6 +49,9 @@ class StatGlobales extends Component {
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
         </Row>
         <br/>
+        <Row>
+          <div id="radar"><GraphRadar /></div>
+        </Row>
 
       </Container>
     );

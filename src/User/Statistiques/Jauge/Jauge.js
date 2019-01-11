@@ -17,7 +17,7 @@ class Jauge extends Component {
           </div>
           </Col>
           <Col sm="9" className="scoreJauge">
-          <p>Niveau X <br/> xx/10 </p>
+          <p>Niveau 1 <br/> 5/10 </p>
           </Col>
         </Row>
       </Container>
