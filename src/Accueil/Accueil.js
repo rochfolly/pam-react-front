@@ -5,31 +5,31 @@ import { Container, Row, Col, Form, FormGroup, Button, Input } from 'reactstrap'
 import ProfilPro from '../Pro/Profil/Profil.js';
 import Inscription from '../Pro/Inscription/Inscription.js';
 import { Route } from 'react-router-dom';
-
-
+import { login } from '../utils/API';
 
 
 class Accueil extends Component {
   constructor(props) {
     super(props);
-    this.state = {mail: '', mdp:''};
+    this.state = {email: '', password:''};
 
-    this.handleChangeMail = this.handleChangeMail.bind(this);
-    this.handleChangeMdp = this.handleChangeMdp.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeMail(event) {
-    this.setState({mail: event.target.value});
-  }
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value })
+}
 
-  handleChangeMdp(event) {
-    this.setState({mdp: event.target.value});
-  }
+  handleSubmit = event => {
+   event.preventDefault();
 
-  handleSubmit(event) {
-    alert('An account was submitted: \n' + this.state.mail + '\n' + this.state.mdp);
-    event.preventDefault();
+    const user = {
+      email : this.state.email,
+      password : this.state.password
+    }
+    
+    login(user).then(window.location = "/profil")
   }
 
   render() {
@@ -45,12 +45,12 @@ class Accueil extends Component {
             <Form>
               <FormGroup row>
                 <Col sm={12}>
-                  <Input type="email" value={this.state.value} name="email" id="email" placeholder="Email" onChange={this.handleChangeMail}/>
+                  <Input type="email" value={this.state.email} name="email" id="email" placeholder="email" onChange={this.handleChange}/>
                 </Col>
               </FormGroup>
               <FormGroup row>
                 <Col sm={12}>
-                  <Input type="password" value={this.state.value} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChangeMdp} />
+                  <Input type="password" value={this.state.password} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChange} />
                 </Col>
               </FormGroup>
               <FormGroup check row>

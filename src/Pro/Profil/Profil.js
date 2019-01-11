@@ -3,18 +3,36 @@ import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reac
 import {Glyphicon} from 'react-bootstrap';
 import logo from '../../Images/logoPAM.png';
 import user from '../../Images/user.png';
+import jwt_decode from 'jwt-decode'
 import './Profil.css';
 
 
-
-
 class ProfilPro extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {name: '', firstname:'', mail: '', job:'', city:''};
+  }
+
+  componentDidMount () {
+    const token = localStorage.usertoken
+    const decoded = jwt_decode(token)
+    this.setState({
+        firstname: decoded.firstname,
+        name: decoded.name,
+        email: decoded.email,
+        job: decoded.job,
+        city: decoded.city
+    })
+}
+
+
   render() {
     return (
       <Container>
       <br/>
         <Row>
-        <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">Prénom Nom</span></h3></Col>
+        <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">{this.state.firstname}</span></h3></Col>
         <Col sm={{size: 2}}><img src={logo} className="Inscription-logo" alt="logoPAM" /></Col>
         </Row>
         <br/><br/>

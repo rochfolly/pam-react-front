@@ -2,27 +2,29 @@ import React, { Component } from 'react';
 import logo from '../../Images/logoPAM.png';
 import './Inscription.css';
 import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reactstrap';
-import { Route } from 'react-router-dom';
-import ProfilPro from '../Profil/Profil.js';
+import { signup } from '../../utils/API';
 
 class Inscription extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: '', firstName:'', mail: '', password:'', conf:'', job:'', city:'', phone:''};
+    this.state = {name: '', firstname:'', mail: '', password:'', conf:'', job:'', city:'', phone:''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleChange (event) {
+   
+  handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
     }
-
-  handleSubmit(event) {
+ 
+    
+  handleSubmit = event => {
     event.preventDefault();
 
-     const doctor = {
-        firstname: this.state.first_name,
+    console.log(this.state.firstname)
+
+     const newDoctor = {
+        firstname: this.state.firstname,
         name: this.state.name,
         email: this.state.email,
         password: this.state.password,
@@ -30,12 +32,16 @@ class Inscription extends Component {
         city: this.state.city,
         phone: this.state.phone
      }
-    //const NEW_DOCTOR_QUERY = 'INSERT into doctor SET prenom = ?, nom = ?, email = ?, password = ?, domaine = ?, ville = ?, phone = ?, date_insciption = ?'
+     
+     signup(newDoctor)
 
-    //connection.query(NEW_DOCTOR_QUERY,
-    //  [doctor.firstName, doctor.name, doctor.email, doctor.password, doctor.job, doctor.city, doctor.phone, new Date()])
-    alert('An account was submitted: \n' + this.state.name + '\n' + this.state.job);
+    //window.location = "/profil"
   }
+  
+  /*testAxios = event => {
+    const working = 'axios marche!'
+    test(working)
+  }*/
 
 
   render() {
@@ -55,7 +61,7 @@ class Inscription extends Component {
         <br/>
         <Row>
         <Col>
-            <Form noValidate>
+            <Form onSubmit={this.handleSubmit}>
               <FormGroup row>
               <Label for="name" sm={1}>Nom*</Label>
                 <Col sm={4}>
@@ -63,7 +69,7 @@ class Inscription extends Component {
                 </Col>
                 <Label for="firstname" sm={{size:1, offset:1}}>Prénom*</Label>
                 <Col sm={4}>
-                  <Input type="text" value={this.state.firstname} name="firstName" id="firstName" placeholder="Prénom" onChange={this.handleChange} required/>
+                  <Input type="text" value={this.state.firstname} name="firstname" id="firstname" placeholder="Prénom" onChange={this.handleChange} required/>
                 </Col>
               </FormGroup>
               <FormGroup row>
@@ -102,7 +108,7 @@ class Inscription extends Component {
               </FormGroup>
               <FormGroup check row>
                 <Col sm={{size:1, offset:10}}>
-                  <Button onClick={this.handleSubmit}>Submit</Button>
+                  <Button type="submit">Submit</Button>
                 </Col>
                 </FormGroup>
             </Form>
