@@ -30,14 +30,9 @@ class ProfilPro extends Component {
       <Container>
       <br/>
         <Row>
-<<<<<<< HEAD
-        <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">{this.state.firstname}</span></h3></Col>
-        <Col sm={{size: 2}}><img src={logo} className="Inscription-logo" alt="logoPAM" /></Col>
-=======
         <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">Prénom Nom</span></h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-cog"></i></h2></Button></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
->>>>>>> 75ebe85935691e53521c27c1a08f43f925303a5f
         </Row>
         <br/><br/>
         <Row>

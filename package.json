@@ -9,12 +9,9 @@
     "bootstrap": "^4.1.3",
     "chart.js": "^2.7.3",
     "cors": "^2.8.5",
-<<<<<<< HEAD
     "express-session": "^1.15.6",
     "jwt-decode": "^2.2.0",
-=======
     "font-awesome": "^4.7.0",
->>>>>>> 75ebe85935691e53521c27c1a08f43f925303a5f
     "mysql": "^2.16.0",
     "nodemon": "^1.18.6",
     "react": "^16.5.2",
