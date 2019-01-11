@@ -1,0 +1,9 @@
+.GameLogo {
+    margin: 0 auto;
+    height: 100px;
+}
+
+.no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}

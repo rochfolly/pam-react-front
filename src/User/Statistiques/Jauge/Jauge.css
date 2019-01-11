@@ -1,0 +1,39 @@
+.jauge {
+  margin: 0 auto;
+  height: 25rem;
+}
+
+.scoreJauge {
+    margin-top: 15%;
+    font-weight: bold;
+    color: #EB7842;
+    text-align: center;
+    font-size: 50px;
+}
+
+.jaugepleine {
+    height:512px;
+    width:150px;
+    background: transparent url(../../../Images/jauge_pleine.png) no-repeat;
+    background-position: top;
+}
+
+.jaugevide {
+    height:210px;
+    width:150px;
+    background: transparent url(../../../Images/jauge_vide.png) no-repeat top;
+}
+
+/* Calcul de la hauteur de la jauge :
+- minimum = 0
+- maximum = 10
+- marge_bas = 112px (quand elle est vide, au moins une hauteur de 112px orange )
+- marge_haut = 20px
+- hauteur (totale) = 512px
+- note = le nb de points / 10 du patient
+
+Pour savoir quelle est la hauteur de la jaugevide :
+hauteur = (hauteur - marge_bas) - ((note - minimum) / (maximum - minimum)) * (hauteur - marge_bas - marge_haut)
+
+donc hauteur = 400 - x/10 * 380 ( soit 210 pour une note de 5)
+ */
