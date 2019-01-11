@@ -36,7 +36,7 @@ class GraphRadar extends Component {
   render() {
     return (
       <div>
-        <Radar data={this.data} />
+        <Radar data={this.data} height="500" width="1000" />
       </div>
     );
   }
