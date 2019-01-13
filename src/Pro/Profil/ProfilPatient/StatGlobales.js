@@ -57,11 +57,5 @@ class StatGlobales extends Component {
     );
   }
 }
-/* <Radar
-    data={this.chartData}
-    options={this.chartOptions}
-    width="600"
-    height="250"
-  /> */
 
 export default StatGlobales;
