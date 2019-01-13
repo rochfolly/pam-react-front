@@ -30,7 +30,7 @@ class ProfilPro extends Component {
       <Container>
       <br/>
         <Row>
-        <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">Prénom Nom</span></h3></Col>
+        <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">{this.state.fir}</span></h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-cog"></i></h2></Button></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
         </Row>

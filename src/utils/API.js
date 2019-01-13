@@ -7,7 +7,7 @@ const headers = {
 const backurl = "http://localhost:8000"
 
 export const login = user => {
-    return axios.post(backurl + '/user/login', {
+    return axios.post(backurl + '/doctor/login', {
             email: user.email,
             password: user.password
         })
@@ -22,7 +22,7 @@ export const login = user => {
     
 export const signup = newDoctor => {
     console.log('Requête axios envoyée')
-        return axios.post(backurl + '/user/signup', {
+        return axios.post(backurl + '/doctor/signup', {
             firstname: newDoctor.firstname,
             name: newDoctor.name,
             email: newDoctor.email,
@@ -36,6 +36,17 @@ export const signup = newDoctor => {
         })
     }
 
+    export const createUser = newUser => {
+        return axios.post(backurl + '/user/create', {
+            doctor_id: newUser.doctor_id,
+            firstname: newUser.firstname,
+            name: newUser.name,
+            email: newUser.email,
+            password: newUser.password
+        })
+        .then(res => { console.log("User added") })
+    }
+
 export const isAuth = _ => {
     console.log('Authenticated')
     return (localStorage.getItem('usertoken') !== null)
@@ -46,9 +57,7 @@ export const test = working => {
     .then(console.log('axios marche'))
 }
     
-    /*isAuth : function() {
-        return (localStorage.getItem('token') !== null);
-    },
+    /*
     logout : function() {
         localStorage.clear();
     }*/
