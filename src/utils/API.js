@@ -41,8 +41,7 @@ export const signup = newDoctor => {
             doctor_id: newUser.doctor_id,
             firstname: newUser.firstname,
             name: newUser.name,
-            email: newUser.email,
-            password: newUser.password
+            email: newUser.email
         })
         .then(res => { console.log("User added") })
     }
@@ -50,6 +49,12 @@ export const signup = newDoctor => {
 export const isAuth = _ => {
     console.log('Authenticated')
     return (localStorage.getItem('usertoken') !== null)
+}
+
+
+export const fetchUsers = doctor_id  => {
+    return axios.get(backurl + '/doctor/users/' + doctor_id)
+
 }
 
 export const test = working => {

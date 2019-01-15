@@ -3,8 +3,7 @@ import { Container, Row, Col, FormGroup, Button, Input, Label } from 'reactstrap
 import './AjoutPatient.css';
 import ChoixExercice from './ChoixExercice/ChoixExercice'
 import jwt_decode from 'jwt-decode'
-import { addPatient } from '../utils/API';
-
+import { createUser } from '../../../utils/API';
 
 
 class AjoutPatient extends Component {
@@ -29,6 +28,7 @@ class AjoutPatient extends Component {
       email : this.state.email,
       password : this.state.firstname
     }
+    createUser(newUser)
   }
   
   render() {

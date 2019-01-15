@@ -3,13 +3,15 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import user from '../../Images/user.png';
 import jwt_decode from 'jwt-decode'
 import './Profil.css';
+import { fetchUsers } from '../../utils/API'
 
+const backurl = "http://localhost:8000"
 
 class ProfilPro extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {name: '', firstname:'', mail: '', job:'', city:''};
+    this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:""};
   }
 
   componentDidMount () {
@@ -22,15 +24,31 @@ class ProfilPro extends Component {
         job: decoded.job,
         city: decoded.city
     })
+
+    fetch(backurl + '/doctor/users/' + decoded.id)
+      .then(response => response.json())
+      .then(data =>{
+        this.setState({ users: data })
+        })
+    /*fetchUsers(decoded.id)
+    .then(data => {
+      this.setState({users : data})
+    })*/
 }
 
 
   render() {
+    /*const users = this.state.users.map((user) => {
+      <li><a href="/profil/patient">
+       <img src={user} className="User-logo" alt="user" />
+       <span>{user.firstname} {user.name}</span>
+      </a></li>
+     })*/
     return (
       <Container>
       <br/>
         <Row>
-        <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">{this.state.fir}</span></h3></Col>
+        <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">{this.state.firstname}</span></h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-cog"></i></h2></Button></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
         </Row>
@@ -48,18 +66,7 @@ class ProfilPro extends Component {
         </Row>
         <Row>
         <ul className="patients">
-        <a href="/profil/patient"><li>
-          <img src={user} className="User-logo" alt="user" />
-          <span>Prénom Nom</span>
-        </li></a>
-        <a href="/profil/patient"><li>
-          <img src={user} className="User-logo" alt="user" />
-          <span>Prénom Nom</span>
-        </li></a>
-        <a href="/profil/patient"><li>
-          <img src={user} className="User-logo" alt="user" />
-          <span>Prénom Nom</span>
-        </li></a>
+          {this.state.users}
         </ul>
         </Row>
       </Container>
