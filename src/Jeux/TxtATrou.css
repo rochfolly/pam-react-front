@@ -1,13 +1,23 @@
 #trou {
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #EB7842;
+    background-color: transparent;
+    border-style: none; 
+    font-size: 30px;
+    width: 20%;
 }
+#trou::placeholder {
+    color: #EB7842;
+    font-weight: bold;
+    font-size: 30px;
+  }
 #phrase {
     text-align: center;
+    margin-left: 20%;
 }
 .txtATrouLogo {
     margin: 0 auto;
-    height: 200px;
+    height: 150px;
 }
 
 .rep {
@@ -26,17 +36,18 @@
     outline:none !important;
 }
 
-.footerLeft {
+.footerLeft, .footerRight {
     position: fixed;
     bottom: 10%;
-    left: 10%;
-}
-.footerRight {
-    position: fixed;
-    bottom: 10%;
-    right: 10%;
-}
-.footer {
     width: 150px;
     height: 50px;
+}
+.footerLeft a, .footerRight a{
+    color: white !important;
+}
+.footerRight {
+    right: 10%;
+}
+.footerLeft {
+    left: 10%;
 }
