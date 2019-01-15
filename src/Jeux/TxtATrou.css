@@ -1,0 +1,42 @@
+#trou {
+    font-weight: bold;
+    color: #EB7842;
+}
+#phrase {
+    text-align: center;
+}
+.txtATrouLogo {
+    margin: 0 auto;
+    height: 200px;
+}
+
+.rep {
+    background-color: transparent !important;
+    color: black !important;
+    border-style: none !important;
+    font-size: 28px !important;
+}
+.rep:hover {
+    font-weight: bold;
+}
+.rep:focus {
+    color: #EB7842 !important;
+    border-style: none !important;
+    font-weight: bold;
+    outline:none !important;
+}
+
+.footerLeft {
+    position: fixed;
+    bottom: 10%;
+    left: 10%;
+}
+.footerRight {
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+}
+.footer {
+    width: 150px;
+    height: 50px;
+}
