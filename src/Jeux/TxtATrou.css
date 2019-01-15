@@ -1,5 +1,4 @@
 #trou {
-    /* font-weight: bold; */
     color: #EB7842;
     background-color: transparent;
     border-style: none; 
@@ -17,7 +16,7 @@
 }
 .txtATrouLogo {
     margin: 0 auto;
-    height: 150px;
+    height: 100px;
 }
 
 .rep {

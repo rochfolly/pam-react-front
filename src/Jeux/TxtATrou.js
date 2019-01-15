@@ -10,9 +10,16 @@ class TxtATrou extends Component {
       <Container>
       <br/>
         <Row>
-        <Col sm={{size: 10}}><h3 class="titlePAM">Texte à trous</h3></Col>
-        <Col sm={{size: 2}}><img src={game} alt="jeu" class="txtATrouLogo"/></Col>
+        <Col sm={{size: 10}}>
+            <Row>
+                <Col sm="6"><h3 class="titlePAM">Texte à trous</h3></Col>            
+                <Col sm="6"><h6 className="exNumber titlePAM">Exercice 1/10</h6></Col>
+            </Row>
+            <Row><h5 className="sous-titre">Quel est le mot manquant de cette phrase ?</h5></Row>            
+        </Col>
+        <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" class="txtATrouLogo"/></Col>
         </Row>
+        <br/>
         <div id="phrase">
             <FormGroup row>
                 <Label for="trou"><h2>Voici une phrase d'une dizaine de</h2></Label>

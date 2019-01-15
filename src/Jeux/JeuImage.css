@@ -1,0 +1,34 @@
+.exNumber {
+    font-size: 30px;
+    padding-top: 5%;
+}
+.sous-titre{
+    margin-left: 40%;
+    margin-bottom: 5%;
+}
+.jeuImageLogo {
+    margin: 0 auto;
+    height: 100px;
+}
+
+.jeuImg {
+    background-image: url("../Images/jeu_image/5.jpg");
+    background-position: left; 
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.jeuSol {
+    background-color: transparent !important;
+    color: black !important;
+    border-style: none !important;
+    font-size: 28px !important;
+}
+.jeuSol:hover {
+    font-weight: bold;
+}
+.jeuSol:focus {
+    color: #EB7842 !important;
+    border-style: none !important;
+    font-weight: bold;
+    outline:none !important;
+}
