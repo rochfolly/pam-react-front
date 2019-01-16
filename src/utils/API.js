@@ -4,6 +4,7 @@ const headers = {
     'Content-Type': 'application/json'
 }
 
+const jeuurl = "http://localhost:5000"
 const backurl = "http://localhost:8000"
 
 export const login = user => {
@@ -61,6 +62,8 @@ export const test = working => {
     return axios.get(backurl + '/user/signup', {working})
     .then(console.log('axios marche'))
 }
+
+
     
     /*
     logout : function() {

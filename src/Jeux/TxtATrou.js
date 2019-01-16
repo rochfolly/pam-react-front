@@ -2,22 +2,46 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button, FormGroup, Label, Input } from 'reactstrap';
 import './TxtATrou.css'
 import game from '../Images/dice.png'
+import axios from 'axios';
+//import { getPhrase } from '../utils/API'
+const headers = {'Content-Type': 'application/json'}
 
 class TxtATrou extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {phrase:''}
+
+        
+    }
+    
+
+    componentDidMount(){
+        const jeuurl = "http://localhost:5000"
+        return axios.get(jeuurl, {headers: headers})
+     .then(res => {
+        const phrases = new Array(1)
+        phrases[0] = res.data 
+        console.log(res.data.Phrase)
+        this.setState({ phrase: res.data.Phrase })
+        })
+    }
+    
+
   render() {
+      
     return (
       <Container>
       <br/>
         <Row>
         <Col sm={{size: 10}}>
             <Row>
-                <Col sm="6"><h3 class="titlePAM">Texte à trous</h3></Col>            
+                <Col sm="6"><h3 className="titlePAM">Texte à trous</h3></Col>            
                 <Col sm="6"><h6 className="exNumber titlePAM">Exercice 1/10</h6></Col>
             </Row>
             <Row><h5 className="sous-titre">Quel est le mot manquant de cette phrase ?</h5></Row>            
         </Col>
-        <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" class="txtATrouLogo"/></Col>
+        <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="txtATrouLogo"/></Col>
         </Row>
         <br/>
         <div id="phrase">
@@ -40,6 +64,9 @@ class TxtATrou extends Component {
             <Row>
                 <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>
                 <Col sm={{size: 4}}><Button className="footerRight">Valider</Button></Col>
+            </Row>
+            <Row>
+            {this.state.phrase}
             </Row>
         </div>
       </Container>
