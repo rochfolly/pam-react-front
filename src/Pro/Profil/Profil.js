@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
-import user from '../../Images/user.png';
+import usericon from '../../Images/user.png';
 import jwt_decode from 'jwt-decode'
 import './Profil.css';
 import { fetchUsers } from '../../utils/API'
@@ -11,8 +11,9 @@ class ProfilPro extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:""};
+    this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[]};
   }
+
 
   componentDidMount () {
     const token = localStorage.usertoken
@@ -25,25 +26,26 @@ class ProfilPro extends Component {
         city: decoded.city
     })
 
-    fetch(backurl + '/doctor/users/' + decoded.id)
-      .then(response => response.json())
-      .then(data =>{
-        this.setState({ users: data })
-        })
-    /*fetchUsers(decoded.id)
-    .then(data => {
-      this.setState({users : data})
-    })*/
+
+    fetchUsers(decoded.id)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ users: res.data })
+      })
+
 }
 
-
   render() {
-    /*const users = this.state.users.map((user) => {
+    
+    const potentialUsers = this.state.users.map((user) => 
       <li><a href="/profil/patient">
-       <img src={user} className="User-logo" alt="user" />
-       <span>{user.firstname} {user.name}</span>
+       <img src={usericon} className="User-logo" alt="user" />
+       <span>{user[1]} {user[2]}</span>
       </a></li>
-     })*/
+     )
+
+    const users = (this.state.users) ? potentialUsers : "none"
+
     return (
       <Container>
       <br/>
@@ -66,7 +68,7 @@ class ProfilPro extends Component {
         </Row>
         <Row>
         <ul className="patients">
-          {this.state.users}
+           {users}
         </ul>
         </Row>
       </Container>

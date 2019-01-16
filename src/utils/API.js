@@ -36,12 +36,12 @@ export const signup = newDoctor => {
         })
     }
 
-    export const createUser = newUser => {
-        return axios.post(backurl + '/user/create', {
-            doctor_id: newUser.doctor_id,
-            firstname: newUser.firstname,
-            name: newUser.name,
-            email: newUser.email
+export const createUser = newUser => {
+    return axios.post(backurl + '/user/create', {
+        doctor_id: newUser.doctor_id,
+        firstname: newUser.firstname,
+        name: newUser.name,
+        email: newUser.email
         })
         .then(res => { console.log("User added") })
     }
