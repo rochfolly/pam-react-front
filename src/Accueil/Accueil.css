@@ -11,13 +11,13 @@
   border-radius: 15px;
 }
 
-.footer{
+.footerAccueil{
   text-align: center;
 }
 
-.footer a{
-  color: #EB7842;
+.footerAccueil a{
+  color: #EB7842 !important;
 }
-.footer a:hover{
-  color: #EB7842;
+.footerAccueil a:hover{
+  color: #EB7842 !important;
 }

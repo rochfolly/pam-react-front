@@ -45,7 +45,7 @@ class Accueil extends Component {
             <Form>
               <FormGroup row>
                 <Col sm={12}>
-                  <Input type="email" value={this.state.email} name="email" id="email" placeholder="email" onChange={this.handleChange}/>
+                  <Input type="email" value={this.state.email} name="email" id="email" placeholder="Email" onChange={this.handleChange}/>
                 </Col>
               </FormGroup>
               <FormGroup row>
@@ -63,11 +63,11 @@ class Accueil extends Component {
           </Col>
         </Row>
 
-        <Row className="footer">
+        <Row className="footerAccueil">
           <Col>
-          <p>Vous n'avez pas de compte et vous êtes un(e) professionnel(le) de santé ? </p>
+            <p>Vous n'avez pas de compte et vous êtes un(e) professionnel(le) de santé ? </p>
             <a href="/inscription"> Créez votre compte ici !</a>
-        </Col>
+          </Col>
         </Row>
       </Container>
     );
