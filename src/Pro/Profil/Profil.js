@@ -3,29 +3,21 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import usericon from '../../Images/user.png';
 import jwt_decode from 'jwt-decode'
 import './Profil.css';
-<<<<<<< HEAD
 import { fetchUsers, logout } from '../../utils/API'
-=======
-import { fetchUsers } from '../../utils/API'
 import Settings from './Settings/Settings'
->>>>>>> 20018a5e77348397af38548930c7838ed2cd6550
 
 
 class ProfilPro extends Component {
 
   constructor(props) {
     super(props);
-<<<<<<< HEAD
-    this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[]};
-
-     this.goToProfile = this.goToProfile.bind(this)
-     this.logout = this.logout.bind(this)
-=======
     this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[], isModalOpen: false};
   
+    
+    this.goToProfile = this.goToProfile.bind(this)
+    this.logout = this.logout.bind(this)
     this.showModal = this.showModal.bind(this);
     this.toggle = this.toggle.bind(this);
->>>>>>> 20018a5e77348397af38548930c7838ed2cd6550
   }
 
   toggle() {
