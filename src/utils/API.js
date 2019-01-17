@@ -64,8 +64,6 @@ export const test = working => {
 }
 
 
-    
-    /*
-    logout : function() {
+export const logout = _ => {
         localStorage.clear();
-    }*/
+    }

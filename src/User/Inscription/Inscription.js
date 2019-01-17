@@ -28,10 +28,6 @@ class UserInscription extends Component {
         city: this.state.city,
         phone: this.state.phone
      }
-    //const NEW_DOCTOR_QUERY = 'INSERT into doctor SET prenom = ?, nom = ?, email = ?, password = ?, domaine = ?, ville = ?, phone = ?, date_insciption = ?'
-
-    //connection.query(NEW_DOCTOR_QUERY,
-    //  [doctor.firstName, doctor.name, doctor.email, doctor.password, doctor.job, doctor.city, doctor.phone, new Date()])
     alert('An account was submitted: \n' + this.state.name + '\n' + this.state.job);
   }
 
