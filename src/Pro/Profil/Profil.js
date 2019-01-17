@@ -10,12 +10,13 @@ class ProfilPro extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[]};
-
-     this.goToProfile = this.goToProfile.bind(this)
-     this.logout = this.logout.bind(this)
-     this.showModal = this.showModal.bind(this);
-     this.toggle = this.toggle.bind(this);
+    this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[], isModalOpen: false};
+  
+    
+    this.goToProfile = this.goToProfile.bind(this)
+    this.logout = this.logout.bind(this)
+    this.showModal = this.showModal.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
