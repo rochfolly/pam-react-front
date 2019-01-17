@@ -46,9 +46,11 @@ class TxtATrou extends Component {
         <br/>
         <div id="phrase">
             <FormGroup row>
-                <Label for="trou"><h2>Voici une phrase d'une dizaine de</h2></Label>
+                <Col sm={{size: 6, offset:3}}>
+                <Label for="trou"><h2>{this.state.phrase} </h2></Label>
                 <Input type="text" id="trou" size="8" placeholder="________________"/>
-                <h2> stylé non ? et là ça fait environ une quinzaine</h2>
+                {/* <h2> stylé non ? et là ça fait environ une quinzaine</h2> */}
+                </Col>
             </FormGroup>
         </div>
         <br/>
@@ -66,7 +68,6 @@ class TxtATrou extends Component {
                 <Col sm={{size: 4}}><Button className="footerRight">Valider</Button></Col>
             </Row>
             <Row>
-            {this.state.phrase}
             </Row>
         </div>
       </Container>

@@ -93,7 +93,10 @@ class Inscription extends Component {
               <FormGroup row>
               <Label for="job" sm={1}>Profession</Label>
                 <Col sm={4}>
-                  <Input type="text" value={this.state.job} name="job" id="job" placeholder="Orthophoniste" onChange={this.handleChange} required/>
+                  <Input type="select" value={this.state.job} name="job" id="job" placeholder="Orthophoniste" onChange={this.handleChange} required>
+                    <option>Orthophoniste</option>
+                    <option>Autre</option>
+                  </Input>
                 </Col>
                 <Label for="city" sm={{size:1, offset:1}}>Ville</Label>
                 <Col sm={4}>
