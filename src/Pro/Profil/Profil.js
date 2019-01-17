@@ -3,19 +3,42 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import usericon from '../../Images/user.png';
 import jwt_decode from 'jwt-decode'
 import './Profil.css';
+<<<<<<< HEAD
 import { fetchUsers, logout } from '../../utils/API'
+=======
+import { fetchUsers } from '../../utils/API'
+import Settings from './Settings/Settings'
+>>>>>>> 20018a5e77348397af38548930c7838ed2cd6550
 
 
 class ProfilPro extends Component {
 
   constructor(props) {
     super(props);
+<<<<<<< HEAD
     this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[]};
 
      this.goToProfile = this.goToProfile.bind(this)
      this.logout = this.logout.bind(this)
+=======
+    this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[], isModalOpen: false};
+  
+    this.showModal = this.showModal.bind(this);
+    this.toggle = this.toggle.bind(this);
+>>>>>>> 20018a5e77348397af38548930c7838ed2cd6550
   }
 
+  toggle() {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
+  }
+
+  showModal() {
+    this.setState({
+      isModalOpen: true
+    });
+  }
 
   componentDidMount () {
     const token = localStorage.usertoken
@@ -54,15 +77,20 @@ class ProfilPro extends Component {
      )
 
     const users = (this.state.users) ? potentialUsers : "none"
+    console.log(this.state.users)
 
     return (
       <Container>
       <br/>
         <Row>
         <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">{this.state.firstname}</span></h3></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-cog"></i></h2></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.toggle}><h2><i class="fa fa-cog"></i></h2></Button></Col>
         <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i class="fa fa-power-off"></i></h2></Button></Col>
         </Row>
+        <Settings
+          isOpen={this.state.isModalOpen}
+          toggle={this.toggle}
+        />
         <br/><br/>
         <Row>
         <Col sm={{size:4, offset:4}}>
