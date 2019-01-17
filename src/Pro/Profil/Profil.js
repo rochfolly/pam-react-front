@@ -6,7 +6,6 @@ import './Profil.css';
 import { fetchUsers, logout } from '../../utils/API'
 import Settings from './Settings/Settings'
 
-
 class ProfilPro extends Component {
 
   constructor(props) {
@@ -62,7 +61,7 @@ class ProfilPro extends Component {
   render() {
     //onlick={this.goToProfile(user[0])}
     const potentialUsers = this.state.users.map((user) => 
-      <li><a href="/profil/patient" >
+      <li><a href="/profil/patient" onclick="location.href=this.href+{user[0]}" >
        <img src={usericon} className="User-logo" alt="user" />
        <span>{user[1]} {user[2]}</span>
       </a></li>
