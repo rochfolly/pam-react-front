@@ -7,7 +7,7 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {name: '', firstname:'', mail: '', password:'', conf:'', job:'', city:'', phone:''};
-
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -75,24 +75,30 @@ class Settings extends Component {
                 <br/>
                 <br/>
                 <FormGroup row>
-                <Label for="job" sm={2}>Profession</Label>
+                <Label for="sexe" sm={2}>Sexe</Label>
                     <Col sm={4}>
-                    <Input type="select" value={this.state.job} name="job" id="job" onChange={this.handleChange}>
-                        <option>Orthophoniste</option>
-                        <option>Autre</option>
-                    </Input>
+                    <FormGroup check>
+                        <Label check>
+                        <Input type="radio" name="sexe" value="M"/>{' '}Homme
+                        </Label>
+                    </FormGroup>
+                    <FormGroup check>
+                        <Label check>
+                        <Input type="radio" name="sexe" value="W" />{' '}Femme
+                        </Label>
+                    </FormGroup>
                     </Col>
                     <Label for="city" sm={{size:2}}>Ville</Label>
                     <Col sm={4}>
-                    <Input type="text" value={this.state.city} name="city" id="city" onChange={this.handleChange}/>
+                    <Input type="text" value={this.state.city} name="city" id="city" placeholder="Paris" onChange={this.handleChange}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                <Label for="phone" sm={2}>Téléphone</Label>
+                <Label for="birth" sm={2}>Date de naissance</Label>
                     <Col sm={4}>
-                    <Input type="phone" value={this.state.phone} name="phone" id="phone" onChange={this.handleChange}/>
+                    <Input type="date" name="birth" id="birth" onChange={this.handleChange}/>
                     </Col>
-                </FormGroup>            
+                </FormGroup>       
                 </ModalBody>
                 <ModalFooter>
                     <FormGroup check>
