@@ -65,5 +65,5 @@ export const test = working => {
 
 
 export const logout = _ => {
-        localStorage.clear();
+        localStorage.clear()
     }
