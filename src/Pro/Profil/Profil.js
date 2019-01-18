@@ -33,20 +33,28 @@ class ProfilPro extends Component {
 
   componentDidMount () {
     const token = localStorage.usertoken
-    const decoded = jwt_decode(token)
-    this.setState({
+  
+    if(token){
+      console.log('token exists')
+      console.log('token:', token)
+      const decoded = jwt_decode(token)
+
+      this.setState({
         firstname: decoded.firstname,
         name: decoded.name,
         email: decoded.email,
         job: decoded.job,
         city: decoded.city
-    })
+      })
+     console.log('decoded:', decoded)
 
-    fetchUsers(decoded.id)
+     fetchUsers(decoded.id)
       .then(res => {
         console.log(res.data)
         this.setState({ users: res.data })
       })
+     }
+    else console.log('No token')
 
   }
 
@@ -54,14 +62,15 @@ class ProfilPro extends Component {
    logout.then(window.location = '/')
   }
 
-  goToProfile(user_id){
-    window.location = "/profil/patient/" + user_id
+  goToProfile = user_id => {
+    const link = "/profil/patient/" + user_id
+    return link
   }
 
   render() {
-    //onlick={this.goToProfile(user[0])}
+    //href="/profil/patient`"
     const potentialUsers = this.state.users.map((user) => 
-      <li><a href="/profil/patient" onclick="location.href=this.href+{user[0]}" >
+      <li><a href={this.goToProfile(user[0])} >
        <img src={usericon} className="User-logo" alt="user" />
        <span>{user[1]} {user[2]}</span>
       </a></li>

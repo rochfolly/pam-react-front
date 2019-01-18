@@ -16,8 +16,8 @@ class TxtATrou extends Component {
     
 
     componentDidMount(){
-        const jeuurl = "http://localhost:5000"
-        return axios.get(jeuurl, {headers: headers})
+        const gameurl = "http://localhost:5000"
+        return axios.get(gameurl, {headers: headers})
      .then(res => {
         const phrases = new Array(1)
         phrases[0] = res.data 
