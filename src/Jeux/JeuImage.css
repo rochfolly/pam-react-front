@@ -12,11 +12,15 @@
 }
 
 .jeuImg {
-    /* background-image: url("../Images/images/10.jpg"); */
     background-position: left; 
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+.imgExo {
+    object-fit: contain !important;
+}
+
 .jeuSol {
     background-color: transparent !important;
     color: black !important;
