@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button} from 'reactstrap';
+import { Container, Row, Col} from 'reactstrap';
 import './Jauge.css'
-import jaugeVide from '../../../Images/jauge_vide.png';
-import jaugePleine from '../../../Images/jauge_pleine.png';
 
 
 class Jauge extends Component {
