@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
-import { Container, Row, Col,
-  Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import './ProfilPatient.css';
 import ExercicePatient from '../ExercicePatient/ExercicePatient'
+//import jwt_decode from 'jwt-decode'
+import {showUser} from '../../../utils/API'
 
 class ProfilPatient extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modal: false
-    };
+    this.state = { modal: false, id: '', firstname:'', name:'', email:''};
 
     this.toggle = this.toggle.bind(this);
+  }
+
+  componentDidMount(){
+    const { id } = this.props.match.params
+    showUser(id).then(res => {
+      this.setState({
+        firstname: res.data.firstname,
+        name: res.data.name,
+        email: res.data.email
+      })
+    })
+    
   }
 
   toggle() {
@@ -25,7 +36,7 @@ class ProfilPatient extends Component {
       <Container>
       <br/>
         <Row>
-        <Col sm={{size: 10}}><h3 class="titlePAM">Profil de <span id="user">Prénom Nom</span></h3></Col>
+        <Col sm={{size: 10}}><h3 class="titlePAM">Profil de <span id="user">{this.state.firstname} {this.state.name}</span></h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><a href="/profil">
         <h2><i class="fa fa-arrow-left"></i></h2>
         </a></Button></Col>

@@ -4,7 +4,7 @@ const headers = {
     'Content-Type': 'application/json'
 }
 
-const jeuurl = "http://localhost:5000"
+//const gameurl = "http://localhost:5000"
 const backurl = "http://localhost:8000"
 
 export const login = user => {
@@ -13,7 +13,7 @@ export const login = user => {
             password: user.password
         })
         .then(res => {
-            localStorage.setItem('usertoken', res.data)
+            localStorage.setItem("usertoken", res.data)
             return res.data
         })
         .catch(err => {
@@ -21,6 +21,7 @@ export const login = user => {
         })
 }
     
+
 export const signup = newDoctor => {
     console.log('Requête axios envoyée')
         return axios.post(backurl + '/doctor/signup', {
@@ -36,6 +37,7 @@ export const signup = newDoctor => {
             console.log("Registered")
         })
     }
+
 
 export const createUser = newUser => {
     return axios.post(backurl + '/user/create', {
@@ -56,6 +58,10 @@ export const isAuth = _ => {
 export const fetchUsers = doctor_id  => {
     return axios.get(backurl + '/doctor/users/' + doctor_id)
 
+}
+
+export const showUser = id => {
+    return axios.get(backurl + '/doctor/user/' + id)
 }
 
 export const test = working => {
