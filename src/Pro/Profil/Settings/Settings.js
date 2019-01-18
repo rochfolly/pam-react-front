@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, FormGroup, Button, Input, Label,
+import { Col, Form, FormGroup, Button, Input, Label,
     Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 
 class Settings extends Component {
@@ -21,16 +21,6 @@ class Settings extends Component {
     event.preventDefault();
 
     console.log(this.state.firstname)
-
-     const newDoctor = {
-        firstname: this.state.firstname,
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-        job: this.state.job,
-        city: this.state.city,
-        phone: this.state.phone
-     }
   }
 
   render() {
