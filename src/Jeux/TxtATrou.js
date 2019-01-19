@@ -10,21 +10,34 @@ class TxtATrou extends Component {
 
     constructor(props){
         super(props);
-        this.state = {phrase:''}
-        
+        this.state = {question:0, part1:'', part2:''}
     }
     
-
     componentDidMount(){
-        const gameurl = "http://localhost:5000"
-        return axios.get(gameurl, {headers: headers})
-     .then(res => {
-        const phrases = new Array(1)
-        phrases[0] = res.data 
-        console.log(res.data.Phrase)
-        this.setState({ phrase: res.data.Phrase })
-        })
+        const gameurl = "https://pampfe.azurewebsites.net/exo1"
+        axios.post(gameurl) 
+        .then(res => {
+            console.log(res.data.part1)
+            console.log(res.data.part2)
+            this.setState({part1: res.data.part1,
+                            part2: res.data.part2 })
+            })        
     }
+
+    //Utile si on reçoit direct toutes les phrases
+    // componentDidMount(){
+    //     const phrases=["phrase_1","phrase_2","phrase_3","phrase_4","phrase_5"
+    //         ,"phrase_6","phrase_7","phrase_8","phrase_9","phrase_10"]
+    //     const gameurl = "https://pfepamapi.azurewebsites.net/exo1"
+    //     axios.post(gameurl)
+    //     .then(res => {
+    //         console.log(res.data[phrases[this.state.question]].part1)
+    //         console.log(res.data[images[this.state.question]].part2)
+    //         this.setState({part1: res.data[phrases[this.state.question]].part1,
+    //         part2: res.data[phrases[this.state.question]].part2 })
+    //         })        
+    // }
+
     
 
   render() {
@@ -42,18 +55,18 @@ class TxtATrou extends Component {
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="txtATrouLogo"/></Col>
         </Row>
-        <br/>
+        <br/><br/>
         <div id="phrase">
             <FormGroup row>
                 <Col sm={{size: 6, offset:3}}>
-                <Label for="trou"><h2>{this.state.phrase} </h2></Label>
+                <h2>{this.state.part1}
                 <Input type="text" id="trou" size="8" placeholder="________________"/>
-                {/* <h2> stylé non ? et là ça fait environ une quinzaine</h2> */}
+                {this.state.part2}</h2>
                 </Col>
             </FormGroup>
         </div>
         <br/>
-        <div id="niv1">
+        <div id="niv1" style={{display:"none"}}>
             <Row>
                 <Col sm={{size:2, offset:4}}><Button className="rep" id="rep1">phrases</Button></Col>
                 <Col sm={{size:2, offset:1}}><Button className="rep" id="rep2">mots</Button></Col>
@@ -62,13 +75,11 @@ class TxtATrou extends Component {
                 <Col sm={{size:2, offset:4}}><Button className="rep" id="rep3">lapins</Button></Col>
                 <Col sm={{size:2, offset:1}}><Button className="rep" id="rep4">boissons</Button></Col>
             </Row>
-            <Row>
-                <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>
-                <Col sm={{size: 4}}><Button className="footerRight">Valider</Button></Col>
-            </Row>
-            <Row>
-            </Row>
         </div>
+        <Row>
+            <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>
+            <Col sm={{size: 4}}><Button className="footerRight">Valider</Button></Col>
+        </Row>
       </Container>
     );
   }
