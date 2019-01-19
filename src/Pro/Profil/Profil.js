@@ -11,8 +11,7 @@ class ProfilPro extends Component {
   constructor(props) {
     super(props);
     this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[], isModalOpen: false};
-  
-    
+      
     this.goToProfile = this.goToProfile.bind(this)
     this.logout = this.logout.bind(this)
     this.showModal = this.showModal.bind(this);
@@ -39,21 +38,14 @@ class ProfilPro extends Component {
       console.log('token:', token)
       const decoded = jwt_decode(token)
 
-      this.setState({
-        firstname: decoded.firstname,
-        name: decoded.name,
-        email: decoded.email,
-        job: decoded.job,
-        city: decoded.city
-      })
-     console.log('decoded:', decoded)
+      this.setState({firstname: decoded.firstname, name: decoded.name, email: decoded.email, job: decoded.job, city: decoded.city})
+      console.log('decoded:', decoded)
 
-     fetchUsers(decoded.id)
-      .then(res => {
+     fetchUsers(decoded.id).then(res => {
         console.log(res.data)
         this.setState({ users: res.data })
       })
-     }
+    }
     else console.log('No token')
 
   }

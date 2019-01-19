@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const headers = {
+/*const headers = {
     'Content-Type': 'application/json'
-}
+}*/
 
 //const gameurl = "http://localhost:5000"
 const backurl = "http://localhost:8000"
@@ -64,6 +64,10 @@ export const showUser = id => {
     return axios.get(backurl + '/doctor/user/' + id)
 }
 
+export const fetchExos = user_id => {
+    return axios.get(backurl + '/doctor/user/'+user_id+'/exercices' )
+}
+
 export const test = working => {
     return axios.get(backurl + '/user/signup', {working})
     .then(console.log('axios marche'))
@@ -73,3 +77,4 @@ export const test = working => {
 export const logout = _ => {
         localStorage.clear()
     }
+

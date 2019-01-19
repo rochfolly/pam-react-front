@@ -3,12 +3,12 @@ import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody } from 'reac
 import './ProfilPatient.css';
 import ExercicePatient from '../ExercicePatient/ExercicePatient'
 //import jwt_decode from 'jwt-decode'
-import {showUser} from '../../../utils/API'
+import { showUser, fetchExos } from '../../../utils/API'
 
 class ProfilPatient extends Component {
   constructor(props) {
     super(props);
-    this.state = { modal: false, id: '', firstname:'', name:'', email:''};
+    this.state = { modal: false, id: '', firstname:'', name:'', email:'', exos:[]};
 
     this.toggle = this.toggle.bind(this);
   }
@@ -22,6 +22,10 @@ class ProfilPatient extends Component {
         email: res.data.email
       })
     })
+
+    fetchExos(id).then(res => {
+      this.setState({ exos: res.data })
+    })
     
   }
 
@@ -32,6 +36,8 @@ class ProfilPatient extends Component {
   }
 
   render() {
+    console.log(this.state.exos[0])
+
     return (
       <Container>
       <br/>
@@ -58,13 +64,8 @@ class ProfilPatient extends Component {
         </Row>
         <br/>
         <Row>
-        <Col onClick={this.toggle} sm="6"><ExercicePatient /></Col>
-        <Col onClick={this.toggle} sm="6"><ExercicePatient /></Col>
-        </Row>
-        <br/>
-        <Row>
-        <Col onClick={this.toggle} sm="6"><ExercicePatient /></Col>
-        <Col onClick={this.toggle} sm="6"><ExercicePatient /></Col>
+        <Col onClick={this.toggle} sm="6"><ExercicePatient exo={this.state.exos[0]}/></Col>
+        <Col onClick={this.toggle} sm="6"><ExercicePatient exo={this.state.exos[1]}/></Col>
         </Row>
         <br/>
 

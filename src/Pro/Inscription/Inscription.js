@@ -4,6 +4,7 @@ import './Inscription.css';
 import { Container, Row, Col, Form, FormGroup, Button, Input, Label } from 'reactstrap';
 import { signup } from '../../utils/API';
 
+
 class Inscription extends Component {
   constructor(props) {
     super(props);
