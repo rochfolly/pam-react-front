@@ -68,6 +68,10 @@ export const fetchExos = user_id => {
     return axios.get(backurl + '/doctor/user/'+user_id+'/exercices' )
 }
 
+export function deletePrescription (exo_id, user_id) {
+    return axios.delete(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id )
+}
+
 export const test = working => {
     return axios.get(backurl + '/user/signup', {working})
     .then(console.log('axios marche'))

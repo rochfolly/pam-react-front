@@ -14,6 +14,7 @@ class ModifExercices extends Component {
 
  componentDidMount(){
     const { id } = this.props.match.params
+    this.setState({id: id})
 
     fetchExos(id).then(res => {
       this.setState({ exos: res.data })
@@ -24,7 +25,7 @@ class ModifExercices extends Component {
 
   render() {
     const edit = this.state.exos.map((exo) => 
-    <Col sm="6"><ChoixExercice exo={exo} /></Col> 
+    <Col sm="6"><ChoixExercice exo={exo} id={this.state.id} /></Col> 
     )
     
     return (
@@ -49,7 +50,7 @@ class ModifExercices extends Component {
         <br/>
         <Row>
         <Col sm={{size:2, offset:10}}>
-          <Button>Valider</Button>
+          <Button type="Submit">Valider</Button>
         </Col>
         </Row>
       </Form>
