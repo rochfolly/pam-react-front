@@ -56,7 +56,7 @@ class JeuImage extends Component {
                  word2: res.data[this.state.question].word_2,
                  word3: res.data[this.state.question].word_3,
                  word4: res.data[this.state.question].word_4,
-                 word5: res.data[this.state.question].word_5, })
+                 word5: res.data[this.state.question].word_5 })
             })  
     }
 

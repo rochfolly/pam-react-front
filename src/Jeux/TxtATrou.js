@@ -3,41 +3,55 @@ import { Container, Row, Col, Button, FormGroup, Input } from 'reactstrap';
 import './TxtATrou.css'
 import game from '../Images/dice.png'
 import axios from 'axios';
-//import { getPhrase } from '../utils/API'
-const headers = {'Content-Type': 'application/json'}
+
+var answerTab = {0:{part1:"",part2:"",rep:""},1:{part1:"",part2:"",rep:""},2:{part1:"",part2:"",rep:""},
+                3:{part1:"",part2:"",rep:""},4:{part1:"",part2:"",rep:""}}
 
 class TxtATrou extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, part1:'', part2:''}
+        this.state = {question:0, part1:'', part2:'',
+        reponse:'', answer:'', email:''}
+        
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleSubmit() {
+        this.setState({
+            part1: this.state.reponse[this.state.question+1].part1, 
+            part2: this.state.reponse[this.state.question+1].part2,
+        })
+        this.setState({question: this.state.question+1})
+
+        answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
+        answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
+        answerTab[this.state.question].rep = this.state.answer
+        this.setState({answer: ''})
+
+        if(answerTab[4].rep!==""){
+            axios.post("https://pfepam.azurewebsites.net/exo1/scoring",{answerTab})
+            .then(res => {
+              console.log(res.data)
+            })
+        }
+        console.log(answerTab)
     }
     
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
     componentDidMount(){
         const gameurl = "https://pfepam.azurewebsites.net/exo1"
         axios.post(gameurl) 
         .then(res => {
-            console.log(res.data.part1)
-            console.log(res.data.part2)
-            this.setState({part1: res.data.part1,
-                            part2: res.data.part2 })
+            this.setState({reponse: res.data,
+                part1: res.data[this.state.question].part1,
+                part2: res.data[this.state.question].part2 })
             })        
     }
-
-    //Utile si on reçoit direct toutes les phrases
-    // componentDidMount(){
-    //     const phrases=["phrase_1","phrase_2","phrase_3","phrase_4","phrase_5"
-    //         ,"phrase_6","phrase_7","phrase_8","phrase_9","phrase_10"]
-    //     const gameurl = "https://pfepamapi.azurewebsites.net/exo1"
-    //     axios.post(gameurl)
-    //     .then(res => {
-    //         console.log(res.data[phrases[this.state.question]].part1)
-    //         console.log(res.data[images[this.state.question]].part2)
-    //         this.setState({part1: res.data[phrases[this.state.question]].part1,
-    //         part2: res.data[phrases[this.state.question]].part2 })
-    //         })        
-    // }
-
     
 
   render() {
@@ -49,7 +63,7 @@ class TxtATrou extends Component {
         <Col sm={{size: 10}}>
             <Row>
                 <Col sm="6"><h3 className="titlePAM">Texte à trous</h3></Col>            
-                <Col sm="6"><h6 className="exNumber titlePAM">Exercice 1/5</h6></Col>
+                <Col sm="6"><h6 className="exNumber titlePAM">Exercice {this.state.question+1}/5</h6></Col>
             </Row>
             <Row><h5 className="sous-titre">Quel est le mot manquant de cette phrase ?</h5></Row>            
         </Col>
@@ -60,7 +74,7 @@ class TxtATrou extends Component {
             <FormGroup row>
                 <Col sm={{size: 6, offset:3}}>
                 <h2>{this.state.part1}
-                <Input type="text" id="trou" size="8" placeholder="________________"/>
+                <Input type="text" name="answer" id="trou" value={this.state.answer} placeholder="________________" onChange={this.handleChange}/>
                 {this.state.part2}</h2>
                 </Col>
             </FormGroup>
@@ -78,7 +92,7 @@ class TxtATrou extends Component {
         </div>
         <Row>
             <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>
-            <Col sm={{size: 4}}><Button className="footerRight">Valider</Button></Col>
+            <Col sm={{size: 4}}><Button onClick={this.handleSubmit} className="footerRight">Valider</Button></Col>
         </Row>
       </Container>
     );
