@@ -36,3 +36,12 @@
     font-weight: bold;
     outline:none !important;
 }
+/* 
+.radio-btn {
+    margin-right: 2rem;
+    border: 0.5rem solid #009688;
+    background: red;
+}
+.radio-btn:checked {
+    color: #009688;
+} */
