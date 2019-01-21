@@ -19,6 +19,8 @@ class TxtATrou extends Component {
     }
 
     handleSubmit() {
+        if(this.state.question<4)
+        {
         this.setState({
             part1: this.state.reponse[this.state.question+1].part1, 
             part2: this.state.reponse[this.state.question+1].part2,
@@ -29,11 +31,12 @@ class TxtATrou extends Component {
         answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
         answerTab[this.state.question].rep = this.state.answer
         this.setState({answer: ''})
-
-        if(answerTab[4].rep!==""){
+        }
+        else {
             axios.post("https://pfepam.azurewebsites.net/exo1/scoring",{answerTab})
             .then(res => {
-              console.log(res.data)
+                axios.post("http://localhost:4000/score",{score: res.data})
+                window.location="http://localhost:4000/score"
             })
         }
         console.log(answerTab)
