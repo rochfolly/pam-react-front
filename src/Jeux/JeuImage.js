@@ -35,7 +35,7 @@ class JeuImage extends Component {
         answerTab[this.state.question].rep = this.state.answer
 
         if(answerTab[9].src!==""){
-            axios.post("https://pampfe.azurewebsites.net/exo2/scoring",{answerTab})
+            axios.post("https://pfepam.azurewebsites.net/exo2/scoring",{answerTab})
             .then(res => {
               console.log(res.data)
             })
@@ -47,7 +47,7 @@ class JeuImage extends Component {
     }
     
     componentDidMount(){
-        const gameurl = "https://pampfe.azurewebsites.net/exo2"
+        const gameurl = "https://pfepam.azurewebsites.net/exo2"
         axios.post(gameurl)
         .then(res => {
             this.setState({ reponse: res.data,
@@ -81,31 +81,31 @@ class JeuImage extends Component {
             <Col sm={{size: 3, offset:3}} className="jeuImg">
                 <img height="300" width="300" src={require(`./../Images/${this.state.lien}`)} className="imgExo"></img>
             </Col>
-            <Col sm={{size: 3, offset:1}}>
+            <Col sm={{size: 3, offset:1}} className="solutions">
                 <Row>
                     <Label check className="jeuSol" >
-                    <Input type="radio" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange}/>{this.state.word1}
-                    </Label>
+                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange}/>{this.state.word1}
+                    <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
                     <Label check className="jeuSol">
                     <Input type="radio" checked={this.state.answer === this.state.word2} value={this.state.word2} onChange={this.handleChange}/>{this.state.word2}
-                    </Label>
+                    <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
                     <Label check className="jeuSol">
                     <Input type="radio" checked={this.state.answer === this.state.word3} value={this.state.word3} onChange={this.handleChange}/>{this.state.word3}
-                    </Label>
+                    <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
                     <Label check className="jeuSol">
                     <Input type="radio" checked={this.state.answer === this.state.word4} value={this.state.word4} onChange={this.handleChange}/>{this.state.word4}
-                    </Label>
+                    <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
                     <Label check className="jeuSol">
                     <Input type="radio" checked={this.state.answer === this.state.word5} value={this.state.word5} onChange={this.handleChange}/>{this.state.word5}
-                    </Label>
+                    <span className="checkmark"></span></Label>
                 </Row>
             </Col>
         </Row>

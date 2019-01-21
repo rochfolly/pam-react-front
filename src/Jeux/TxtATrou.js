@@ -14,7 +14,7 @@ class TxtATrou extends Component {
     }
     
     componentDidMount(){
-        const gameurl = "https://pampfe.azurewebsites.net/exo1"
+        const gameurl = "https://pfepam.azurewebsites.net/exo1"
         axios.post(gameurl) 
         .then(res => {
             console.log(res.data.part1)
