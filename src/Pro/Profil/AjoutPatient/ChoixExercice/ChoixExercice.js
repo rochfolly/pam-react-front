@@ -15,8 +15,8 @@ class ChoixExercice extends Component {
       <Col sm={1}><Input type="checkbox" id="exXX"/></Col>
       <Col sm={3}><img src={game} alt="jeu" class="Game-logo"/></Col>
       <Col sm={8}>
-      <Row>Titre</Row>
-      <Row>Description</Row>
+      <Row><b>Exercice {this.props.exo.exo_id} : {this.props.exo.exo_name}</b></Row>
+      <br/>
       <Row>
       <Col sm={3} className="no-padding">Niveau</Col>
       <Col sm={2}>1<Input type="checkbox" id="niv1"/></Col>

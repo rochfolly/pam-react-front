@@ -17,6 +17,7 @@ class ProfilPatient extends Component {
     const { id } = this.props.match.params
     showUser(id).then(res => {
       this.setState({
+        id: id,
         firstname: res.data.firstname,
         name: res.data.name,
         email: res.data.email
@@ -35,8 +36,17 @@ class ProfilPatient extends Component {
     });
   }
 
+  goToModif = user_id => {
+    const link = "/profil/patient/" + user_id + "/exercices"
+    return link
+  }
+
   render() {
-    console.log(this.state.exos[0])
+
+    //console.log(this.state.exos[0])
+    const exercices = this.state.exos.map((exo) => 
+    <Col onClick={this.toggle} sm="6"><ExercicePatient exo={exo} /></Col>
+    )
 
     return (
       <Container>
@@ -52,7 +62,7 @@ class ProfilPatient extends Component {
         <Row>
         <Col sm="2"></Col>
         <Col sm={{size:4}}>
-          <Button><a href="/profil/patient/exercices">Modifier l'accès aux exercices</a></Button>
+          <Button><a href={this.goToModif(this.state.id)}>Modifier l'accès aux exercices</a></Button>
         </Col>
         <Col sm={{size:4}}>
           <Button><a href="/profil/patient/global">Voir les statistiques globales</a></Button>
@@ -64,8 +74,7 @@ class ProfilPatient extends Component {
         </Row>
         <br/>
         <Row>
-        <Col onClick={this.toggle} sm="6"><ExercicePatient exo={this.state.exos[0]}/></Col>
-        <Col onClick={this.toggle} sm="6"><ExercicePatient exo={this.state.exos[1]}/></Col>
+          {exercices}
         </Row>
         <br/>
 

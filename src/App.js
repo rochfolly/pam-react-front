@@ -28,7 +28,7 @@ class App extends Component {
           <Route exact path='/profil' component={ProfilPro} />
           <Route path='/profil/ajout' component={AjoutPatient} />
           <Route path='/profil/patient/:id' component={ProfilPatient} />
-          <Route path='/profil/patient/exercices' component={ModifExercices} />
+          <Route path='/profil/patient/:id/exercices' component={ModifExercices} />
           <Route path='/profil/patient/global' component={StatGlobales} />
           <Route exact path='/user' component={ProfilUser} />
           <Route exact path='/user/scores' component={Scores} />

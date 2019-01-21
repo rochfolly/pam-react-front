@@ -1,14 +1,36 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Form, Col, Button } from 'reactstrap';
 //import './ModifExercices.css';
 import ChoixExercice from '.././AjoutPatient/ChoixExercice/ChoixExercice'
+import { fetchExos } from '../../../utils/API'
 
 
 class ModifExercices extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { modal: false, id: '', firstname:'', name:'', email:'', exos:[]};
+
+  }
+
+ componentDidMount(){
+    const { id } = this.props.match.params
+
+    fetchExos(id).then(res => {
+      this.setState({ exos: res.data })
+    })
+   
+    
+  } 
+
   render() {
+    const edit = this.state.exos.map((exo) => 
+    <Col sm="6"><ChoixExercice exo={exo} /></Col> 
+    )
+    
     return (
       <Container>
       <br/>
+      <Form onSubmit={this.handleSubmit}>
         <Row>
         <Col sm={{size: 10}}><h3 class="titlePAM">Modification</h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton">
@@ -22,13 +44,7 @@ class ModifExercices extends Component {
         </Row>
         <br/>
         <Row>
-        <Col sm="6"><ChoixExercice /></Col>
-        <Col sm="6"><ChoixExercice /></Col>
-        </Row>
-        <br/>
-        <Row>
-        <Col sm="6"><ChoixExercice /></Col>
-        <Col sm="6"><ChoixExercice /></Col>
+          {edit}
         </Row>
         <br/>
         <Row>
@@ -36,6 +52,9 @@ class ModifExercices extends Component {
           <Button>Valider</Button>
         </Col>
         </Row>
+      </Form>
+      <br/>
+      <br/>
       </Container>
     );
   }
