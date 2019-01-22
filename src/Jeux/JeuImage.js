@@ -4,9 +4,11 @@ import './JeuImage.css'
 import game from '../Images/dice.png'
 import axios from 'axios';
 
-var answerTab = {0:{src:"",rep:""},1:{src:"",rep:""},2:{src:"",rep:""},3:{src:"",rep:""},4:{src:"",rep:""},
-5:{src:"",rep:""},6:{src:"",rep:""},7:{src:"",rep:""},8:{src:"",rep:""},9:{src:"",rep:""}}
+var answerTab = {"0":{src:"",rep:""},"1":{src:"",rep:""},"2":{src:"",rep:""},
+                "3":{src:"",rep:""},"4":{src:"",rep:""},"5":{src:"",rep:""},
+                "6":{src:"",rep:""},"7":{src:"",rep:""},"8":{src:"",rep:""},"9":{src:"",rep:""}}
 
+var niv = { "niv": 1}
 
 class JeuImage extends Component {
 
@@ -22,6 +24,10 @@ class JeuImage extends Component {
     }
 
     handleSubmit() {
+        if(this.state.question<9)
+        {
+            answerTab[this.state.question].src = this.state.reponse[this.state.question].src
+            answerTab[this.state.question].rep = this.state.answer
         this.setState({
             lien: this.state.reponse[this.state.question+1].src,
             word1: this.state.reponse[this.state.question+1].word_1,
@@ -30,16 +36,49 @@ class JeuImage extends Component {
             word4: this.state.reponse[this.state.question+1].word_4,
             word5: this.state.reponse[this.state.question+1].word_5 
         })
-        this.setState({question: this.state.question+1})
-        answerTab[this.state.question].src = this.state.reponse[this.state.question].src
-        answerTab[this.state.question].rep = this.state.answer
+        this.setState({question: this.state.question+1,
+                        answer: ''}, ()=>{console.log(this.state.question)})
 
-        if(answerTab[9].src!==""){
-            axios.post("https://pfepam.azurewebsites.net/exo2/scoring",{answerTab})
-            .then(res => {
-              console.log(res.data)
+        // this.setState({ counter: 2 }, () => console.log('le compteur vaut: ' + this.state.counter));
+
+        // this.setState({
+        //     lien: this.state.reponse[this.state.question+1].src,
+        //     word1: this.state.reponse[this.state.question+1].word_1,
+        //     word2: this.state.reponse[this.state.question+1].word_2,
+        //     word3: this.state.reponse[this.state.question+1].word_3,
+        //     word4: this.state.reponse[this.state.question+1].word_4,
+        //     word5: this.state.reponse[this.state.question+1].word_5 
+        // }, () => {
+        //         answerTab[this.state.question].src = this.state.reponse[this.state.question].src
+        //         answerTab[this.state.question].rep = this.state.answer},
+        //         () => {
+        //             this.setState({question: this.state.question+1})
+        //         }
+        // )
+        
+        } else {
+            answerTab[this.state.question].src = this.state.reponse[this.state.question].src
+            answerTab[this.state.question].rep = this.state.answer
+            this.setState({question: 0}, () => {
+                console.log(this.state.question)
             })
+
+            const tab = JSON.stringify(answerTab)
+                axios("https://pfepam.azurewebsites.net/exo2/scoring",
+                {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
+               .then(res => {
+                   console.log(res.data)
+                   const finaltab = JSON.stringify(res.data)
+                   localStorage.setItem("resultat", finaltab)
+                   console.log("item créé")  
+                   console.log(finaltab)   
+                   console.log(localStorage.getItem("resultat"))             
+                })
+                window.location = '/user/result'
+            
+            
         }
+        console.log(JSON.stringify(answerTab))
     }
 
     handleChange(event) {
@@ -48,7 +87,7 @@ class JeuImage extends Component {
     
     componentDidMount(){
         const gameurl = "https://pfepam.azurewebsites.net/exo2"
-        axios.post(gameurl)
+        axios.post(gameurl,{niv})
         .then(res => {
             this.setState({ reponse: res.data,
                 lien: res.data[this.state.question].src,
@@ -57,6 +96,7 @@ class JeuImage extends Component {
                  word3: res.data[this.state.question].word_3,
                  word4: res.data[this.state.question].word_4,
                  word5: res.data[this.state.question].word_5 })
+                 console.log(res.data)
             })  
     }
 
@@ -79,7 +119,7 @@ class JeuImage extends Component {
         <FormGroup check>
         <Row>
             <Col sm={{size: 3, offset:3}} className="jeuImg">
-                <img height="300" width="300" src={require(`./../Images/${this.state.lien}`)} className="imgExo"></img>
+                <img height="300" width="300" alt="" src={require(`./../Images/${this.state.lien}`)} className="imgExo"></img>
             </Col>
             <Col sm={{size: 3, offset:1}} className="solutions">
                 <Row>

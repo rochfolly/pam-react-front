@@ -16,6 +16,7 @@ import Statistiques from './User/Statistiques/Statistiques.js'
 import UserInscription from './User/Inscription/Inscription.js'
 import TxtATrou from './Jeux/TxtATrou';
 import JeuImage from './Jeux/JeuImage';
+import Result from './Jeux/Result';
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
           <Route exact path='/user/inscription' component={UserInscription} />
           <Route exact path='/user/txtATrou' component={TxtATrou} /> 
           <Route exact path='/user/jeuImage' component={JeuImage} /> 
+          <Route exact path='/user/result' component={Result} /> 
         </div>
       </BrowserRouter>
     );

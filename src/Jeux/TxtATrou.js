@@ -4,8 +4,14 @@ import './TxtATrou.css'
 import game from '../Images/dice.png'
 import axios from 'axios';
 
-var answerTab = {0:{part1:"",part2:"",rep:""},1:{part1:"",part2:"",rep:""},2:{part1:"",part2:"",rep:""},
-                3:{part1:"",part2:"",rep:""},4:{part1:"",part2:"",rep:""}}
+var answerTab = {"0":{part1:"",part2:"",rep:""},
+                "1":{part1:"",part2:"",rep:""},
+                "2":{part1:"",part2:"",rep:""},
+                "3":{part1:"",part2:"",rep:""},
+                "4":{part1:"",part2:"",rep:""}}
+
+var niv = { "niv": 1}
+
 
 class TxtATrou extends Component {
 
@@ -33,13 +39,24 @@ class TxtATrou extends Component {
         this.setState({answer: ''})
         }
         else {
-            axios.post("https://pfepam.azurewebsites.net/exo1/scoring",{answerTab})
+            answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
+            answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
+            answerTab[this.state.question].rep = this.state.answer
+            
+            const tab = JSON.stringify(answerTab)
+            axios("https://pfepam.azurewebsites.net/exo1/scoring",
+                {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
             .then(res => {
-                axios.post("http://localhost:4000/score",{score: res.data})
-                window.location="http://localhost:4000/score"
+                
+                console.log(res.data)
+                const finaltab = JSON.stringify(res.data)
+                localStorage.setItem("resultat", finaltab)
+                   console.log("item créé")  
+                   console.log(finaltab)   
+                   console.log(localStorage.getItem("resultat"))             
             })
         }
-        console.log(answerTab)
+        console.log(JSON.stringify(answerTab))
         //Pour rendre synchrone le setState, utiliser un callback ex :
         //this.setState({ counter: 2 }, () => console.log('le compteur vaut: ' + this.state.counter));
     }
@@ -50,7 +67,8 @@ class TxtATrou extends Component {
 
     componentDidMount(){
         const gameurl = "https://pfepam.azurewebsites.net/exo1"
-        axios.post(gameurl) 
+        //axios.post(gameurl,{niv}) 
+        axios.post(gameurl)
         .then(res => {
             this.setState({reponse: res.data,
                 part1: res.data[this.state.question].part1,
