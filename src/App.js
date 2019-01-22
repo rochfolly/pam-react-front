@@ -24,12 +24,12 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Route exact path='/' component={Accueil} />
-          <Route path='/inscription' component={Inscription} />
+          <Route exact path='/inscription' component={Inscription} />
           <Route exact path='/profil' component={ProfilPro} />
-          <Route path='/profil/ajout' component={AjoutPatient} />
-          <Route path='/profil/patient/:id' component={ProfilPatient} />
-          <Route path='/profil/patient/:id/exercices' component={ModifExercices} />
-          <Route path='/profil/patient/global' component={StatGlobales} />
+          <Route exact path='/profil/ajout' component={AjoutPatient} />
+          <Route exact path='/profil/patient/:id' component={ProfilPatient} />
+          <Route exact path='/profil/patient/:id/exercices' component={ModifExercices} />
+          <Route exact path='/profil/patient/global' component={StatGlobales} />
           <Route exact path='/user' component={ProfilUser} />
           <Route exact path='/user/scores' component={Scores} />
           <Route exact path='/user/statistiques' component={Statistiques} />

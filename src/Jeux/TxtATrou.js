@@ -40,6 +40,8 @@ class TxtATrou extends Component {
             })
         }
         console.log(answerTab)
+        //Pour rendre synchrone le setState, utiliser un callback ex :
+        //this.setState({ counter: 2 }, () => console.log('le compteur vaut: ' + this.state.counter));
     }
     
     handleChange = event => {

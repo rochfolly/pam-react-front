@@ -55,13 +55,13 @@ class ProfilUser extends Component {
         </Col>
         </Row><br/>
         <Row>
-        <Col onClick={this.toggle} sm="6"><ChoixExercice /></Col>
-        <Col onClick={this.toggle} sm="6"><ChoixExercice /></Col>
+        <Col sm="6"><ChoixExercice /></Col>
+        <Col sm="6"><ChoixExercice /></Col>
         </Row>
         <br/>
         <Row>
-        <Col onClick={this.toggle} sm="6"><ChoixExercice /></Col>
-        <Col onClick={this.toggle} sm="6"><ChoixExercice /></Col>
+        <Col sm="6"><ChoixExercice /></Col>
+        <Col sm="6"><ChoixExercice /></Col>
         </Row>
         <br/>
 
