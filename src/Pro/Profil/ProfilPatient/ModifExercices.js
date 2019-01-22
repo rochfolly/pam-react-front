@@ -31,7 +31,7 @@ class ModifExercices extends Component {
     return (
       <Container>
       <br/>
-      <Form onSubmit={this.handleSubmit}>
+      <Form>
         <Row>
         <Col sm={{size: 10}}><h3 class="titlePAM">Modification</h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton">
@@ -48,11 +48,6 @@ class ModifExercices extends Component {
           {edit}
         </Row>
         <br/>
-        <Row>
-        <Col sm={{size:2, offset:10}}>
-          <Button type="Submit">Valider</Button>
-        </Col>
-        </Row>
       </Form>
       <br/>
       <br/>
