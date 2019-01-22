@@ -64,7 +64,7 @@ class ProfilPro extends Component {
     const potentialUsers = this.state.users.map((user) => 
       <li><a href={this.goToProfile(user[0])} >
        <img src={usericon} className="User-logo" alt="user" />
-       <span>{user[1]} {user[2]}</span>
+       <span><b>{user[1]} {user[2]}</b></span>
       </a></li>
      )
 

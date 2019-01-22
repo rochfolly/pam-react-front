@@ -17,14 +17,14 @@ class Inscription extends Component {
   handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
     }
- 
-    
+     
   handleSubmit = event => {
     event.preventDefault();
 
     console.log(this.state.firstname)
-
-     const newDoctor = {
+    if(this.state.password === this.state.conf)
+     {
+       const newDoctor = {
         firstname: this.state.firstname,
         name: this.state.name,
         email: this.state.email,
@@ -34,10 +34,13 @@ class Inscription extends Component {
         phone: this.state.phone
      }
      
-     signup(newDoctor)
-
-    //window.location = "/profil"
+     signup(newDoctor).then(res => {
+       window.location = '/profil'
+     })
+    }
+    else{alert('Mot de passe invalide')}
   }
+    
   
   /*testAxios = event => {
     const working = 'axios marche!'

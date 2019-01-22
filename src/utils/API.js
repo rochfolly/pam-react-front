@@ -72,6 +72,11 @@ export function deletePrescription (exo_id, user_id) {
     return axios.delete(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id )
 }
 
+export function updatePrescription (level, exo_id, user_id) {
+    return axios.post(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id + '/' + level )
+} 
+
+
 export const test = working => {
     return axios.get(backurl + '/user/signup', {working})
     .then(console.log('axios marche'))
