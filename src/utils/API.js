@@ -38,7 +38,6 @@ export const signup = newDoctor => {
         })
     }
 
-
 export const createUser = newUser => {
     return axios.post(backurl + '/user/create', {
         doctor_id: newUser.doctor_id,

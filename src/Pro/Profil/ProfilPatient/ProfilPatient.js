@@ -81,7 +81,7 @@ class ProfilPatient extends Component {
         <Modal isOpen={this.state.modal} size="lg" toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Statistiques du jeu TITRE</ModalHeader>
           <ModalBody>
-          <Row><Col>Line ou bar chart des stat de l'exo</Col></Row>
+          <Row><Col>Line ou bar chart des stats de l'exo</Col></Row>
           </ModalBody>
         </Modal>
 

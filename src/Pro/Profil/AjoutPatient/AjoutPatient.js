@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, FormGroup, Button, Input, Label } from 'reactstrap';
+import { Container, Row, Col, FormGroup, Button, Input, Label, Form } from 'reactstrap';
 import './AjoutPatient.css';
 import ChoixExercice from './ChoixExercice/ChoixExercice'
 import jwt_decode from 'jwt-decode'
@@ -9,7 +9,10 @@ import { createUser } from '../../../utils/API';
 class AjoutPatient extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: '', firstname:'', email: ''};
+    this.state = {name:'', firstname:'', email:''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = event => {
@@ -18,22 +21,33 @@ class AjoutPatient extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-
-    const token = localStorage.usertoken
-    const doctor_id = jwt_decode(token).id
+    
+    const {id} = this.props.match.params
+    /*const token = localStorage.usertoken
+    const doctor_id = jwt_decode(token).id*/
 
     const newUser = {
-      doctor_id : doctor_id,
+      doctor_id : id,
       firstname : this.state.firstname,
       email : this.state.email,
-      password : this.state.firstname
+      name : this.state.name
     }
+    console.log(newUser)
     createUser(newUser)
+    .then(res => {
+      window.location=this.gotoFirstPrescription(id, res.data.id)
+    })
+  }
+
+  gotoFirstPrescription(doctor_id, user_id){
+    const link = "/profil/ajout/" + doctor_id + "/exercices" + user_id
+    return link
   }
   
   render() {
     return (
       <Container>
+       <Form>
       <br/>
         <Row>
         <Col sm={{size: 10}}><h3 class="titlePAM">Nouveau patient</h3></Col>
@@ -44,17 +58,17 @@ class AjoutPatient extends Component {
         <FormGroup row>
         <Label for="name" sm={1}>Nom*</Label>
           <Col sm={4}>
-            <Input value={this.state.name} type="text" name="name" id="name" placeholder="Nom" required/>
+            <Input value={this.state.name} type="text" name="name" id="name" onChange={this.handleChange} placeholder="Nom" required/>
           </Col>
           <Label for="firstname" sm={{size:1, offset:1}}>Prénom*</Label>
           <Col sm={4}>
-            <Input value={this.state.firstname} type="text" name="firstName" id="firstName" placeholder="Prénom"  required/>
+            <Input value={this.state.firstname} type="text" name="firstname" id="firstname" onChange={this.handleChange} placeholder="Prénom"  required/>
           </Col>
         </FormGroup>
         <FormGroup row>
         <Label for="email" sm={1}>Email*</Label>
           <Col sm={4}>
-            <Input value={this.state.email} type="email" name="email" id="email" placeholder="exemple@gmail.com" required/>
+            <Input value={this.state.email} type="email" name="email" id="email" onChange={this.handleChange} placeholder="exemple@gmail.com" required/>
             <small>Un email lui sera envoyé pour terminer l'inscription</small>
           </Col>
         </FormGroup>
@@ -62,24 +76,30 @@ class AjoutPatient extends Component {
         <h3>Exercices accessibles au patient :</h3>
         </Row>
         <br/>
-        <Row>
-        <Col sm="6"><ChoixExercice /></Col>
-        <Col sm="6"><ChoixExercice /></Col>
-        </Row>
-        <br/>
-        <Row>
-        <Col sm="6"><ChoixExercice /></Col>
-        <Col sm="6"><ChoixExercice /></Col>
-        </Row>
-        <br/>
+
         <Row>
         <Col sm={{size:2, offset:10}}>
-          <Button>Valider</Button>
+          <Button type="submit" onClick={this.handleSubmit}>Suivant</Button>
         </Col>
         </Row>
+        </Form>
       </Container>
     );
   }
 }
 
 export default AjoutPatient;
+
+
+/*
+        <Row>
+        <Col sm="6"><ChoixExercice /></Col>
+        <Col sm="6"><ChoixExercice /></Col>
+        </Row>
+        <br/>
+        <Row>
+        <Col sm="6"><ChoixExercice /></Col>
+        <Col sm="6"><ChoixExercice /></Col>
+        </Row>
+        <br/>
+*/
