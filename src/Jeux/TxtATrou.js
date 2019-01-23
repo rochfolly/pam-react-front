@@ -28,32 +28,47 @@ class TxtATrou extends Component {
     }
 
     handleSubmit() {
+
+        answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
+        answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
+        answerTab[this.state.question].rep = this.state.answer
+        // answerTab[this.state.question].repo1 = this.state.answer
+        // answerTab[this.state.question].repo2 = this.state.answer
+        // answerTab[this.state.question].repo3 = this.state.answer
+
+        if(this.state.answer === this.state.rep1){
+            answerTab[this.state.question].repo1 = this.state.rep2
+            answerTab[this.state.question].repo2 = this.state.rep3
+            answerTab[this.state.question].repo3 = this.state.rep4
+            console.log(answerTab)
+        }
+        else if(this.state.answer === this.state.rep2){
+            answerTab[this.state.question].repo1 = this.state.rep1
+            answerTab[this.state.question].repo2 = this.state.rep3
+            answerTab[this.state.question].repo3 = this.state.rep4
+            console.log(answerTab)
+        }
+        else if(this.state.answer === this.state.rep3){
+            answerTab[this.state.question].repo1 = this.state.rep1
+            answerTab[this.state.question].repo2 = this.state.rep2
+            answerTab[this.state.question].repo3 = this.state.rep4
+            console.log(answerTab)
+        }
+        else if(this.state.answer === this.state.rep4){
+            answerTab[this.state.question].repo1 = this.state.rep1
+            answerTab[this.state.question].repo2 = this.state.rep2
+            answerTab[this.state.question].repo3 = this.state.rep3
+            console.log(answerTab)
+        }
+        else {
+            answerTab[this.state.question].repo1 = this.state.rep1
+            answerTab[this.state.question].repo2 = this.state.rep2
+            answerTab[this.state.question].repo3 = this.state.rep3
+            console.log(answerTab)   
+        }
+
         if(this.state.question<4)
         {
-            answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
-            answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
-            answerTab[this.state.question].rep = this.state.answer
-            // answerTab[this.state.question].repo1 = this.state.answer
-            // answerTab[this.state.question].repo2 = this.state.answer
-            // answerTab[this.state.question].repo3 = this.state.answer
-
-            var j=1
-            var rep=""
-            var repo=""
-
-            for(var i=1;i<5;i++)
-            {
-                rep = "rep"+i
-                repo = "repo"+j
-                console.log(this.getRep(i)+" ")
-                if(this.state.rep!==this.state.answer)
-                {
-                    answerTab[this.state.question].repo = this.getRep(i)
-                    j++;
-                }
-                console.log(i+" "+j)
-            }
-
             this.setState({
                 part1: this.state.reponse[this.state.question+1].part1, 
                 part2: this.state.reponse[this.state.question+1].part2,
@@ -70,9 +85,6 @@ class TxtATrou extends Component {
             )  
         }
         else {
-            answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
-            answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
-            answerTab[this.state.question].rep = this.state.answer
             
             const tab = JSON.stringify(answerTab)
             console.log(tab)
@@ -183,3 +195,22 @@ class TxtATrou extends Component {
 }
 
 export default TxtATrou;
+
+
+
+            /*var j=1
+            var rep=""
+            var repo=""
+
+            for(var i=1;i<5;i++)
+            {
+                rep = "rep"+i
+                repo = "repo"+j
+                console.log(this.getRep(i)+" ")
+                if(this.state.rep!==this.state.answer)
+                {
+                    answerTab[this.state.question].repo = this.getRep(i)
+                    j++;
+                }
+                console.log(i+" "+j)
+            } */
