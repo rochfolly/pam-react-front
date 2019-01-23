@@ -1,60 +1,122 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, FormGroup, Input } from 'reactstrap';
+import { Container, Row, Col, Button, FormGroup, Input, Label } from 'reactstrap';
 import './TxtATrou.css'
 import game from '../Images/dice.png'
 import axios from 'axios';
 
-var answerTab = {0:{part1:"",part2:"",rep:""},1:{part1:"",part2:"",rep:""},2:{part1:"",part2:"",rep:""},
-                3:{part1:"",part2:"",rep:""},4:{part1:"",part2:"",rep:""}}
+var answerTab = {"niv":2,
+                "0":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
+                "1":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
+                "2":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
+                "3":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
+                "4":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""}}
+
+var niv = { "niv": 2}
+
 
 class TxtATrou extends Component {
 
     constructor(props){
         super(props);
         this.state = {question:0, part1:'', part2:'',
-        reponse:'', answer:'', email:''}
+                    reponse:'', answer:'', email:'', 
+                    rep1:'', rep2:'', rep3:'', rep4:''}
         
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.getRep = this.getRep.bind(this)
     }
 
     handleSubmit() {
         if(this.state.question<4)
         {
-        this.setState({
-            part1: this.state.reponse[this.state.question+1].part1, 
-            part2: this.state.reponse[this.state.question+1].part2,
-        })
-        this.setState({question: this.state.question+1})
+            answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
+            answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
+            answerTab[this.state.question].rep = this.state.answer
+            // answerTab[this.state.question].repo1 = this.state.answer
+            // answerTab[this.state.question].repo2 = this.state.answer
+            // answerTab[this.state.question].repo3 = this.state.answer
 
-        answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
-        answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
-        answerTab[this.state.question].rep = this.state.answer
-        this.setState({answer: ''})
+            var j=1
+            var rep=""
+            var repo=""
+
+            for(var i=1;i<5;i++)
+            {
+                rep = "rep"+i
+                repo = "repo"+j
+                console.log(this.getRep(i)+" ")
+                if(this.state.rep!==this.state.answer)
+                {
+                    answerTab[this.state.question].repo = this.getRep(i)
+                    j++;
+                }
+                console.log(i+" "+j)
+            }
+
+            this.setState({
+                part1: this.state.reponse[this.state.question+1].part1, 
+                part2: this.state.reponse[this.state.question+1].part2,
+                rep1: this.state.reponse[this.state.question+1].rep1,
+                rep2: this.state.reponse[this.state.question+1].rep2,
+                rep3: this.state.reponse[this.state.question+1].rep3,
+                rep4: this.state.reponse[this.state.question+1].rep4,
+            }, ()=>{
+                    this.setState({question: this.state.question+1, 
+                    answer: ''}, ()=>{
+                        console.log(this.state.question)
+                    })
+                }
+            )  
         }
         else {
-            axios.post("https://pfepam.azurewebsites.net/exo1/scoring",{answerTab})
-            .then(res => {
-                axios.post("http://localhost:4000/score",{score: res.data})
-                window.location="http://localhost:4000/score"
-            })
+            answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
+            answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
+            answerTab[this.state.question].rep = this.state.answer
+            
+            const tab = JSON.stringify(answerTab)
+            console.log(tab)
+                axios("https://pfepam.azurewebsites.net/exo1/scoring",
+                {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
+                .then(res => {
+                    console.log(res.data)
+                    const finaltab = JSON.stringify(res.data)
+                    localStorage.setItem("resultat", finaltab)
+                    console.log("item créé")  
+                    console.log(finaltab)   
+                    console.log(localStorage.getItem("resultat"))            
+                })
+                window.location = '/user/result'
         }
-        console.log(answerTab)
-        //Pour rendre synchrone le setState, utiliser un callback ex :
-        //this.setState({ counter: 2 }, () => console.log('le compteur vaut: ' + this.state.counter));
-    }
-    
-    handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value })
+        console.log(JSON.stringify(answerTab))
     }
 
+    handleChange(event) {
+        this.setState({ answer: event.target.value })
+    }
+
+    getRep = rep_id => {
+        const rep = "this.state.rep" + rep_id
+        return rep
+    }
+    getRepo = repo_id => {
+        const repo = "repo" + repo_id
+        return repo
+    }
+    
+
     componentDidMount(){
-        const gameurl = "https://pfepam.azurewebsites.net/exo1"
-        axios.post(gameurl) 
+        axios("https://pfepam.azurewebsites.net/exo1",
+                {method: 'POST', header: {"Content-Type": "application/json"}})
         .then(res => {
+            console.log(res.data)
             this.setState({reponse: res.data,
                 part1: res.data[this.state.question].part1,
-                part2: res.data[this.state.question].part2 })
+                part2: res.data[this.state.question].part2,
+                rep1: res.data[this.state.question].rep1,
+                rep2: res.data[this.state.question].rep2,
+                rep3: res.data[this.state.question].rep3,
+                rep4: res.data[this.state.question].rep4})
             })        
     }
     
@@ -85,14 +147,30 @@ class TxtATrou extends Component {
             </FormGroup>
         </div>
         <br/>
-        <div id="niv1" style={{display:"none"}}>
+        <div id="niv1" style={{display:"block"}} className="solutions">
             <Row>
-                <Col sm={{size:2, offset:4}}><Button className="rep" id="rep1">phrases</Button></Col>
-                <Col sm={{size:2, offset:1}}><Button className="rep" id="rep2">mots</Button></Col>
+                <Col sm={{size:3, offset:4}}>
+                    <Label check className="jeuSol" >
+                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.rep1} value={this.state.rep1} onChange={this.handleChange}/>{this.state.rep1}
+                    <span className="checkmark"></span></Label>
+                </Col>
+                <Col sm={{size:3}}>
+                <Label check className="jeuSol" >
+                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.rep2} value={this.state.rep2} onChange={this.handleChange}/>{this.state.rep2}
+                    <span className="checkmark"></span></Label>
+                </Col>
             </Row>
             <Row>
-                <Col sm={{size:2, offset:4}}><Button className="rep" id="rep3">lapins</Button></Col>
-                <Col sm={{size:2, offset:1}}><Button className="rep" id="rep4">boissons</Button></Col>
+                <Col sm={{size:3, offset:4}}>
+                    <Label check className="jeuSol" >
+                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.rep3} value={this.state.rep3} onChange={this.handleChange}/>{this.state.rep3}
+                    <span className="checkmark"></span></Label>
+                </Col>
+                <Col sm={{size:3}}>
+                <Label check className="jeuSol" >
+                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.rep4} value={this.state.rep4} onChange={this.handleChange}/>{this.state.rep4}
+                    <span className="checkmark"></span></Label>
+                </Col>
             </Row>
         </div>
         <Row>
