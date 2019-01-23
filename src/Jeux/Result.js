@@ -13,6 +13,7 @@ class Result extends Component {
 
     componentDidMount(){
         const resultat = localStorage.getItem("resultat") 
+        localStorage.clear("resultat")
         if(resultat){
         var score = 0
         this.setState({result: score})

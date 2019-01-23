@@ -1,0 +1,9 @@
+
+.jeuSol img:hover {
+    object-fit: cover !important;
+}
+
+.jeuSol input:checked ~ img {
+    object-fit: cover !important;
+    box-shadow: 5px 5px 5px 5px #EB7842;
+}

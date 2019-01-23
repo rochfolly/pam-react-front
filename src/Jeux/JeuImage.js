@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, FormGroup, Input, Label} from 'reactstrap';
 import './JeuImage.css'
-import game from '../Images/dice.png'
+import game from '../Images/jeuImage.png'
 import axios from 'axios';
 
 var answerTab = {"niv": null, 
