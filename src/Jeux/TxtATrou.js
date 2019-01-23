@@ -4,27 +4,30 @@ import './TxtATrou.css'
 import game from '../Images/dice.png'
 import axios from 'axios';
 
-var answerTab = {"niv":2,
+var answerTab = {"niv": null,
                 "0":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
                 "1":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
                 "2":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
                 "3":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
                 "4":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""}}
 
-var niv = { "niv": 2}
-
+var niveau = { "niv": null}
+//Niv 1 = 4 mots très différents
+//Niv 2 = 4 mots similaires
+//Niv 3 = 1 input à remplir
 
 class TxtATrou extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, part1:'', part2:'',
+        this.state = {niv:1, question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
                     rep1:'', rep2:'', rep3:'', rep4:''}
         
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.getRep = this.getRep.bind(this)
+        this.isFirstLevel = this.isFirstLevel.bind(this)
     }
 
     handleSubmit() {
@@ -45,10 +48,10 @@ class TxtATrou extends Component {
             {
                 rep = "rep"+i
                 repo = "repo"+j
-                console.log(this.getRep(i)+" ")
+                console.log(repo)
                 if(this.state.rep!==this.state.answer)
                 {
-                    answerTab[this.state.question].repo = this.getRep(i)
+                    answerTab[this.state.question].repo = "tete"
                     j++;
                 }
                 console.log(i+" "+j)
@@ -73,7 +76,8 @@ class TxtATrou extends Component {
             answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
             answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
             answerTab[this.state.question].rep = this.state.answer
-            
+            answerTab.niv = this.state.niv
+
             const tab = JSON.stringify(answerTab)
             console.log(tab)
                 axios("https://pfepam.azurewebsites.net/exo1/scoring",
@@ -104,8 +108,18 @@ class TxtATrou extends Component {
         return repo
     }
     
+    isFirstLevel() {
+        if (this.state.niv === 1) {
+            var lvl = true
+        } else 
+        {
+            lvl = false
+        }
+        return lvl
+    }
 
     componentDidMount(){
+        niveau.niv = this.state.niv
         axios("https://pfepam.azurewebsites.net/exo1",
                 {method: 'POST', header: {"Content-Type": "application/json"}})
         .then(res => {
@@ -141,13 +155,15 @@ class TxtATrou extends Component {
             <FormGroup row>
                 <Col sm={{size: 6, offset:3}}>
                 <h2>{this.state.part1}
-                <Input type="text" name="answer" id="trou" value={this.state.answer} placeholder="________________" onChange={this.handleChange}/>
+                <Input type="text" name="answer" id="trou" 
+                value={this.state.answer} placeholder="________________" 
+                onChange={this.handleChange} disabled={this.isFirstLevel()}/>
                 {this.state.part2}</h2>
                 </Col>
             </FormGroup>
         </div>
         <br/>
-        <div id="niv1" style={{display:"block"}} className="solutions">
+        <div id="niv1" style={{display: this.isFirstLevel() ? "block": "none"}} className="solutions">
             <Row>
                 <Col sm={{size:3, offset:4}}>
                     <Label check className="jeuSol" >
