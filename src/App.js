@@ -16,6 +16,7 @@ import Statistiques from './User/Statistiques/Statistiques.js'
 import UserInscription from './User/Inscription/Inscription.js'
 import TxtATrou from './Jeux/TxtATrou';
 import JeuImage from './Jeux/JeuImage';
+import PremierePrescription from './Pro/Profil/AjoutPatient/PremierePrescription/PremierePrescription';
 import Result from './Jeux/Result';
 
 
@@ -27,9 +28,10 @@ class App extends Component {
           <Route exact path='/' component={Accueil} />
           <Route exact path='/inscription' component={Inscription} />
           <Route exact path='/profil' component={ProfilPro} />
-          <Route exact path='/profil/ajout' component={AjoutPatient} />
-          <Route exact path='/profil/patient/:id' component={ProfilPatient} />
-          <Route exact path='/profil/patient/:id/exercices' component={ModifExercices} />
+          <Route path='/profil/ajout/:id' component={AjoutPatient} />
+          <Route path='/profil/ajout/:id/exercices/:newuser_id' component={PremierePrescription} />
+          <Route path='/profil/patient/:id' component={ProfilPatient} />
+          <Route path='/profil/patient/:id/exercices' component={ModifExercices} />
           <Route exact path='/profil/patient/global' component={StatGlobales} />
           <Route exact path='/user' component={ProfilUser} />
           <Route exact path='/user/scores' component={Scores} />

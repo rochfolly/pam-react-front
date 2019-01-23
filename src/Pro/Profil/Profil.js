@@ -10,7 +10,7 @@ class ProfilPro extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {name: '', firstname:'', mail: '', job:'', city:'', users:[], isModalOpen: false};
+    this.state = {id:'', name: '', firstname:'', mail: '', job:'', city:'', users:[], isModalOpen: false};
       
     this.goToProfile = this.goToProfile.bind(this)
     this.logout = this.logout.bind(this)
@@ -30,6 +30,7 @@ class ProfilPro extends Component {
     });
   }
 
+  
   componentDidMount () {
     const token = localStorage.usertoken
   
@@ -38,7 +39,7 @@ class ProfilPro extends Component {
       console.log('token:', token)
       const decoded = jwt_decode(token)
 
-      this.setState({firstname: decoded.firstname, name: decoded.name, email: decoded.email, job: decoded.job, city: decoded.city})
+      this.setState({id: decoded.id, firstname: decoded.firstname, name: decoded.name, email: decoded.email, job: decoded.job, city: decoded.city})
       console.log('decoded:', decoded)
 
      fetchUsers(decoded.id).then(res => {
@@ -51,11 +52,16 @@ class ProfilPro extends Component {
   }
 
   logout(){
-   logout.then(window.location = '/')
+   localStorage.clear().then(window.location = '/')
   }
 
   goToProfile = user_id => {
     const link = "/profil/patient/" + user_id
+    return link
+  }
+
+  goToAjout = doctor_id => {
+    const link = "/profil/ajout/" + doctor_id
     return link
   }
 
@@ -86,7 +92,7 @@ class ProfilPro extends Component {
         <br/><br/>
         <Row>
         <Col sm={{size:4, offset:4}}>
-          <Button><a href="/profil/ajout">Ajouter un nouveau patient</a></Button>
+          <Button><a href={this.goToAjout(this.state.id)}>Ajouter un nouveau patient</a></Button>
         </Col>
         </Row>
         <br/><br/>

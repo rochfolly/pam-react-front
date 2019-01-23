@@ -8,7 +8,7 @@ import { fetchExos } from '../../../utils/API'
 class ModifExercices extends Component {
   constructor(props) {
     super(props);
-    this.state = { modal: false, id: '', firstname:'', name:'', email:'', exos:[]};
+    this.state = { id: '', firstname:'', name:'', email:'', exos:[]};
 
   }
 
