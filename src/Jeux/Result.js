@@ -14,16 +14,14 @@ class Result extends Component {
     componentDidMount(){
         const resultat = localStorage.getItem("resultat") 
         if(resultat){
-            console.log(resultat)
-        var score = 1
-        this.setState({result: score}, () => {console.log(this.state.result)})
+        var score = 0
+        this.setState({result: score})
         const veryfinal = JSON.parse(resultat)
-        console.log(veryfinal)
-        for(var i = 0; i < 10; i++){
-          score += veryfinal[i].score+1
-          console.log(veryfinal[i].score)
+        var length = Object.keys(veryfinal).length
+        for(var i = 0; i < length; i++){
+          score += veryfinal[i].score
           reponse.push(veryfinal[i].score) 
-          if(i===9){this.setState({result: score})}
+          if(i===length-1){this.setState({result: score})}
         }
       }
     }
@@ -35,7 +33,7 @@ class Result extends Component {
 
         var indents = [];
 
-        for (var i = 0; i < 10; i++) { // remplacer 10 par reponse.length
+        for (var i = 0; i < reponse.length; i++) {
         indents.push(<Row key={i}><h3>Exercice {i+1} : {reponse[i]}</h3></Row>);
         }
 
@@ -56,6 +54,7 @@ class Result extends Component {
                 <Row>
                     <Col sm={{size:8, offset:1}}>
                     {indents}
+                    <br/>
                     </Col>
                     <Col sm="3">
                         <br/><br/><br/>

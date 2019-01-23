@@ -8,7 +8,7 @@ var answerTab = {"0":{src:"",rep:""},"1":{src:"",rep:""},"2":{src:"",rep:""},
                 "3":{src:"",rep:""},"4":{src:"",rep:""},"5":{src:"",rep:""},
                 "6":{src:"",rep:""},"7":{src:"",rep:""},"8":{src:"",rep:""},"9":{src:"",rep:""}}
 
-var niv = { "niv": 1}
+var niv = {"niv": 1}
 
 class JeuImage extends Component {
 
@@ -28,42 +28,27 @@ class JeuImage extends Component {
         {
             answerTab[this.state.question].src = this.state.reponse[this.state.question].src
             answerTab[this.state.question].rep = this.state.answer
-        this.setState({
-            lien: this.state.reponse[this.state.question+1].src,
-            word1: this.state.reponse[this.state.question+1].word_1,
-            word2: this.state.reponse[this.state.question+1].word_2,
-            word3: this.state.reponse[this.state.question+1].word_3,
-            word4: this.state.reponse[this.state.question+1].word_4,
-            word5: this.state.reponse[this.state.question+1].word_5 
-        })
-        this.setState({question: this.state.question+1,
-                        answer: ''}, ()=>{console.log(this.state.question)})
-
-        // this.setState({ counter: 2 }, () => console.log('le compteur vaut: ' + this.state.counter));
-
-        // this.setState({
-        //     lien: this.state.reponse[this.state.question+1].src,
-        //     word1: this.state.reponse[this.state.question+1].word_1,
-        //     word2: this.state.reponse[this.state.question+1].word_2,
-        //     word3: this.state.reponse[this.state.question+1].word_3,
-        //     word4: this.state.reponse[this.state.question+1].word_4,
-        //     word5: this.state.reponse[this.state.question+1].word_5 
-        // }, () => {
-        //         answerTab[this.state.question].src = this.state.reponse[this.state.question].src
-        //         answerTab[this.state.question].rep = this.state.answer},
-        //         () => {
-        //             this.setState({question: this.state.question+1})
-        //         }
-        // )
-        
-        } else {
+            this.setState({
+                lien: this.state.reponse[this.state.question+1].src,
+                word1: this.state.reponse[this.state.question+1].word_1,
+                word2: this.state.reponse[this.state.question+1].word_2,
+                word3: this.state.reponse[this.state.question+1].word_3,
+                word4: this.state.reponse[this.state.question+1].word_4,
+                word5: this.state.reponse[this.state.question+1].word_5 
+            }, ()=>{
+                    this.setState({question: this.state.question+1,
+                    answer: ''}, ()=>{
+                        console.log(this.state.question)
+                    })
+                }    
+            )       
+        }
+        else {
             answerTab[this.state.question].src = this.state.reponse[this.state.question].src
             answerTab[this.state.question].rep = this.state.answer
-            this.setState({question: 0}, () => {
-                console.log(this.state.question)
-            })
 
             const tab = JSON.stringify(answerTab)
+            console.log(tab)
                 axios("https://pfepam.azurewebsites.net/exo2/scoring",
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                .then(res => {
@@ -74,9 +59,7 @@ class JeuImage extends Component {
                    console.log(finaltab)   
                    console.log(localStorage.getItem("resultat"))             
                 })
-                window.location = '/user/result'
-            
-            
+                window.location = '/user/result'           
         }
         console.log(JSON.stringify(answerTab))
     }
@@ -85,18 +68,20 @@ class JeuImage extends Component {
         this.setState({ answer: event.target.value })
     }
     
-    componentDidMount(){
-        const gameurl = "https://pfepam.azurewebsites.net/exo2"
-        axios.post(gameurl,{niv})
+    componentDidMount() {
+        //const gameurl = "https://pfepam.azurewebsites.net/exo2"
+        axios("https://pfepam.azurewebsites.net/exo2",
+                {method: 'POST', data: niv, header: {"Content-Type": "application/json"}})
+        // axios.post(gameurl,{niv})
         .then(res => {
+            console.log(res.data)
             this.setState({ reponse: res.data,
-                lien: res.data[this.state.question].src,
-                 word1: res.data[this.state.question].word_1,
-                 word2: res.data[this.state.question].word_2,
-                 word3: res.data[this.state.question].word_3,
-                 word4: res.data[this.state.question].word_4,
-                 word5: res.data[this.state.question].word_5 })
-                 console.log(res.data)
+            lien: res.data[this.state.question].src,
+            word1: res.data[this.state.question].word_1,
+            word2: res.data[this.state.question].word_2,
+            word3: res.data[this.state.question].word_3,
+            word4: res.data[this.state.question].word_4,
+            word5: res.data[this.state.question].word_5 })
             })  
     }
 
@@ -118,7 +103,7 @@ class JeuImage extends Component {
         </Row>
         <FormGroup check>
         <Row>
-            <Col sm={{size: 3, offset:3}} className="jeuImg">
+            <Col sm={{size: 3, offset:3}}>
                 <img height="300" width="300" alt="" src={require(`./../Images/${this.state.lien}`)} className="imgExo"></img>
             </Col>
             <Col sm={{size: 3, offset:1}} className="solutions">
