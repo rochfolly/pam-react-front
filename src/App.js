@@ -17,6 +17,7 @@ import UserInscription from './User/Inscription/Inscription.js'
 import TxtATrou from './Jeux/TxtATrou';
 import JeuImage from './Jeux/JeuImage';
 import PremierePrescription from './Pro/Profil/AjoutPatient/PremierePrescription/PremierePrescription';
+import BonneImage from './Jeux/BonneImage';
 import Result from './Jeux/Result';
 
 
@@ -38,9 +39,13 @@ class App extends Component {
           <Route exact path='/user/:user_id/statistiques' component={Statistiques} />
           <Route exact path='/user/inscription' component={UserInscription} />
           <Route exact path='/txtATrou' component={TxtATrou} />
+          <Route exact path='/bneImage' component={BonneImage} />
           <Route exact path='/user/:user_id/txtATrou' component={TxtATrou} /> 
           <Route exact path='/user/:user_id/jeuImage' component={JeuImage} /> 
           <Route exact path='/jeuImage' component={JeuImage} />
+          <Route exact path='/user/txtATrou' component={TxtATrou} /> 
+          <Route exact path='/user/jeuImage' component={JeuImage} /> 
+          <Route exact path='/user/:user_id/bneImage' component={BonneImage} />
           <Route exact path='/user/result' component={Result} /> 
         </div>
       </BrowserRouter>

@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, FormGroup, Input, Label} from 'reactstrap';
 import './JeuImage.css'
-import game from '../Images/dice.png'
+import game from '../Images/jeuImage.png'
 import axios from 'axios';
 
-var answerTab = {"0":{src:"",rep:""},"1":{src:"",rep:""},"2":{src:"",rep:""},
+var answerTab = {"niv": null,
+                "0":{src:"",rep:""},"1":{src:"",rep:""},"2":{src:"",rep:""},
                 "3":{src:"",rep:""},"4":{src:"",rep:""},"5":{src:"",rep:""},
                 "6":{src:"",rep:""},"7":{src:"",rep:""},"8":{src:"",rep:""},"9":{src:"",rep:""}}
 
-var niv = {"niv": 1}
+var niveau = {"niv": null}
+//Niv 1 = 5 mots très différents
+//Niv 2 = 5 mots similaires
+//Niv 3 = 1 input à remplir
 
 class JeuImage extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, 
+        this.state = {question:0, niv: 3,
             lien:'images/0.png',
-            word1:'A', word2:'B', word3:'C', word4:'D', word5:'E',
-            reponse:'', answer:'null'}
+            word1:'', word2:'', word3:'', word4:'', word5:'',
+            reponse:'', answer:''}
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.isLastLevel = this.isLastLevel.bind(this)
     }
 
     handleSubmit() {
@@ -52,14 +57,11 @@ class JeuImage extends Component {
                 axios("https://pfepam.azurewebsites.net/exo2/scoring",
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                .then(res => {
-                   console.log(res.data)
-                   const finaltab = JSON.stringify(res.data)
-                   localStorage.setItem("resultat", finaltab)
-                   console.log("item créé")  
-                   console.log(finaltab)   
-                   console.log(localStorage.getItem("resultat"))             
+                    res.data.exo = "Jeu d'image"
+                    const finaltab = JSON.stringify(res.data)
+                    localStorage.setItem("resultat", finaltab)  
+                    window.location = '/user/result'           
                 })
-                window.location = '/user/result'           
         }
         console.log(JSON.stringify(answerTab))
     }
@@ -67,12 +69,21 @@ class JeuImage extends Component {
     handleChange(event) {
         this.setState({ answer: event.target.value })
     }
+
+    isLastLevel() {
+        if (this.state.niv === 3) {
+            var lvl = true
+        } else 
+        {
+            lvl = false
+        }
+        return lvl
+    }
     
     componentDidMount() {
-        //const gameurl = "https://pfepam.azurewebsites.net/exo2"
+        niveau.niv = this.state.niv
         axios("https://pfepam.azurewebsites.net/exo2",
-                {method: 'POST', data: niv, header: {"Content-Type": "application/json"}})
-        // axios.post(gameurl,{niv})
+                {method: 'POST', data: niveau, header: {"Content-Type": "application/json"}})
         .then(res => {
             console.log(res.data)
             this.setState({ reponse: res.data,
@@ -106,7 +117,8 @@ class JeuImage extends Component {
             <Col sm={{size: 3, offset:3}}>
                 <img height="300" width="300" alt="" src={require(`./../Images/${this.state.lien}`)} className="imgExo"></img>
             </Col>
-            <Col sm={{size: 3, offset:1}} className="solutions">
+            <Col sm={{size: 3, offset:1}} className="solutions" >
+            <div style={{display: this.isLastLevel() ? "none": "block"}}>
                 <Row>
                     <Label check className="jeuSol" >
                     <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange}/>{this.state.word1}
@@ -132,6 +144,13 @@ class JeuImage extends Component {
                     <Input type="radio" checked={this.state.answer === this.state.word5} value={this.state.word5} onChange={this.handleChange}/>{this.state.word5}
                     <span className="checkmark"></span></Label>
                 </Row>
+            </div>
+            <div style={{display: this.isLastLevel() ? "block": "none"}}>
+            <br/><br/><br/><br/>
+            <Input type="text" name="answer" id="trou" 
+                value={this.state.answer} placeholder="________________" 
+                onChange={this.handleChange} style={{width: "100%"}}/>
+            </div>
             </Col>
         </Row>
         </FormGroup>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, FormGroup, Input, Label } from 'reactstrap';
+import { Container, Row, Col, Button, 
+    FormGroup, Input, Label,
+    Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 import './TxtATrou.css'
-import game from '../Images/dice.png'
+import game from '../Images/txtATrou.png'
 import axios from 'axios';
 
-var answerTab = {"niv":2,
+var answerTab = {"niv": null,
                 "0":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
                 "1":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
                 "2":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
@@ -12,30 +14,37 @@ var answerTab = {"niv":2,
                 "4":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""}
             }
 
-var niv = { "niv": 2}
-
+var niveau = { "niv": null}
+//Niv 1 = 4 mots très différents
+//Niv 2 = 4 mots similaires
+//Niv 3 = 1 input à remplir
 
 class TxtATrou extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, part1:'', part2:'',
+        this.state = {niv:1, question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
-                    rep1:'', rep2:'', rep3:'', rep4:''}
+                    rep1:'', rep2:'', rep3:'', rep4:'',
+                    modal: false}
         
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.getRep = this.getRep.bind(this)
+        this.isLastLevel = this.isLastLevel.bind(this)
+        this.toggle = this.toggle.bind(this);
     }
+
+    toggle() {
+        this.setState({
+          modal: !this.state.modal
+        });
+      }
 
     handleSubmit() {
 
         answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
         answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
         answerTab[this.state.question].rep = this.state.answer
-        // answerTab[this.state.question].repo1 = this.state.answer
-        // answerTab[this.state.question].repo2 = this.state.answer
-        // answerTab[this.state.question].repo3 = this.state.answer
 
         if(this.state.answer === this.state.rep1){
             answerTab[this.state.question].repo1 = this.state.rep2
@@ -86,20 +95,18 @@ class TxtATrou extends Component {
             )  
         }
         else {
-            
+            answerTab.niv = this.state.niv
+            this.toggle()
             const tab = JSON.stringify(answerTab)
             console.log(tab)
                 axios("https://pfepam.azurewebsites.net/exo1/scoring",
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                 .then(res => {
-                    console.log(res.data)
+                    res.data.exo = "Texte à trou"
                     const finaltab = JSON.stringify(res.data)
                     localStorage.setItem("resultat", finaltab)
-                    console.log("item créé")  
-                    console.log(finaltab)   
-                    console.log(localStorage.getItem("resultat"))            
+                    window.location = '/user/result'          
                 })
-                window.location = '/user/result'
         }
         console.log(JSON.stringify(answerTab))
     }
@@ -107,20 +114,21 @@ class TxtATrou extends Component {
     handleChange(event) {
         this.setState({ answer: event.target.value })
     }
-
-    getRep = rep_id => {
-        const rep = "this.state.rep" + rep_id
-        return rep
-    }
-    getRepo = repo_id => {
-        const repo = "repo" + repo_id
-        return repo
-    }
     
+    isLastLevel() {
+        if (this.state.niv === 3) {
+            var lvl = true
+        } else 
+        {
+            lvl = false
+        }
+        return lvl
+    }
 
     componentDidMount(){
+        niveau.niv = this.state.niv
         axios("https://pfepam.azurewebsites.net/exo1",
-                {method: 'POST', header: {"Content-Type": "application/json"}})
+                {method: 'POST', data:niveau, header: {"Content-Type": "application/json"}})
         .then(res => {
             console.log(res.data)
             this.setState({reponse: res.data,
@@ -154,13 +162,15 @@ class TxtATrou extends Component {
             <FormGroup row>
                 <Col sm={{size: 6, offset:3}}>
                 <h2>{this.state.part1}
-                <Input type="text" name="answer" id="trou" value={this.state.answer} placeholder="________________" onChange={this.handleChange}/>
+                <Input type="text" name="answer" id="trou" 
+                value={this.state.answer} placeholder="________________" 
+                onChange={this.handleChange} disabled={!this.isLastLevel()}/>
                 {this.state.part2}</h2>
                 </Col>
             </FormGroup>
         </div>
         <br/>
-        <div id="niv1" style={{display:"block"}} className="solutions">
+        <div id="niv1et2" style={{display: this.isLastLevel() ? "none": "block"}} className="solutions">
             <Row>
                 <Col sm={{size:3, offset:4}}>
                     <Label check className="jeuSol" >
@@ -190,28 +200,16 @@ class TxtATrou extends Component {
             <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>
             <Col sm={{size: 4}}><Button onClick={this.handleSubmit} className="footerRight">Valider</Button></Col>
         </Row>
+
+        <Modal isOpen={this.state.modal} toggle={this.toggle} backdrop="static">
+          <ModalBody>
+            Nous calculons votre score ! Veuillez attendre quelques instants...
+          </ModalBody>
+        </Modal>
+
       </Container>
     );
   }
 }
 
 export default TxtATrou;
-
-
-
-            /*var j=1
-            var rep=""
-            var repo=""
-
-            for(var i=1;i<5;i++)
-            {
-                rep = "rep"+i
-                repo = "repo"+j
-                console.log(this.getRep(i)+" ")
-                if(this.state.rep!==this.state.answer)
-                {
-                    answerTab[this.state.question].repo = this.getRep(i)
-                    j++;
-                }
-                console.log(i+" "+j)
-            } */
