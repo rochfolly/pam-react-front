@@ -4,7 +4,7 @@ import './JeuImage.css'
 import game from '../Images/jeuImage.png'
 import axios from 'axios';
 
-var answerTab = {"niv": null, 
+var answerTab = {"niv": null,
                 "0":{src:"",rep:""},"1":{src:"",rep:""},"2":{src:"",rep:""},
                 "3":{src:"",rep:""},"4":{src:"",rep:""},"5":{src:"",rep:""},
                 "6":{src:"",rep:""},"7":{src:"",rep:""},"8":{src:"",rep:""},"9":{src:"",rep:""}}
@@ -57,14 +57,11 @@ class JeuImage extends Component {
                 axios("https://pfepam.azurewebsites.net/exo2/scoring",
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                .then(res => {
-                   console.log(res.data)
-                   const finaltab = JSON.stringify(res.data)
-                   localStorage.setItem("resultat", finaltab)
-                   console.log("item créé")  
-                   console.log(finaltab)   
-                   console.log(localStorage.getItem("resultat"))             
+                    res.data.exo = "Jeu d'image"
+                    const finaltab = JSON.stringify(res.data)
+                    localStorage.setItem("resultat", finaltab)  
+                    window.location = '/user/result'           
                 })
-                window.location = '/user/result'           
         }
         console.log(JSON.stringify(answerTab))
     }

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, FormGroup, Input, Label} from 'reactstrap';
+import { Container, Row, Col, Button, 
+    FormGroup, Input, Label} from 'reactstrap';
 import './BonneImage.css'
-import game from '../Images/dice.png'
+import game from '../Images/bneImg.png'
 import axios from 'axios';
 
-var answerTab = {"niv": null, 
+var answerTab = {"niv": null,
                 "0":{src:"",label:""},"1":{src:"",label:""},"2":{src:"",label:""},
                 "3":{src:"",label:""},"4":{src:"",label:""}}
 
 var niveau = {"niv": null}
-//Niv 1 = 5 mots très différents
-//Niv 2 = 5 mots similaires
-//Niv 3 = 1 input à remplir
+//Niv 1 = choix entre 2 images
+//Niv 2 = choix entre 4 images
 
 class BonneImage extends Component {
 
@@ -24,7 +24,7 @@ class BonneImage extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.isLastLevel = this.isLastLevel.bind(this)
+        this.isFirstLevel = this.isFirstLevel.bind(this)
     }
 
     handleSubmit() {
@@ -33,19 +33,35 @@ class BonneImage extends Component {
             answerTab[this.state.question].src = this.state.answer
             answerTab[this.state.question].label = this.state.reponse[this.state.question].label
             
-            this.setState({
-                label: this.state.reponse[this.state.question+1].label,
-                src_1: this.state.reponse[this.state.question+1].src_1,
-                src_2: this.state.reponse[this.state.question+1].src_2,
-                src_3: this.state.reponse[this.state.question+1].src_3,
-                src_4: this.state.reponse[this.state.question+1].src_4
-            }, ()=>{
-                    this.setState({question: this.state.question+1,
-                    answer: ''}, ()=>{
-                        console.log(this.state.question)
-                    })
-                }    
-            )       
+            if(this.state.niv === 1){
+                this.setState({
+                    label: this.state.reponse[this.state.question+1].label,
+                    src_1: this.state.reponse[this.state.question+1].src_1,
+                    src_2: this.state.reponse[this.state.question+1].src_2
+                }, ()=>{
+                        this.setState({question: this.state.question+1,
+                        answer: ''}, ()=>{
+                            console.log(this.state.question)
+                        })
+                    }    
+                ) 
+            }
+            else {
+                this.setState({
+                    label: this.state.reponse[this.state.question+1].label,
+                    src_1: this.state.reponse[this.state.question+1].src_1,
+                    src_2: this.state.reponse[this.state.question+1].src_2,
+                    src_3: this.state.reponse[this.state.question+1].src_3,
+                    src_4: this.state.reponse[this.state.question+1].src_4
+                }, ()=>{
+                        this.setState({question: this.state.question+1,
+                        answer: ''}, ()=>{
+                            console.log(this.state.question)
+                        })
+                    }    
+                ) 
+            }
+                  
         }
         else {
             answerTab[this.state.question].label = this.state.reponse[this.state.question].label
@@ -57,14 +73,11 @@ class BonneImage extends Component {
                 axios("https://pfepam.azurewebsites.net/exo3/scoring",
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                .then(res => {
-                   console.log(res.data)
+                   res.data.exo = "La bonne image"
                    const finaltab = JSON.stringify(res.data)
-                   localStorage.setItem("resultat", finaltab)
-                   console.log("item créé")  
-                   console.log(finaltab)   
-                   console.log(localStorage.getItem("resultat"))             
+                   localStorage.setItem("resultat", finaltab)            
+                   window.location = '/user/result' 
                 })
-                //.then(window.location = '/user/result')    
         }
         console.log(JSON.stringify(answerTab))
     }
@@ -73,8 +86,8 @@ class BonneImage extends Component {
         this.setState({ answer: event.target.value })
     }
 
-    isLastLevel() {
-        if (this.state.niv === 2) {
+    isFirstLevel() {
+        if (this.state.niv === 1) {
             var lvl = true
         } else 
         {
@@ -89,12 +102,19 @@ class BonneImage extends Component {
                 {method: 'POST', data: niveau, header: {"Content-Type": "application/json"}})
         .then(res => {
             console.log(res.data)
-            this.setState({ reponse: res.data,
-            label: res.data[this.state.question].label,
-            src_1: res.data[this.state.question].src_1,
-            src_2: res.data[this.state.question].src_2,
-            src_3: res.data[this.state.question].src_3,
-            src_4: res.data[this.state.question].src_4 })
+            if(this.state.niv === 1){
+                this.setState({ reponse: res.data,
+                    label: res.data[this.state.question].label,
+                    src_1: res.data[this.state.question].src_1,
+                    src_2: res.data[this.state.question].src_2})
+            } else {
+                this.setState({ reponse: res.data,
+                    label: res.data[this.state.question].label,
+                    src_1: res.data[this.state.question].src_1,
+                    src_2: res.data[this.state.question].src_2,
+                    src_3: res.data[this.state.question].src_3,
+                    src_4: res.data[this.state.question].src_4 })
+            }
             })  
     }
 
@@ -114,73 +134,56 @@ class BonneImage extends Component {
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="jeuImageLogo"/></Col>
         </Row>
-        <FormGroup check><br/><br/><br/>
+        <FormGroup check>
+        <div style={{display: this.isFirstLevel() ? "none": "block"}}>
+        <br/>
             <Row>
                 <Col sm="3">
                     <Label check className="jeuSol" >
                     <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
-                    <img height="150" width="150" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
+                    <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
                     </Label>
                 </Col>
                 <Col sm="3">
                     <Label check className="jeuSol" >
                     <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_2} value={this.state.src_2} onChange={this.handleChange}/>
-                    <img height="150" width="150" alt="" src={require(`./../Images/${this.state.src_2}`)} className="imgExo"></img>
+                    <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_2}`)} className="imgExo"></img>
                     </Label>
                 </Col>
                 <Col sm="3">
                     <Label check className="jeuSol" >
                     <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_3} value={this.state.src_3} onChange={this.handleChange}/>
-                    <img height="150" width="150" alt="" src={require(`./../Images/${this.state.src_3}`)} className="imgExo"></img>
+                    <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_3}`)} className="imgExo"></img>
                     </Label>
                 </Col>
                 <Col sm="3">
                     <Label check className="jeuSol" >
                     <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_4} value={this.state.src_4} onChange={this.handleChange}/>
-                    <img height="150" width="150" alt="" src={require(`./../Images/${this.state.src_4}`)} className="imgExo"></img>
+                    <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_4}`)} className="imgExo"></img>
                     </Label>
                 </Col>
             </Row>
+        </div>
+        <div style={{display: this.isFirstLevel() ? "block": "none"}}>
+            <Row>
+                <Col sm={{size:4, offset:2}}>
+                    <Label check className="jeuSol" >
+                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
+                    <img height="250" width="250" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
+                    </Label>
+                </Col>
+                <Col sm="4">
+                    <Label check className="jeuSol" >
+                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_2} value={this.state.src_2} onChange={this.handleChange}/>
+                    <img height="250" width="250" alt="" src={require(`./../Images/${this.state.src_2}`)} className="imgExo"></img>
+                    </Label>
+                </Col>
+            </Row>
+        </div>
             <br/><br/>
             <Row>
                 <Col><h2 style={{textAlign:"center"}} className="titlePAM">{this.state.label}</h2></Col>
             </Row>
-
-
-            {/* <Col sm={{size: 2, offset:3}}>
-                <h2>{this.state.label}</h2>
-            </Col>
-            <Col sm={{size: 4, offset:1}} className="solutions" >
-                <Row>
-                    <Col sm="6">
-                        <Label check className="jeuSol" >
-                        <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
-                        <img height="150" width="150" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
-                        </Label>
-                    </Col>
-                    <Col sm="6">
-                        <Label check className="jeuSol" >
-                        <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_2} value={this.state.src_2} onChange={this.handleChange}/>
-                        <img height="150" width="150" alt="" src={require(`./../Images/${this.state.src_2}`)} className="imgExo"></img>
-                        </Label>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm="6">
-                        <Label check className="jeuSol" >
-                        <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_3} value={this.state.src_3} onChange={this.handleChange}/>
-                        <img height="150" width="150" alt="" src={require(`./../Images/${this.state.src_3}`)} className="imgExo"></img>
-                        </Label>
-                    </Col>
-                    <Col sm="6">
-                        <Label check className="jeuSol" >
-                        <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_4} value={this.state.src_4} onChange={this.handleChange}/>
-                        <img height="150" width="150" alt="" src={require(`./../Images/${this.state.src_4}`)} className="imgExo"></img>
-                        </Label>
-                    </Col>
-                </Row>
-            </Col>
-        </Row> */}
         </FormGroup>
         <Row>
             <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>

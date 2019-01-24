@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, FormGroup, Input, Label } from 'reactstrap';
+import { Container, Row, Col, Button, 
+    FormGroup, Input, Label,
+    Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 import './TxtATrou.css'
 import game from '../Images/txtATrou.png'
 import axios from 'axios';
@@ -22,12 +24,20 @@ class TxtATrou extends Component {
         super(props);
         this.state = {niv:1, question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
-                    rep1:'', rep2:'', rep3:'', rep4:''}
+                    rep1:'', rep2:'', rep3:'', rep4:'',
+                    modal: false}
         
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.isFirstLevel = this.isFirstLevel.bind(this)
+        this.isLastLevel = this.isLastLevel.bind(this)
+        this.toggle = this.toggle.bind(this);
     }
+
+    toggle() {
+        this.setState({
+          modal: !this.state.modal
+        });
+      }
 
     handleSubmit() {
 
@@ -85,20 +95,17 @@ class TxtATrou extends Component {
         }
         else {
             answerTab.niv = this.state.niv
-            
+            this.toggle()
             const tab = JSON.stringify(answerTab)
             console.log(tab)
                 axios("https://pfepam.azurewebsites.net/exo1/scoring",
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                 .then(res => {
-                    console.log(res.data)
+                    res.data.exo = "Texte à trou"
                     const finaltab = JSON.stringify(res.data)
                     localStorage.setItem("resultat", finaltab)
-                    console.log("item créé")  
-                    console.log(finaltab)   
-                    console.log(localStorage.getItem("resultat"))            
+                    window.location = '/user/result'          
                 })
-                window.location = '/user/result'
         }
         console.log(JSON.stringify(answerTab))
     }
@@ -107,8 +114,8 @@ class TxtATrou extends Component {
         this.setState({ answer: event.target.value })
     }
     
-    isFirstLevel() {
-        if (this.state.niv === 1) {
+    isLastLevel() {
+        if (this.state.niv === 3) {
             var lvl = true
         } else 
         {
@@ -120,7 +127,7 @@ class TxtATrou extends Component {
     componentDidMount(){
         niveau.niv = this.state.niv
         axios("https://pfepam.azurewebsites.net/exo1",
-                {method: 'POST', header: {"Content-Type": "application/json"}})
+                {method: 'POST', data:niveau, header: {"Content-Type": "application/json"}})
         .then(res => {
             console.log(res.data)
             this.setState({reponse: res.data,
@@ -156,13 +163,13 @@ class TxtATrou extends Component {
                 <h2>{this.state.part1}
                 <Input type="text" name="answer" id="trou" 
                 value={this.state.answer} placeholder="________________" 
-                onChange={this.handleChange} disabled={this.isFirstLevel()}/>
+                onChange={this.handleChange} disabled={!this.isLastLevel()}/>
                 {this.state.part2}</h2>
                 </Col>
             </FormGroup>
         </div>
         <br/>
-        <div id="niv1" style={{display: this.isFirstLevel() ? "block": "none"}} className="solutions">
+        <div id="niv1et2" style={{display: this.isLastLevel() ? "none": "block"}} className="solutions">
             <Row>
                 <Col sm={{size:3, offset:4}}>
                     <Label check className="jeuSol" >
@@ -192,6 +199,13 @@ class TxtATrou extends Component {
             <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>
             <Col sm={{size: 4}}><Button onClick={this.handleSubmit} className="footerRight">Valider</Button></Col>
         </Row>
+
+        <Modal isOpen={this.state.modal} toggle={this.toggle} backdrop="static">
+          <ModalBody>
+            Nous calculons votre score ! Veuillez attendre quelques instants...
+          </ModalBody>
+        </Modal>
+
       </Container>
     );
   }

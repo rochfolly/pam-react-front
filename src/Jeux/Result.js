@@ -8,21 +8,21 @@ var reponse = [];
 class Result extends Component {
     constructor(props){
         super(props);
-        this.state = {question:0, result:null}
+        this.state = {question:0, result:null, title:""}
     }
 
     componentDidMount(){
         const resultat = localStorage.getItem("resultat") 
-        localStorage.clear("resultat")
+        //localStorage.clear("resultat")
         if(resultat){
         var score = 0
-        this.setState({result: score})
         const veryfinal = JSON.parse(resultat)
+        this.setState({title: veryfinal.exo})   
         var length = Object.keys(veryfinal).length
-        for(var i = 0; i < length; i++){
+        for(var i = 0; i < length-1; i++){
           score += veryfinal[i].score
           reponse.push(veryfinal[i].score) 
-          if(i===length-1){this.setState({result: score})}
+          if(i===length-2){this.setState({result: score})}
         }
       }
     }
@@ -46,7 +46,7 @@ class Result extends Component {
                     <Row>
                         <h3 className="titlePAM">Félicitations !</h3>           
                     </Row>
-                    <Row><h6 id="sous-titre">Voici vos résultats :</h6></Row>            
+                    <Row><h6 id="sous-titre">Voici vos résultats : {this.state.title} </h6></Row>            
                 </Col>
                 <Col sm="5"><h6 className="titlePAM"><img src={trophy} alt="" style={{height:"150px"}}></img></h6></Col>
                 <Col sm={{size: 1}}><Button className ="smallButton"><a href="/user"><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
