@@ -9,7 +9,8 @@ var answerTab = {"niv":2,
                 "1":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
                 "2":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
                 "3":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
-                "4":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""}}
+                "4":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""}
+            }
 
 var niv = { "niv": 2}
 

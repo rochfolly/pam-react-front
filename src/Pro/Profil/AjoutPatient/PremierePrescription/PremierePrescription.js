@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
-import { Container, Row, Form, Col, Button, Input, FormGroup } from 'reactstrap';
+import { Container, Row, Form, Col, Button, Input, FormGroup, Label } from 'reactstrap';
 import game from '../../../../Images/dice.png';
-//import './ModifExercices.css';
+import '../../../../Jeux/JeuImage.css';
 import { showUser } from '../../../../utils/API'
 
+class Checkbox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { checked: false, new_id:'', firstname:'', name:''};
+  }
+
+  handleCheck(){
+    this.setState({checked: !this.state.checked})
+  }
+
+  render(){
+    return(
+      <Input type="checkbox" value={this.props.value} onChange={this.handleCheck} />
+    )
+
+  }
+}
 
 class PremierePrescription extends Component {
   constructor(props) {
     super(props);
-    this.state = { id: '', new_id:'', firstname:'', name:'', exos:[]};
+    this.state = { id: '', new_id:'', firstname:'', name:'', exos:[], ex1level:'', ex2level:'', ex3level:''};
 
   }
 
@@ -25,33 +42,67 @@ class PremierePrescription extends Component {
       })
   } 
 
+  handleChange_1 = event => {
+    this.setState({ ex1level: event.target.value }, () => console.log(this.state.ex1level))
+    
+  }
+
+  handleChange_2 = event => {
+    this.setState({ ex2level: event.target.value })
+  }
+
+  handleChange_3 = event => {
+    this.setState({ ex3level: event.target.value })
+  }
+ 
+  handleSubmit = event => {
+    event.preventDefault();
+
+  }
+
   render() {
-    const level1 = <Input type="checkbox" value={1} id="niv1" onChange={this.handleChange} defaultChecked/> 
-    
-    const level2 = <Input type="checkbox" value={2} id="niv2" onChange={this.handleChange}/>
-    
-    const level3 = <Input type="checkbox" value={3} id="niv3" onChange={this.handleChange} /> 
 
     return (
       <Container>
-        <Form> 
+        <Form onSubmit={this.handleSubmit}> 
           <FormGroup row>
             <Col sm={3}><img src={game} alt="jeu" class="Game-logo"/></Col>
             <Col sm={8}>
             <Row>
+            <Col sm={3}><Input type="checkbox" checked={this.state.exos[0] === 1} /></Col>
              <Col sm={9}><b>Exercice 1 : Texte à Trous</b></Col>
             </Row>
             <br/>
             <Row>
-            <Col sm={3} className="no-padding">Niveau</Col>
-            <Col sm={2}>1{level1}</Col>
-            <Col sm={2}>2{level2}</Col>
-            <Col sm={2}>3{level3}</Col>
+              <Col sm={3} className="no-padding">Niveau</Col>
+              <Col sm={2}>1<Input type="checkbox" value={1} id="niv1" onChange={this.handleChange_1} defaultChecked/> </Col>
+              <Col sm={2}>2<Input type="checkbox" value={2} id="niv2" onChange={this.handleChange_1}/></Col>
+              <Col sm={2}>3<Input type="checkbox" value={3} id="niv3" onChange={this.handleChange_1} /></Col>
+            </Row>
+            <Row>
+             <Col sm={9}><b>Exercice 2 : Jeu d'Images</b></Col>
+            </Row>
+            <br/>
+            <Row>
+              <Col sm={3} className="no-padding">Niveau</Col>
+              <Col sm={2}>1<Input type="checkbox" value={1} id="niv1" onChange={this.handleChange_2} defaultChecked/> </Col>
+              <Col sm={2}>2<Input type="checkbox" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
+              <Col sm={2}>3<Input type="checkbox" value={3} id="niv3" onChange={this.handleChange_2} /> </Col>
+            </Row>
+            <Row>
+             <Col sm={9}><b>Exercice 3 : La Juste Image</b></Col>
+            </Row>
+            <br/>
+            <Row>
+              <Col sm={3} className="no-padding">Niveau</Col>
+              <Col sm={2}>1<Input type="checkbox" value={1} id="niv1" onChange={this.handleChange_3} defaultChecked/> </Col>
+              <Col sm={2}>2<Input type="checkbox" value={2} id="niv2" onChange={this.handleChange_3}/></Col>
+              <Col sm={2}>3<Input type="checkbox" value={3} id="niv3" onChange={this.handleChange_3} /></Col>
             </Row>
             <br/>
             <Row>
              <Col sm={{size:2, offset:10}}>
-              <Button onClick={this.handleSubmit}>Valider</Button>
+              <Button type="submit">Valider</Button>
              </Col>
             </Row>
             </Col>

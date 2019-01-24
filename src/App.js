@@ -33,12 +33,14 @@ class App extends Component {
           <Route path='/profil/patient/:id' component={ProfilPatient} />
           <Route path='/profil/patient/:id/exercices' component={ModifExercices} />
           <Route exact path='/profil/patient/global' component={StatGlobales} />
-          <Route exact path='/user' component={ProfilUser} />
-          <Route exact path='/user/scores' component={Scores} />
-          <Route exact path='/user/statistiques' component={Statistiques} />
+          <Route exact path='/user/:user_id' component={ProfilUser} />
+          <Route exact path='/user/:user_id/scores' component={Scores} />
+          <Route exact path='/user/:user_id/statistiques' component={Statistiques} />
           <Route exact path='/user/inscription' component={UserInscription} />
-          <Route exact path='/user/txtATrou' component={TxtATrou} /> 
-          <Route exact path='/user/jeuImage' component={JeuImage} /> 
+          <Route exact path='/txtATrou' component={TxtATrou} />
+          <Route exact path='/user/:user_id/txtATrou' component={TxtATrou} /> 
+          <Route exact path='/user/:user_id/jeuImage' component={JeuImage} /> 
+          <Route exact path='/jeuImage' component={JeuImage} />
           <Route exact path='/user/result' component={Result} /> 
         </div>
       </BrowserRouter>

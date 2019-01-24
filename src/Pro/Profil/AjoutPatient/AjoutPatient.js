@@ -72,9 +72,6 @@ class AjoutPatient extends Component {
             <small>Un email lui sera envoyé pour terminer l'inscription</small>
           </Col>
         </FormGroup>
-        <Row>
-        <h3>Exercices accessibles au patient :</h3>
-        </Row>
         <br/>
 
         <Row>

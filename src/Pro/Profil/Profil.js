@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import usericon from '../../Images/user.png';
 import jwt_decode from 'jwt-decode'
 import './Profil.css';
-import { fetchUsers, logout } from '../../utils/API'
+import { fetchUsers } from '../../utils/API'
 import Settings from './Settings/Settings'
 
 class ProfilPro extends Component {
@@ -29,13 +29,11 @@ class ProfilPro extends Component {
       isModalOpen: true
     });
   }
-
-  
+ 
   componentDidMount () {
-    const token = localStorage.usertoken
+    const token = localStorage.doctortoken
   
     if(token){
-      console.log('token exists')
       console.log('token:', token)
       const decoded = jwt_decode(token)
 
@@ -81,9 +79,9 @@ class ProfilPro extends Component {
       <Container>
       <br/>
         <Row>
-        <Col sm={{size: 10}}><h3 class="titlePAM">Bienvenue <span id="user">{this.state.firstname}</span></h3></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.toggle}><h2><i class="fa fa-cog"></i></h2></Button></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i class="fa fa-power-off"></i></h2></Button></Col>
+        <Col sm={{size: 10}}><h3 className="titlePAM">Bienvenue <span id="user">{this.state.firstname}</span></h3></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.toggle}><h2><i className="fa fa-cog"></i></h2></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
         </Row>
         <Settings
           isOpen={this.state.isModalOpen}

@@ -13,7 +13,11 @@ export const login = user => {
             password: user.password
         })
         .then(res => {
-            localStorage.setItem("usertoken", res.data)
+            if(res.data.type.is_doctor){
+            localStorage.setItem("doctortoken", res.data.token)
+            }
+            else {localStorage.setItem("usertoken", res.data.token)}
+            console.log(res.data)
             return res.data
         })
         .catch(err => {

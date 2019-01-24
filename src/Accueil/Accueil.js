@@ -26,7 +26,11 @@ class Accueil extends Component {
       password : this.state.password
     }
     
-    login(user).then(window.location = "/profil")
+    login(user).then(res => {
+      const id = res.type.id
+      window.location = (res.type.is_doctor) ? "/profil/"+id : "/user/"+id
+      
+    })
   }
 
   render() {
