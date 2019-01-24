@@ -60,7 +60,7 @@ class JeuImage extends Component {
                     res.data.exo = "Jeu d'image"
                     const finaltab = JSON.stringify(res.data)
                     localStorage.setItem("resultat", finaltab)  
-                    window.location = '/user/result'           
+                    window.location = '/result'           
                 })
         }
         console.log(JSON.stringify(answerTab))
