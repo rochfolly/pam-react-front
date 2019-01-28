@@ -31,7 +31,7 @@ class ProfilPro extends Component {
   }
  
   componentDidMount () {
-    const token = localStorage.doctortoken
+    const token = sessionStorage.doctortoken
   
     if(token){
       console.log('token:', token)
@@ -50,21 +50,21 @@ class ProfilPro extends Component {
   }
 
   logout(){
-   localStorage.clear().then(window.location = '/')
+   sessionStorage.clear()
+   window.location = '/'
   }
 
   goToProfile = user_id => {
-    const link = "/profil/patient/" + user_id
+    const link = "/profil/" +this.state.id+ "/patient/" + user_id
     return link
   }
 
   goToAjout = doctor_id => {
-    const link = "/profil/ajout/" + doctor_id
+    const link = "/profil/" + this.state.id + "/ajout"
     return link
   }
 
   render() {
-    //href="/profil/patient`"
     const potentialUsers = this.state.users.map((user) => 
       <li><a href={this.goToProfile(user[0])} >
        <img src={usericon} className="User-logo" alt="user" />

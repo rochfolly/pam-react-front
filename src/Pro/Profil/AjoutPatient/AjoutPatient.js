@@ -3,7 +3,7 @@ import { Container, Row, Col, FormGroup, Button, Input, Label, Form } from 'reac
 import './AjoutPatient.css';
 import ChoixExercice from './ChoixExercice/ChoixExercice'
 import jwt_decode from 'jwt-decode'
-import { createUser } from '../../../utils/API';
+import { createUser, mailToUser } from '../../../utils/API';
 
 
 class AjoutPatient extends Component {
@@ -23,8 +23,6 @@ class AjoutPatient extends Component {
     event.preventDefault()
     
     const {id} = this.props.match.params
-    /*const token = localStorage.usertoken
-    const doctor_id = jwt_decode(token).id*/
 
     const newUser = {
       doctor_id : id,
@@ -32,15 +30,17 @@ class AjoutPatient extends Component {
       email : this.state.email,
       name : this.state.name
     }
-    console.log(newUser)
     createUser(newUser)
     .then(res => {
-      window.location=this.gotoFirstPrescription(id, res.data.id)
+      console.log(res.data)      
+      mailToUser(res.data)
+      console.log('Email sent to' + res.data.firstname)
+      //window.location=this.gotoFirstPrescription(id, res.data.id)
     })
   }
 
   gotoFirstPrescription(doctor_id, user_id){
-    const link = "/profil/ajout/" + doctor_id + "/exercices" + user_id
+    const link = "/profil/" + doctor_id + "/ajout/exercices/" + user_id
     return link
   }
   

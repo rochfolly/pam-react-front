@@ -14,9 +14,9 @@ export const login = user => {
         })
         .then(res => {
             if(res.data.type.is_doctor){
-            localStorage.setItem("doctortoken", res.data.token)
+            sessionStorage.setItem("doctortoken", res.data.token)
             }
-            else {localStorage.setItem("usertoken", res.data.token)}
+            else {sessionStorage.setItem("usertoken", res.data.token)}
             console.log(res.data)
             return res.data
         })
@@ -49,12 +49,12 @@ export const createUser = newUser => {
         name: newUser.name,
         email: newUser.email
         })
-        .then(res => { console.log("User added") })
+
     }
 
 export const isAuth = _ => {
     console.log('Authenticated')
-    return (localStorage.getItem('usertoken') !== null)
+    return (sessionStorage.getItem('usertoken') !== null)
 }
 
 
@@ -69,6 +69,10 @@ export const showUser = id => {
 
 export const fetchExos = user_id => {
     return axios.get(backurl + '/doctor/user/'+user_id+'/exercices' )
+}
+
+export const mailToUser = newUser => {
+    return axios.post(backurl + '/user/new', {user: newUser})
 }
 
 export function deletePrescription (exo_id, user_id) {
@@ -87,6 +91,6 @@ export const test = working => {
 
 
 export const logout = _ => {
-        localStorage.clear()
+        sessionStorage.clear()
     }
 

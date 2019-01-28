@@ -20,7 +20,6 @@ import PremierePrescription from './Pro/Profil/AjoutPatient/PremierePrescription
 import BonneImage from './Jeux/BonneImage';
 import Result from './Jeux/Result';
 
-
 class App extends Component {
   render() {
     return (
@@ -28,12 +27,12 @@ class App extends Component {
         <div>
           <Route exact path='/' component={Accueil} />
           <Route exact path='/inscription' component={Inscription} />
-          <Route exact path='/profil' component={ProfilPro} />
-          <Route path='/profil/ajout/:id' component={AjoutPatient} />
-          <Route path='/profil/ajout/:id/exercices/:newuser_id' component={PremierePrescription} />
-          <Route path='/profil/patient/:id' component={ProfilPatient} />
-          <Route path='/profil/patient/:id/exercices' component={ModifExercices} />
-          <Route exact path='/profil/patient/global' component={StatGlobales} />
+          <Route exact path='/profil/:id' component={ProfilPro} />
+          <Route exact path='/profil/:id/ajout' component={AjoutPatient} />
+          <Route exact path='/profil/:id/ajout/exercices/:newuser_id' component={PremierePrescription} />
+          <Route exact path='/profil/:id/patient/:user_id' component={ProfilPatient} />
+          <Route exact path='/profil/:id/patient/:user_id/exercices' component={ModifExercices} />
+          <Route exact path='/profil/:id/patient/global/:user_id' component={StatGlobales} />
           <Route exact path='/user/:user_id' component={ProfilUser} />
           <Route exact path='/user/:user_id/scores' component={Scores} />
           <Route exact path='/user/:user_id/statistiques' component={Statistiques} />

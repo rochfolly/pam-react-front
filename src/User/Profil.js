@@ -17,7 +17,7 @@ class ProfilUser extends Component {
   }
 
   componentDidMount(){
-      const token = localStorage.usertoken
+      const token = sessionStorage.usertoken
       const { user_id } = this.props.match.params
     
       if(token){
@@ -57,7 +57,8 @@ class ProfilUser extends Component {
   }
 
   logout(){
-    localStorage.clear().then(window.location = '/')
+    sessionStorage.clear()
+    window.location = '/'
   }
 
   render() {

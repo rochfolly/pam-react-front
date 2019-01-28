@@ -34,16 +34,22 @@ class StatGlobales extends Component {
         }
     };
 
-
-
   }
+
+  goBackTo(){
+    const { user_id } = this.props.match.params
+    const { id } = this.props.match.params
+    const link = "/profil/" + id + "/patient/" + user_id 
+    return link
+  }
+  
   render() {
     return (
       <Container>
       <br/>
         <Row>
         <Col sm={{size: 10}}><h3 class="titlePAM">Statistiques globales du patient</h3></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><a href="/profil/patient">
+        <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}>
           <h2><i class="fa fa-arrow-left"></i></h2>
         </a></Button></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>

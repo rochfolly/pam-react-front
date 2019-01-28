@@ -65,6 +65,11 @@ class PremierePrescription extends Component {
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}> 
+        <Row>
+        <Col sm={{size: 10}}><h3 class="titlePAM">Prescrption d'Exercices</h3></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton"><a href="/profil"><h2><i class="fa fa-arrow-left"></i></h2></a></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
+        </Row>
           <FormGroup row>
             <Col sm={3}><img src={game} alt="jeu" class="Game-logo"/></Col>
             <Col sm={8}>
@@ -79,6 +84,7 @@ class PremierePrescription extends Component {
               <Col sm={2}>2<Input type="checkbox" value={2} id="niv2" onChange={this.handleChange_1}/></Col>
               <Col sm={2}>3<Input type="checkbox" value={3} id="niv3" onChange={this.handleChange_1} /></Col>
             </Row>
+            <br/>
             <Row>
              <Col sm={9}><b>Exercice 2 : Jeu d'Images</b></Col>
             </Row>
@@ -89,6 +95,7 @@ class PremierePrescription extends Component {
               <Col sm={2}>2<Input type="checkbox" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
               <Col sm={2}>3<Input type="checkbox" value={3} id="niv3" onChange={this.handleChange_2} /> </Col>
             </Row>
+            <br/>
             <Row>
              <Col sm={9}><b>Exercice 3 : La Juste Image</b></Col>
             </Row>
