@@ -17,7 +17,7 @@ class BonneImage extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, niv: 2,
+        this.state = {question:0, niv: 1,
             label:'',
             src_1:'images/0.png', src_2:'images/0.png', src_3:'images/0.png', src_4:'images/0.png',
             reponse:'', answer:''}
@@ -76,7 +76,7 @@ class BonneImage extends Component {
                    res.data.exo = "La bonne image"
                    const finaltab = JSON.stringify(res.data)
                    localStorage.setItem("resultat", finaltab)            
-                   window.location = '/user/result' 
+                   window.location = '/result' 
                 })
         }
         console.log(JSON.stringify(answerTab))

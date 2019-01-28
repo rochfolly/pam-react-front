@@ -45,7 +45,7 @@ class App extends Component {
           <Route exact path='/user/txtATrou' component={TxtATrou} /> 
           <Route exact path='/user/jeuImage' component={JeuImage} /> 
           <Route exact path='/user/:user_id/bneImage' component={BonneImage} />
-          <Route exact path='/user/result' component={Result} /> 
+          <Route exact path='/result' component={Result} /> 
         </div>
       </BrowserRouter>
     );
