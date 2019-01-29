@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, Table} from 'reactstrap';
+import jwt_decode from 'jwt-decode'
 import './Result.css'
 import trophy from '../Images/trophy.png'
 
@@ -77,6 +78,16 @@ class Result extends Component {
         }
     }
 
+    goBackTo(){
+        const token = sessionStorage.usertoken
+  
+        if(token){
+        const decoded = jwt_decode(token)
+        const link = "/user/" + decoded.id
+        return link
+        }
+      }
+
     render() {
 
         const final = (this.state.result) ? this.state.result : '0'
@@ -117,7 +128,7 @@ class Result extends Component {
                     <Row><h6 id="sous-titre">Voici vos résultats : {this.state.title} </h6></Row>            
                 </Col>
                 <Col sm="5"><h6 className="titlePAM"><img src={trophy} alt="" style={{height:"150px"}}></img></h6></Col>
-                <Col sm={{size: 1}}><Button className ="smallButton"><a href="/user"><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
+                <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
                 <Col sm={{size: 1}}><Button className ="smallButton"><h2><i className="fa fa-power-off"></i></h2></Button></Col>
                 </Row>
                 <Row>

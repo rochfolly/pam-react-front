@@ -28,7 +28,8 @@ class ModifExercices extends Component {
   } 
 
   logout(){
-    localStorage.clear().then(window.location = "/")
+    localStorage.clear()
+    window.location = "/"
   }
 
   goBackTo(){

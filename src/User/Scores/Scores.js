@@ -10,6 +10,11 @@ class Scores extends Component {
     const link = "/user/" + user_id
     return link
   }
+  
+  logout(){
+    localStorage.clear()
+    window.location = '/'
+  }
 
   render() {
     return (
@@ -18,7 +23,7 @@ class Scores extends Component {
         <Row>
         <Col sm={{size: 10}}><h3 class="titlePAM">Vos scores</h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i class="fa fa-arrow-left"></i></h2></a></Button></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i class="fa fa-power-off"></i></h2></Button></Col>
         </Row>
         <br/><br/>
         <Row>
