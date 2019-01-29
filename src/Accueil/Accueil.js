@@ -12,14 +12,22 @@ class Accueil extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKeySubmit = this.handleKeySubmit.bind(this);
   }
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  handleKeySubmit(event) {
+    if(event.key == 'Enter'){
+        //alert('enter press here! ')
+        this.handleSubmit()
+    }
+  }
+
   handleSubmit = event => {
-   event.preventDefault();
+   //event.preventDefault();
 
     const user = {
       email : this.state.email,
@@ -46,12 +54,12 @@ class Accueil extends Component {
             <Form>
               <FormGroup row>
                 <Col sm={12}>
-                  <Input type="email" value={this.state.email} name="email" id="email" placeholder="Email" onChange={this.handleChange}/>
+                  <Input onKeyPress={this.handleKeySubmit} type="email" value={this.state.email} name="email" id="email" placeholder="Email" onChange={this.handleChange} required/>
                 </Col>
               </FormGroup>
               <FormGroup row>
                 <Col sm={12}>
-                  <Input type="password" value={this.state.password} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChange} />
+                  <Input onKeyPress={this.handleKeySubmit} type="password" value={this.state.password} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChange} required/>
                 </Col>
               </FormGroup>
               <FormGroup check row>
