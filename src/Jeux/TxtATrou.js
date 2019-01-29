@@ -23,7 +23,7 @@ class TxtATrou extends Component {
 
     constructor(props){
         super(props);
-        this.state = {niv:1, question:0, part1:'', part2:'',
+        this.state = {niv:3, question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
                     rep1:'', rep2:'', rep3:'', rep4:'',
                     modal: false}
