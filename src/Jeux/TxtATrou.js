@@ -29,6 +29,7 @@ class TxtATrou extends Component {
                     modal: false}
         
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleKeySubmit = this.handleKeySubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.isLastLevel = this.isLastLevel.bind(this)
         this.toggle = this.toggle.bind(this);
@@ -36,9 +37,16 @@ class TxtATrou extends Component {
 
     toggle() {
         this.setState({
-          modal: !this.state.modal
+            modal: !this.state.modal
         });
-      }
+    }
+    
+    handleKeySubmit(event) {
+        if(event.key == 'Enter'){
+            //alert('enter press here! ')
+            this.handleSubmit()
+        }
+    }
 
     handleSubmit() {
 
@@ -163,7 +171,8 @@ class TxtATrou extends Component {
             <FormGroup row>
                 <Col sm={{size: 6, offset:3}}>
                 <h2>{this.state.part1}
-                <Input type="text" name="answer" id="trou" 
+                <Input onKeyPress={this.handleKeySubmit}
+                type="text" name="answer" id="trou" 
                 value={this.state.answer} placeholder="________________" 
                 onChange={this.handleChange} disabled={!this.isLastLevel()}/>
                 {this.state.part2}</h2>
@@ -175,24 +184,24 @@ class TxtATrou extends Component {
             <Row>
                 <Col sm={{size:3, offset:4}}>
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.rep1} value={this.state.rep1} onChange={this.handleChange}/>{this.state.rep1}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.rep1} value={this.state.rep1} onChange={this.handleChange}/>{this.state.rep1}
                     <span className="checkmark"></span></Label>
                 </Col>
                 <Col sm={{size:3}}>
                 <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.rep2} value={this.state.rep2} onChange={this.handleChange}/>{this.state.rep2}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.rep2} value={this.state.rep2} onChange={this.handleChange}/>{this.state.rep2}
                     <span className="checkmark"></span></Label>
                 </Col>
             </Row>
             <Row>
                 <Col sm={{size:3, offset:4}}>
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.rep3} value={this.state.rep3} onChange={this.handleChange}/>{this.state.rep3}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.rep3} value={this.state.rep3} onChange={this.handleChange}/>{this.state.rep3}
                     <span className="checkmark"></span></Label>
                 </Col>
                 <Col sm={{size:3}}>
                 <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.rep4} value={this.state.rep4} onChange={this.handleChange}/>{this.state.rep4}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.rep4} value={this.state.rep4} onChange={this.handleChange}/>{this.state.rep4}
                     <span className="checkmark"></span></Label>
                 </Col>
             </Row>
