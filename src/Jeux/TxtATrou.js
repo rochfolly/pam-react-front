@@ -7,11 +7,11 @@ import game from '../Images/txtATrou.png'
 import axios from 'axios';
 
 var answerTab = {"niv": null,
-                "0":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
-                "1":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
-                "2":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
-                "3":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""},
-                "4":{part1:"",part2:"",rep:"",repo1:"",repo2:"",repo3:""}
+                "0":{part1:"",part2:"",repu:"",rept:""},
+                "1":{part1:"",part2:"",repu:"",rept:""},
+                "2":{part1:"",part2:"",repu:"",rept:""},
+                "3":{part1:"",part2:"",repu:"",rept:""},
+                "4":{part1:"",part2:"",repu:"",rept:""}
             }
 
 var niveau = { "niv": null}
@@ -44,38 +44,39 @@ class TxtATrou extends Component {
 
         answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
         answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
-        answerTab[this.state.question].rep = this.state.answer
+        answerTab[this.state.question].repu = this.state.answer
+        answerTab[this.state.question].rept = this.state.reponse[this.state.question].rept
 
-        if(this.state.answer === this.state.rep1){
-            answerTab[this.state.question].repo1 = this.state.rep2
-            answerTab[this.state.question].repo2 = this.state.rep3
-            answerTab[this.state.question].repo3 = this.state.rep4
-            console.log(answerTab)
-        }
-        else if(this.state.answer === this.state.rep2){
-            answerTab[this.state.question].repo1 = this.state.rep1
-            answerTab[this.state.question].repo2 = this.state.rep3
-            answerTab[this.state.question].repo3 = this.state.rep4
-            console.log(answerTab)
-        }
-        else if(this.state.answer === this.state.rep3){
-            answerTab[this.state.question].repo1 = this.state.rep1
-            answerTab[this.state.question].repo2 = this.state.rep2
-            answerTab[this.state.question].repo3 = this.state.rep4
-            console.log(answerTab)
-        }
-        else if(this.state.answer === this.state.rep4){
-            answerTab[this.state.question].repo1 = this.state.rep1
-            answerTab[this.state.question].repo2 = this.state.rep2
-            answerTab[this.state.question].repo3 = this.state.rep3
-            console.log(answerTab)
-        }
-        else {
-            answerTab[this.state.question].repo1 = this.state.rep1
-            answerTab[this.state.question].repo2 = this.state.rep2
-            answerTab[this.state.question].repo3 = this.state.rep3
-            console.log(answerTab)   
-        }
+        // if(this.state.answer === this.state.rep1){
+        //     answerTab[this.state.question].repo1 = this.state.rep2
+        //     answerTab[this.state.question].repo2 = this.state.rep3
+        //     answerTab[this.state.question].repo3 = this.state.rep4
+        //     console.log(answerTab)
+        // }
+        // else if(this.state.answer === this.state.rep2){
+        //     answerTab[this.state.question].repo1 = this.state.rep1
+        //     answerTab[this.state.question].repo2 = this.state.rep3
+        //     answerTab[this.state.question].repo3 = this.state.rep4
+        //     console.log(answerTab)
+        // }
+        // else if(this.state.answer === this.state.rep3){
+        //     answerTab[this.state.question].repo1 = this.state.rep1
+        //     answerTab[this.state.question].repo2 = this.state.rep2
+        //     answerTab[this.state.question].repo3 = this.state.rep4
+        //     console.log(answerTab)
+        // }
+        // else if(this.state.answer === this.state.rep4){
+        //     answerTab[this.state.question].repo1 = this.state.rep1
+        //     answerTab[this.state.question].repo2 = this.state.rep2
+        //     answerTab[this.state.question].repo3 = this.state.rep3
+        //     console.log(answerTab)
+        // }
+        // else {
+        //     answerTab[this.state.question].repo1 = this.state.rep1
+        //     answerTab[this.state.question].repo2 = this.state.rep2
+        //     answerTab[this.state.question].repo3 = this.state.rep3
+        //     console.log(answerTab)   
+        // }
 
         if(this.state.question<4)
         {
