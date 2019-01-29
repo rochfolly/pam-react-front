@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Button, Input, Label,
     Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
+import jwt_decode from 'jwt-decode'
+import { fetchUsers } from '../../../utils/API'
 
 class Settings extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {name: '', firstname:'', mail: '', password:'', conf:'', job:'', city:'', phone:''};
+    this.state = {id:'', name: '', firstname:'', email: '', password:'', conf:'', job:'', city:'', phone:''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount () {
+    const token = sessionStorage.doctortoken
+  
+    if(token){
+      console.log('token:', token)
+      const decoded = jwt_decode(token)
+
+      this.setState({id: decoded.id, firstname: decoded.firstname, name: decoded.name, 
+        email: decoded.email, job: decoded.job, city: decoded.city, phone: decoded.phone})
+      console.log('decoded:', decoded)
+
+     fetchUsers(decoded.id).then(res => {
+        console.log(res.data)
+        this.setState({ users: res.data })
+      })
+    }
+    else console.log('No token')
+
   }
    
   handleChange = event => {

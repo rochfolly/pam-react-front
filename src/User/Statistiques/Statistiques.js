@@ -39,7 +39,7 @@ class Statistiques extends Component {
             </Row>
             <Row>
             <Jauge />
-            </Row>
+            </Row> 
           </Col>
         </Row>
       </Container>
