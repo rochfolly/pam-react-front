@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Form, Col, Button, Input, FormGroup } from 'reactstrap';
-//import './ModifExercices.css';
+import './ModifExercices.css';
 import ChoixExercice from '.././AjoutPatient/ChoixExercice/ChoixExercice'
 import { fetchExos, getOtherExos } from '../../../utils/API'
-import game from '../../../Images/dice.png'
 import { deletePrescription, updatePrescription } from '../../../utils/API'
 
 
@@ -70,21 +69,45 @@ class ModifExercices extends Component {
     const text = "new"
 
     const edit = this.state.exos.map((exo) => 
-    <FormGroup row>
-    <Col sm={1}><Input type="checkbox" defaultChecked/></Col>
-    <Col sm={4}><img src={game} alt="jeu" class="Game-logo"/></Col>
-    <Col sm={6}><b>Exercice {exo.exo_id} : {exo.exo_name}</b></Col>
+    <Row>
+    <Input type="checkbox" defaultChecked/>
+    <Col sm={3}><img src={require(`../../../Images/exo${exo.exo_id}.png`)} alt="jeu" className="Game-logo"/></Col>
+    <Col sm={8}>
+      <Row><b>Exercice {exo.exo_id} : {exo.exo_name}</b></Row>
+      <br/>
+      <Row><small>Description à sortir de la bdd</small></Row>
+      <br/>
+      <Row>
+        <Col sm={3} className="no-padding">Niveau</Col>
+        <Col sm={2}>1<Input type="radio" name="exo2" value={1} id="niv1" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>2<Input type="radio" name="exo2" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>3<Input type="radio" name="exo2" value={3} id="niv3" onChange={this.handleChange_2}/></Col>
+      </Row>
+      <br/>
+    </Col>
     <br/>
-    </FormGroup> 
+    </Row> 
     )
 
     const others = this.state.others.map((exo) => 
-    <FormGroup row>
-    <Col sm={1}><Input type="checkbox" value={true} name={exo.label} onChange={this.handleChange}/></Col>
-    <Col sm={3}><img src={game} alt="jeu" class="Game-logo"/></Col>
-    <Col sm={6}><b>Exercice {exo.exo_id} : {exo.exo_name}</b></Col>
+    <Row>
+    <Input type="checkbox" value={true} name={exo.label} onChange={this.handleChange}/>
+    <Col sm={3}><img src={require(`../../../Images/exo${exo.exo_id}.png`)} alt="jeu" className="Game-logo"/></Col>
+    <Col sm={8}>
+      <Row><b>Exercice {exo.exo_id} : {exo.exo_name}</b></Row>
+      <br/>
+      <Row><small>Description à sortir de la bdd</small></Row>
+      <br/>
+      <Row>
+        <Col sm={3} className="no-padding">Niveau</Col>
+        <Col sm={2}>1<Input type="radio" name="exo2" value={1} id="niv1" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>2<Input type="radio" name="exo2" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>3<Input type="radio" name="exo2" value={3} id="niv3" onChange={this.handleChange_2}/></Col>
+      </Row>
+      <br/>
+    </Col>
     <br/>
-    </FormGroup>  
+    </Row>  
     )
     
     return (
@@ -103,14 +126,18 @@ class ModifExercices extends Component {
         </Row>
         <br/>
         <Row>
+          <FormGroup>
           {edit}
+          </FormGroup>
         </Row>
         <br/>
         <Row>
         </Row>
         <br/>
         <Row>
+          <FormGroup>
           {others}
+          </FormGroup>
         </Row>
         <br/>
         <Row>

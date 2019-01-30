@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Form, Col, Button, Input, FormGroup} from 'reactstrap';
-import txtATrou from '../../../../Images/txtATrou.png';
-import bneImg from '../../../../Images/bneImg.png';
-import jeuImage from '../../../../Images/jeuImage.png';
+import txtATrou from '../../../../Images/exo1.png';
+import bneImg from '../../../../Images/exo3.png';
+import jeuImage from '../../../../Images/exo2.png';
 import '../../../../Jeux/JeuImage.css';
 import { showUser } from '../../../../utils/API'
 import './Prescription.css'
@@ -49,7 +49,11 @@ class PremierePrescription extends Component {
  
   handleSubmit = event => {
     event.preventDefault();
+  }
 
+  logout(){
+    sessionStorage.clear()
+    window.location = '/'
   }
 
   render() {
@@ -60,7 +64,7 @@ class PremierePrescription extends Component {
         <Row>
         <Col sm={{size: 10}}><h3 className="titlePAM">Prescription d'exercices</h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><h2><i className="fa fa-power-off"></i></h2></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout()}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
         </Row>
         <br/><br/>
         <Row>

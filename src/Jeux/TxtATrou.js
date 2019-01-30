@@ -3,7 +3,7 @@ import { Container, Row, Col, Button,
     FormGroup, Input, Label,
     Modal, ModalBody  } from 'reactstrap';
 import './TxtATrou.css'
-import game from '../Images/txtATrou.png'
+import game from '../Images/exo1.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
 

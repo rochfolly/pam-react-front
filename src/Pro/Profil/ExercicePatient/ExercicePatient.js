@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, FormGroup } from 'reactstrap';
 import './ExercicePatient.css';
-import game from '../../../Images/dice.png';
 
 class ExercicePatient extends Component {
   
@@ -13,9 +12,9 @@ class ExercicePatient extends Component {
     return (
       <Container>
       <FormGroup row>
-      <Col sm={3}><img src={game} alt="jeu" class="GameLogo"/></Col>
+      <Col sm={3}><img src={require(`../../../Images/exo${this.props.exo.exo_id}.png`)} alt="jeu" class="GameLogo"/></Col>
       <Col sm={9}>
-      <Row>{titre}</Row>
+      <Row><b>{titre}</b></Row>
       <Row>Niveau : {niveau}</Row>
       <Row>Dernière partie : 00/00/0000</Row>
       <Row>Score : X/X</Row>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button, 
     FormGroup, Input, Label} from 'reactstrap';
 import './BonneImage.css'
-import game from '../Images/bneImg.png'
+import game from '../Images/exo3.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
 
