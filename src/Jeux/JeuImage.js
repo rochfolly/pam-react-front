@@ -31,7 +31,7 @@ class JeuImage extends Component {
     }
 
     handleKeySubmit(event) {
-        if(event.key == 'Enter'){
+        if(event.key === 'Enter'){
             //alert('enter press here! ')
             this.handleSubmit()
         }

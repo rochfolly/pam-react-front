@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, 
     FormGroup, Input, Label,
-    Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
+    Modal, ModalBody  } from 'reactstrap';
 import './TxtATrou.css'
 import game from '../Images/txtATrou.png'
 import jwt_decode from 'jwt-decode'
@@ -43,7 +43,7 @@ class TxtATrou extends Component {
     }
     
     handleKeySubmit(event) {
-        if(event.key == 'Enter'){
+        if(event.key === 'Enter'){
             //alert('enter press here! ')
             this.handleSubmit()
         }

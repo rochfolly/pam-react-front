@@ -19,15 +19,15 @@ class UserInscription extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-     const doctor = {
-        firstname: this.state.first_name,
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-        job: this.state.job,
-        city: this.state.city,
-        phone: this.state.phone
-     }
+    //  const doctor = {
+    //     firstname: this.state.first_name,
+    //     name: this.state.name,
+    //     email: this.state.email,
+    //     password: this.state.password,
+    //     job: this.state.job,
+    //     city: this.state.city,
+    //     phone: this.state.phone
+    //  }
     alert('An account was submitted: \n' + this.state.name + '\n' + this.state.job);
   }
 
