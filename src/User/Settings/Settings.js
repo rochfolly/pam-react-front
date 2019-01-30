@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Button, Input, Label,
     Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
-
+import jwt_decode from 'jwt-decode'
+import { fetchUsers } from '../../utils/API'
+    
 class Settings extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {name: '', firstname:'', mail: '', password:'', conf:'', job:'', city:'', phone:''};
+    this.state = {id:'', name: '', firstname:'', email: '', password:'', conf:'', city:'', gender:'', birth:''};
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount () {
+    const token = sessionStorage.usertoken
+  
+    if(token){
+      console.log('token:', token)
+      const decoded = jwt_decode(token)
+
+      this.setState({id: decoded.id, firstname: decoded.firstname, name: decoded.name, 
+        email: decoded.email, city: decoded.city, birth: decoded.birth, gender: decoded.gender})
+      console.log('decoded:', decoded)
+
+     fetchUsers(decoded.id).then(res => {
+        console.log(res.data)
+        this.setState({ users: res.data })
+      })
+    }
+    else console.log('No token')
+
   }
    
   handleChange = event => {
@@ -69,12 +91,12 @@ class Settings extends Component {
                     <Col sm={4}>
                     <FormGroup check>
                         <Label check>
-                        <Input type="radio" name="sexe" value="M"/>{' '}Homme
+                        <Input type="radio" name="sexe" value="M" checked={this.state.gender === "H" ? true:false}/>{' '}Homme
                         </Label>
                     </FormGroup>
                     <FormGroup check>
                         <Label check>
-                        <Input type="radio" name="sexe" value="W" />{' '}Femme
+                        <Input type="radio" name="sexe" value="W" checked={this.state.gender === "F" ? true:false}/>{' '}Femme
                         </Label>
                     </FormGroup>
                     </Col>
@@ -86,7 +108,7 @@ class Settings extends Component {
                 <FormGroup row>
                 <Label for="birth" sm={2}>Date de naissance</Label>
                     <Col sm={4}>
-                    <Input type="date" name="birth" id="birth" onChange={this.handleChange}/>
+                    <Input type="date" value={this.state.birth} name="birth" id="birth" onChange={this.handleChange}/>
                     </Col>
                 </FormGroup>       
                 </ModalBody>

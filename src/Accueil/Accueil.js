@@ -43,21 +43,21 @@ class Accueil extends Component {
           <Col sm={{size: 4, offset: 4}} className="blocCentral">
                <h3> Bienvenue ! </h3>
                <p> Veuillez vous identifier : </p><br/>
-            <Form>
-              <FormGroup row>
+            <Form onSubmit={this.handleSubmit}>
+              <FormGroup row >
                 <Col sm={12}>
-                  <Input type="email" value={this.state.email} name="email" id="email" placeholder="Email" onChange={this.handleChange}/>
+                  <Input onKeyPress={this.handleKeySubmit} type="email" value={this.state.email} name="email" id="email" placeholder="Email" onChange={this.handleChange} required/>
                 </Col>
               </FormGroup>
               <FormGroup row>
                 <Col sm={12}>
-                  <Input type="password" value={this.state.password} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChange} />
+                  <Input onKeyPress={this.handleKeySubmit} type="password" value={this.state.password} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChange} required/>
                 </Col>
               </FormGroup>
               <FormGroup check row>
                 <Col>
                   <br/>
-                  <Button onClick={this.handleSubmit}>Submit</Button>
+                  <Button type="submit">Submit</Button>
                 </Col>
               </FormGroup>
             </Form>

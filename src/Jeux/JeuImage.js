@@ -24,8 +24,16 @@ class JeuImage extends Component {
             reponse:'', answer:''}
 
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleKeySubmit = this.handleKeySubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.isLastLevel = this.isLastLevel.bind(this)
+    }
+
+    handleKeySubmit(event) {
+        if(event.key == 'Enter'){
+            //alert('enter press here! ')
+            this.handleSubmit()
+        }
     }
 
     handleSubmit() {
@@ -121,33 +129,34 @@ class JeuImage extends Component {
             <div style={{display: this.isLastLevel() ? "none": "block"}}>
                 <Row>
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange}/>{this.state.word1}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange}/>{this.state.word1}
                     <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
                     <Label check className="jeuSol">
-                    <Input type="radio" checked={this.state.answer === this.state.word2} value={this.state.word2} onChange={this.handleChange}/>{this.state.word2}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" checked={this.state.answer === this.state.word2} value={this.state.word2} onChange={this.handleChange}/>{this.state.word2}
                     <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
                     <Label check className="jeuSol">
-                    <Input type="radio" checked={this.state.answer === this.state.word3} value={this.state.word3} onChange={this.handleChange}/>{this.state.word3}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" checked={this.state.answer === this.state.word3} value={this.state.word3} onChange={this.handleChange}/>{this.state.word3}
                     <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
                     <Label check className="jeuSol">
-                    <Input type="radio" checked={this.state.answer === this.state.word4} value={this.state.word4} onChange={this.handleChange}/>{this.state.word4}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" checked={this.state.answer === this.state.word4} value={this.state.word4} onChange={this.handleChange}/>{this.state.word4}
                     <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
                     <Label check className="jeuSol">
-                    <Input type="radio" checked={this.state.answer === this.state.word5} value={this.state.word5} onChange={this.handleChange}/>{this.state.word5}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" checked={this.state.answer === this.state.word5} value={this.state.word5} onChange={this.handleChange}/>{this.state.word5}
                     <span className="checkmark"></span></Label>
                 </Row>
             </div>
             <div style={{display: this.isLastLevel() ? "block": "none"}}>
             <br/><br/><br/><br/>
-            <Input type="text" name="answer" id="trou" 
+            <Input onKeyPress={this.handleKeySubmit} 
+                type="text" name="answer" id="trou" 
                 value={this.state.answer} placeholder="________________" 
                 onChange={this.handleChange} style={{width: "100%"}}/>
             </div>

@@ -23,8 +23,16 @@ class BonneImage extends Component {
             reponse:'', answer:''}
 
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleKeySubmit = this.handleKeySubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.isFirstLevel = this.isFirstLevel.bind(this)
+    }
+
+    handleKeySubmit(event) {
+        if(event.key == 'Enter'){
+            //alert('enter press here! ')
+            this.handleSubmit()
+        }
     }
 
     handleSubmit() {
@@ -140,25 +148,25 @@ class BonneImage extends Component {
             <Row>
                 <Col sm="3">
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
                     <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
                     </Label>
                 </Col>
                 <Col sm="3">
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_2} value={this.state.src_2} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_2} value={this.state.src_2} onChange={this.handleChange}/>
                     <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_2}`)} className="imgExo"></img>
                     </Label>
                 </Col>
                 <Col sm="3">
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_3} value={this.state.src_3} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_3} value={this.state.src_3} onChange={this.handleChange}/>
                     <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_3}`)} className="imgExo"></img>
                     </Label>
                 </Col>
                 <Col sm="3">
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_4} value={this.state.src_4} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_4} value={this.state.src_4} onChange={this.handleChange}/>
                     <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_4}`)} className="imgExo"></img>
                     </Label>
                 </Col>
@@ -168,13 +176,13 @@ class BonneImage extends Component {
             <Row>
                 <Col sm={{size:4, offset:2}}>
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit}  type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
                     <img height="250" width="250" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
                     </Label>
                 </Col>
                 <Col sm="4">
                     <Label check className="jeuSol" >
-                    <Input type="radio" className="radio-btn" checked={this.state.answer === this.state.src_2} value={this.state.src_2} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_2} value={this.state.src_2} onChange={this.handleChange}/>
                     <img height="250" width="250" alt="" src={require(`./../Images/${this.state.src_2}`)} className="imgExo"></img>
                     </Label>
                 </Col>

@@ -43,6 +43,12 @@ class StatGlobales extends Component {
     return link
   }
   
+  logout(){
+    localStorage.clear()
+    window.location = '/'
+  }
+  
+  
   render() {
     return (
       <Container>
@@ -52,7 +58,7 @@ class StatGlobales extends Component {
         <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}>
           <h2><i class="fa fa-arrow-left"></i></h2>
         </a></Button></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><h2><i class="fa fa-power-off"></i></h2></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i class="fa fa-power-off"></i></h2></Button></Col>
         </Row>
         <br/>
         <Row>

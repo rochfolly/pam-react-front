@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, Table} from 'reactstrap';
+import jwt_decode from 'jwt-decode'
 import './Result.css'
 import trophy from '../Images/trophy.png'
 
@@ -50,23 +51,22 @@ class Result extends Component {
 
     createResponse(title, i){
         if (title === "Texte à trou") {
-        //return [<h4>Réponse user</h4>];
-        return [<h5>{this.state.reponse[i].repu}</h5>]
+        //vert //rouge //orange
+        return [<h3  style={{color: this.state.reponse[i].score === 100 ? "#267326": this.state.reponse[i].score === 0 ? "#cc3300":"#EB7842"}}>{this.state.reponse[i].repu}</h3>]
         }
         else if (title === "Jeu d'image") {
-        //return [<h4>Réponse user</h4>];
-        return [<h3>{this.state.reponse[i].repU}</h3>]
+        //vert //rouge //orange
+        return [<h3  style={{color: this.state.reponse[i].score === 100 ? "#267326": this.state.reponse[i].score === 0 ? "#cc3300":"#EB7842"}}>{this.state.reponse[i].repU}</h3>]
         }
         else if (title === "La bonne image") {
-        //    return [<h4>Image user</h4>];
-        return [<img height="100" width="100" alt="" style={{objectFit:"cover"}} src={require(`./../Images/${this.state.reponse[i].repU}`)}></img>]
+        return [<img height="100" width="100" alt="" style={{objectFit:"cover", boxShadow: this.state.reponse[i].score === 100 ? "2px 2px 2px 2px #267326" : "2px 2px 2px 2px #cc3300"}} src={require(`./../Images/${this.state.reponse[i].repU}`)}></img>]
         }
     }
 
     createResult(title, i){
         if (title === "Texte à trou") {
         //return [<h4>Réponse à donner</h4>];
-        return [<h5>{this.state.reponse[i].rept}</h5>]
+        return [<h3>{this.state.reponse[i].rept}</h3>]
         }
         else if (title === "Jeu d'image") {
         //return [<h4>Réponse à donner</h4>];
@@ -77,6 +77,16 @@ class Result extends Component {
         return [<img height="100" width="100" alt="" style={{objectFit:"cover"}} src={require(`./../Images/${this.state.reponse[i].repT}`)}></img>]
         }
     }
+
+    goBackTo(){
+        const token = sessionStorage.usertoken
+  
+        if(token){
+        const decoded = jwt_decode(token)
+        const link = "/user/" + decoded.id
+        return link
+        }
+      }
 
     render() {
 
@@ -100,8 +110,8 @@ class Result extends Component {
         <tr>
             <th style={{verticalAlign:"middle"}} scope="row"><h4 className="titlePAM">{i+1}.</h4></th>
             <td style={{verticalAlign:"middle"}}>{this.createQuestion(this.state.title, i)}</td>
-            <td style={{verticalAlign:"middle"}}>{this.createResponse(this.state.title, i)}</td>
             <td style={{verticalAlign:"middle"}}>{this.createResult(this.state.title, i)}</td>
+            <td style={{verticalAlign:"middle"}}>{this.createResponse(this.state.title, i)}</td>
             <td style={{verticalAlign:"middle"}}><h4>{this.state.reponse[i].score}</h4></td>
         </tr>);
         }
@@ -118,7 +128,7 @@ class Result extends Component {
                     <Row><h6 id="sous-titre">Voici vos résultats : {this.state.title} </h6></Row>            
                 </Col>
                 <Col sm="5"><h6 className="titlePAM"><img src={trophy} alt="" style={{height:"150px"}}></img></h6></Col>
-                <Col sm={{size: 1}}><Button className ="smallButton"><a href="/user"><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
+                <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
                 <Col sm={{size: 1}}><Button className ="smallButton"><h2><i className="fa fa-power-off"></i></h2></Button></Col>
                 </Row>
                 <Row>
@@ -128,8 +138,8 @@ class Result extends Component {
                     <tr>
                         <th><h4>Question</h4></th>
                         <th><h4>Consigne</h4></th>
-                        <th><h4>Votre réponse</h4></th>
                         <th><h4>La bonne réponse</h4></th>
+                        <th><h4>Votre réponse</h4></th>
                         <th><h4>Score</h4></th>
                     </tr>
                     </thead>
