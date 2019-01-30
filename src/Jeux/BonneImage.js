@@ -136,7 +136,7 @@ class BonneImage extends Component {
         <Col sm="10">
             <Row>
                 <Col sm={{size: 6}}><h3 className="titlePAM">La bonne image</h3></Col>
-                <Col sm={{size: 6}}><h6 className="exNumber titlePAM">Exercice {this.state.question+1}/5</h6></Col>
+                <Col sm={{size: 6}}><h6 className="exNumber titlePAM">Niveau {this.state.niv} - Exercice {this.state.question+1}/5</h6></Col>
             </Row>
             <Row><h5 className="sous-titre" style={{marginBottom: "0px"}}>A quel image correspond ce mot ?</h5></Row>
         </Col>

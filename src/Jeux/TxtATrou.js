@@ -160,7 +160,7 @@ class TxtATrou extends Component {
         <Col sm={{size: 10}}>
             <Row>
                 <Col sm="6"><h3 className="titlePAM">Texte à trous</h3></Col>            
-                <Col sm="6"><h6 className="exNumber titlePAM">Exercice {this.state.question+1}/5</h6></Col>
+                <Col sm="6"><h6 className="exNumber titlePAM">Niveau {this.state.niv} - Exercice {this.state.question+1}/5</h6></Col>
             </Row>
             <Row><h5 className="sous-titre">Quel est le mot manquant de cette phrase ?</h5></Row>            
         </Col>
