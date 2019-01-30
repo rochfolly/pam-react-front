@@ -20,7 +20,7 @@ class JeuImage extends Component {
     constructor(props){
         super(props);
         this.state = {question:0, niv: 1,
-            lien:'images/0.png',
+            lien:'images/0.png', user_id:'',
             word1:'', word2:'', word3:'', word4:'', word5:'',
             reponse:'', answer:''}
 
@@ -38,6 +38,7 @@ class JeuImage extends Component {
     }
 
     handleSubmit() {
+        
         if(this.state.question<9)
         {
             answerTab[this.state.question].src = this.state.reponse[this.state.question].src
@@ -67,13 +68,16 @@ class JeuImage extends Component {
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                .then(res => {
                     res.data.exo = "Jeu d'image"
+                    res.data.exo_id = 2
+                    res.data.level = this.state.niv
                     const finaltab = JSON.stringify(res.data)
                     sessionStorage.setItem("resultat", finaltab)  
-                    window.location = '/result'           
+                    window.location = '/result/'+this.state.user_id           
                 })
         }
         console.log(JSON.stringify(answerTab))
     }
+
 
     handleChange(event) {
         this.setState({ answer: event.target.value })
@@ -90,12 +94,14 @@ class JeuImage extends Component {
     }
     
     componentDidMount() {
+        const { user_id } = this.props.match.params
         niveau.niv = this.state.niv
         axios("https://pfepam.azurewebsites.net/exo2",
                 {method: 'POST', data: niveau, header: {"Content-Type": "application/json"}})
         .then(res => {
             console.log(res.data)
             this.setState({ reponse: res.data,
+            user_id: user_id,
             lien: res.data[this.state.question].src,
             word1: res.data[this.state.question].word_1,
             word2: res.data[this.state.question].word_2,

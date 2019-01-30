@@ -6,7 +6,7 @@ import game from '../Images/bneImg.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
 
-var answerTab = {"niv": null,
+var answerTab = {"niv": null, id:'',
                 "0":{src:"",label:""},"1":{src:"",label:""},"2":{src:"",label:""},
                 "3":{src:"",label:""},"4":{src:"",label:""}}
 
@@ -83,9 +83,11 @@ class BonneImage extends Component {
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                .then(res => {
                    res.data.exo = "La bonne image"
+                   res.data.exo_id = 3
+                   res.data.level = this.state.niv
                    const finaltab = JSON.stringify(res.data)
                    sessionStorage.setItem("resultat", finaltab)            
-                   window.location = '/result' 
+                   window.location = '/result/'+this.state.id
                 })
         }
         console.log(JSON.stringify(answerTab))
@@ -106,6 +108,7 @@ class BonneImage extends Component {
     }
     
     componentDidMount() {
+        const {user_id} = this.props.match.params
         niveau.niv = this.state.niv
         axios("https://pfepam.azurewebsites.net/exo3",
                 {method: 'POST', data: niveau, header: {"Content-Type": "application/json"}})
@@ -113,6 +116,7 @@ class BonneImage extends Component {
             console.log(res.data)
             if(this.state.niv === 1){
                 this.setState({ reponse: res.data,
+                    id: user_id,
                     label: res.data[this.state.question].label,
                     src_1: res.data[this.state.question].src_1,
                     src_2: res.data[this.state.question].src_2})

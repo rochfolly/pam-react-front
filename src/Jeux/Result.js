@@ -3,33 +3,49 @@ import { Container, Row, Col, Button, Table} from 'reactstrap';
 import jwt_decode from 'jwt-decode'
 import './Result.css'
 import trophy from '../Images/trophy.png'
+import {saveScore} from '../utils/API'
 
 var score = [];
 
 class Result extends Component {
     constructor(props){
         super(props);
-        this.state = {question:0, reponse:'', result:null, title:""}
+        this.state = {id:'', question:0, reponse:'', result:null, title:""}
 
         this.createResult = this.createResult.bind(this)
         this.createQuestion = this.createQuestion.bind(this)
         this.createResponse = this.createResponse.bind(this)
     }
 
+
     componentDidMount(){
+        const { user_id } = this.props.match.params
         //Récupère résultats de la partie
         const resultat = sessionStorage.getItem("resultat") 
+        //const ex = sessionStorage.getItem("exercice") 
         //sessionStorage.clear("resultat")
         if(resultat){
+        
         var scoreTotal = 0
         const veryfinal = JSON.parse(resultat) //traduit en tableau json
-        this.setState({title: veryfinal.exo, reponse: veryfinal})  //set le titre de l'exo
+        this.setState({id: veryfinal.exo_id, title: veryfinal.exo, reponse: veryfinal})  //set le titre de l'exo
         //Calcul du score final
         var length = Object.keys(veryfinal).length
-        for(var i = 0; i < length-1; i++){
+        
+        for(var i = 0; i < length-3; i++){
           scoreTotal += veryfinal[i].score
           score.push(veryfinal[i].score) 
-          if(i===length-2){this.setState({result: scoreTotal})}
+          if(i===length-4){
+              this.setState({result: scoreTotal})
+              const newscore = {
+                  user_id: user_id,
+                  exo_id: veryfinal.exo_id,
+                  value: scoreTotal,
+                  created: new Date(),
+                  level: veryfinal.level
+              }
+              saveScore(newscore)
+            }
         }
       }
     }
@@ -50,6 +66,7 @@ class Result extends Component {
     }
 
     createResponse(title, i){
+        console.log(title)
         if (title === "Texte à trou") {
         //vert //rouge //orange
         return [<h3  style={{color: this.state.reponse[i].score === 100 ? "#267326": this.state.reponse[i].score === 0 ? "#cc3300":"#EB7842"}}>{this.state.reponse[i].repu}</h3>]
@@ -115,6 +132,8 @@ class Result extends Component {
             <td style={{verticalAlign:"middle"}}><h4>{this.state.reponse[i].score}</h4></td>
         </tr>);
         }
+
+        console.log(indents)
 
 
         return (
