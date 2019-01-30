@@ -138,7 +138,11 @@ class BonneImage extends Component {
                 <Col sm={{size: 6}}><h3 className="titlePAM">La bonne image</h3></Col>
                 <Col sm={{size: 6}}><h6 className="exNumber titlePAM">Niveau {this.state.niv} - Exercice {this.state.question+1}/5</h6></Col>
             </Row>
-            <Row><h5 className="sous-titre" style={{marginBottom: "0px"}}>A quel image correspond ce mot ?</h5></Row>
+            <Row>
+                <Col sm={{size: 5, offset:5}}>
+                <h5 className="sous-titre" style={{marginBottom: "0px", textAlign: "center"}}>A quel image correspond ce mot ?</h5>
+                </Col>
+            </Row>
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="jeuImageLogo"/></Col>
         </Row>

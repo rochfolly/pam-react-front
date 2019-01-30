@@ -162,7 +162,11 @@ class TxtATrou extends Component {
                 <Col sm="6"><h3 className="titlePAM">Texte à trous</h3></Col>            
                 <Col sm="6"><h6 className="exNumber titlePAM">Niveau {this.state.niv} - Exercice {this.state.question+1}/5</h6></Col>
             </Row>
-            <Row><h5 className="sous-titre">Quel est le mot manquant de cette phrase ?</h5></Row>            
+            <Row>
+                <Col sm={{size: 7, offset:4}}>
+                <h5 className="sous-titre" style={{textAlign: "center"}}>Quel est le mot manquant de cette phrase ?</h5>
+                </Col>
+            </Row>         
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="txtATrouLogo"/></Col>
         </Row>
