@@ -50,17 +50,11 @@ class ChoixExercice extends Component {
       <Container>
       <FormGroup row>
       <Col sm={3}><img src={game} alt="jeu" class="Game-logo"/></Col>
+      <Col sm={1}><Input type="checkbox" id="exXX"/></Col>
       <Col sm={8}>
       <Row>
         <Col sm={9}><b>Exercice {this.props.exo.exo_id} : {this.props.exo.exo_name}</b></Col>
         <Button onClick={this.deleteAccess}>X</Button>
-      </Row>
-      <br/>
-      <Row>
-      <Col sm={3} className="no-padding">Niveau</Col>
-      <Col sm={2}>1{level1}</Col>
-      <Col sm={2}>2{level2}</Col>
-      <Col sm={2}>3{level3}</Col>
       </Row>
       <br/>
       <Row>
@@ -76,3 +70,30 @@ class ChoixExercice extends Component {
 }
 
 export default ChoixExercice;
+
+/*<FormGroup row>
+      <Col sm={1}><Input type="checkbox" id="exXX"/></Col>
+      <Col sm={3}><img src={game} alt="jeu" class="Game-logo"/></Col>
+      <Col sm={8}>
+      <Row>Titre</Row>
+      <Row>Description</Row>
+      <Row>
+      <Col sm={3} className="no-padding">Niveau</Col>
+      <Col sm={2}>1<Input type="checkbox" id="niv1"/></Col>
+      <Col sm={2}>2<Input type="checkbox" id="niv2"/></Col>
+      <Col sm={2}>3<Input type="checkbox" id="niv3"/></Col>
+      </Row>
+      </Col>
+      </FormGroup> 
+
+
+      <FormGroup row>
+      <Col sm={3}><img src={game} alt="jeu" class="Game-logo"/></Col>
+      <Col sm={1}><Input type="checkbox" id="exXX"/></Col>
+      <Col sm={8}>
+        <Row>
+          <Col sm={9}><b>Exercice {this.props.exo.exo_id} : {this.props.exo.exo_name}</b></Col>
+        </Row>
+        <br/>
+      </Col>
+      </FormGroup> */

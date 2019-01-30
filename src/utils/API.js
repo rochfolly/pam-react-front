@@ -25,7 +25,6 @@ export const login = user => {
         })
 }
     
-
 export const signup = newDoctor => {
     console.log('Requête axios envoyée')
         return axios.post(backurl + '/doctor/signup', {
@@ -67,8 +66,15 @@ export const showUser = id => {
     return axios.get(backurl + '/doctor/user/' + id)
 }
 
+
+//Afficher les exos déjà accessibles au patient
 export const fetchExos = user_id => {
     return axios.get(backurl + '/doctor/user/'+user_id+'/exercices' )
+}
+
+
+export const getOtherExos = user_id => {
+    return axios.get(backurl + '/doctor/user/'+user_id+'/exercices/other' )
 }
 
 export const mailToUser = newUser => {
@@ -79,8 +85,8 @@ export function deletePrescription (exo_id, user_id) {
     return axios.delete(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id )
 }
 
-export function updatePrescription (level, exo_id, user_id) {
-    return axios.post(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id + '/' + level )
+export function updatePrescription (exo_id, user_id) {
+    return axios.post(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id )
 } 
 
 
@@ -94,3 +100,9 @@ export const logout = _ => {
         sessionStorage.clear()
     }
 
+
+/*
+export function updatePrescription (level, exo_id, user_id) {
+    return axios.post(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id + '/' + level )
+} 
+*/
