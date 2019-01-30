@@ -7,23 +7,6 @@ import '../../../../Jeux/JeuImage.css';
 import { showUser } from '../../../../utils/API'
 import './Prescription.css'
 
-// class Checkbox extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { checked: false, new_id:'', firstname:'', name:''};
-//   }
-
-//   handleCheck(){
-//     this.setState({checked: !this.state.checked})
-//   }
-
-//   render(){
-//     return(
-//       <Input type="checkbox" value={this.props.value} onChange={this.handleCheck} />
-//     )
-
-//   }
-// }
 
 class PremierePrescription extends Component {
   constructor(props) {
@@ -44,6 +27,12 @@ class PremierePrescription extends Component {
         })
       })
   } 
+
+  goBackTo(){
+    const {id} = this.props.match.params
+    const link = "/profil/" + id 
+    return link
+  }
 
   handleChange_1 = event => {
     this.setState({ ex1level: event.target.value }, () => console.log(this.state.ex1level))
@@ -70,7 +59,7 @@ class PremierePrescription extends Component {
         <br/>
         <Row>
         <Col sm={{size: 10}}><h3 className="titlePAM">Prescription d'exercices</h3></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><a href="/profil"><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
+        <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><h2><i className="fa fa-power-off"></i></h2></Button></Col>
         </Row>
         <br/><br/>
@@ -80,7 +69,7 @@ class PremierePrescription extends Component {
             <hr/>
             <FormGroup row>
             <Input type="checkbox" checked={this.state.exos[0] === 1}/>
-            <Col sm={3}><img src={txtATrou} alt="jeu" class="Game-logo"/></Col>
+            <Col sm={3}><img src={txtATrou} alt="jeu" className="Game-logo"/></Col>
             <Col sm={8}>
             <Row>Exercice 1 : Texte à Trous</Row>
             <br/>
@@ -103,7 +92,7 @@ class PremierePrescription extends Component {
 
             <FormGroup row>
             <Input type="checkbox" checked={this.state.exos[0] === 1}/>
-            <Col sm={3}><img src={jeuImage} alt="jeu" class="Game-logo"/></Col>
+            <Col sm={3}><img src={jeuImage} alt="jeu" className="Game-logo"/></Col>
             <Col sm={8}>
             <Row>Exercice 2 : Jeu d'Images</Row>
             <br/>
@@ -126,7 +115,7 @@ class PremierePrescription extends Component {
 
             <FormGroup row>
             <Input type="checkbox" checked={this.state.exos[0] === 1}/>
-            <Col sm={3}><img src={bneImg} alt="jeu" class="Game-logo"/></Col>
+            <Col sm={3}><img src={bneImg} alt="jeu" className="Game-logo"/></Col>
             <Col sm={8}>
             <Row>Exercice 3 : La bonne image</Row>
             <br/>
@@ -155,7 +144,6 @@ class PremierePrescription extends Component {
           </Col>
         </Row>
         <br/>
-        
       </Container>
     );
   }
