@@ -1,0 +1,9 @@
+.Game-logo {
+    margin: 0 auto;
+    height: 150px;
+}
+
+.no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
