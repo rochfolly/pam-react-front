@@ -41,7 +41,7 @@ class App extends Component {
           <Route exact path='/txtATrou' component={TxtATrou} />
           <Route exact path='/jeuImage' component={JeuImage} />
           <Route exact path='/bneImage' component={BonneImage} />
-          <Route exact path='/result' component={Result} /> 
+          <Route exact path='/result/:user_id' component={Result} /> 
           <Route exact path='/user/:user_id/txtATrou' component={TxtATrou} /> 
           <Route exact path='/user/:user_id/jeuImage' component={JeuImage} /> 
           <Route exact path='/user/:user_id/bneImage' component={BonneImage} />

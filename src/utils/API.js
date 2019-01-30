@@ -90,6 +90,15 @@ export function updatePrescription (exo_id, user_id) {
 } 
 
 
+export const updateSettings = newSettings => {
+
+}
+
+export function saveScore(user_id, score) {
+    return axios.post(backurl+ '/user/'+ user_id + '/result/' + score)
+}
+
+
 export const test = working => {
     return axios.get(backurl + '/user/signup', {working})
     .then(console.log('axios marche'))

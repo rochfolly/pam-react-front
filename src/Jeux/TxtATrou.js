@@ -55,36 +55,7 @@ class TxtATrou extends Component {
         answerTab[this.state.question].repu = this.state.answer
         answerTab[this.state.question].rept = this.state.reponse[this.state.question].rept
 
-        // if(this.state.answer === this.state.rep1){
-        //     answerTab[this.state.question].repo1 = this.state.rep2
-        //     answerTab[this.state.question].repo2 = this.state.rep3
-        //     answerTab[this.state.question].repo3 = this.state.rep4
-        //     console.log(answerTab)
-        // }
-        // else if(this.state.answer === this.state.rep2){
-        //     answerTab[this.state.question].repo1 = this.state.rep1
-        //     answerTab[this.state.question].repo2 = this.state.rep3
-        //     answerTab[this.state.question].repo3 = this.state.rep4
-        //     console.log(answerTab)
-        // }
-        // else if(this.state.answer === this.state.rep3){
-        //     answerTab[this.state.question].repo1 = this.state.rep1
-        //     answerTab[this.state.question].repo2 = this.state.rep2
-        //     answerTab[this.state.question].repo3 = this.state.rep4
-        //     console.log(answerTab)
-        // }
-        // else if(this.state.answer === this.state.rep4){
-        //     answerTab[this.state.question].repo1 = this.state.rep1
-        //     answerTab[this.state.question].repo2 = this.state.rep2
-        //     answerTab[this.state.question].repo3 = this.state.rep3
-        //     console.log(answerTab)
-        // }
-        // else {
-        //     answerTab[this.state.question].repo1 = this.state.rep1
-        //     answerTab[this.state.question].repo2 = this.state.rep2
-        //     answerTab[this.state.question].repo3 = this.state.rep3
-        //     console.log(answerTab)   
-        // }
+
 
         if(this.state.question<4)
         {
@@ -223,3 +194,36 @@ class TxtATrou extends Component {
 }
 
 export default TxtATrou;
+
+
+
+        // if(this.state.answer === this.state.rep1){
+        //     answerTab[this.state.question].repo1 = this.state.rep2
+        //     answerTab[this.state.question].repo2 = this.state.rep3
+        //     answerTab[this.state.question].repo3 = this.state.rep4
+        //     console.log(answerTab)
+        // }
+        // else if(this.state.answer === this.state.rep2){
+        //     answerTab[this.state.question].repo1 = this.state.rep1
+        //     answerTab[this.state.question].repo2 = this.state.rep3
+        //     answerTab[this.state.question].repo3 = this.state.rep4
+        //     console.log(answerTab)
+        // }
+        // else if(this.state.answer === this.state.rep3){
+        //     answerTab[this.state.question].repo1 = this.state.rep1
+        //     answerTab[this.state.question].repo2 = this.state.rep2
+        //     answerTab[this.state.question].repo3 = this.state.rep4
+        //     console.log(answerTab)
+        // }
+        // else if(this.state.answer === this.state.rep4){
+        //     answerTab[this.state.question].repo1 = this.state.rep1
+        //     answerTab[this.state.question].repo2 = this.state.rep2
+        //     answerTab[this.state.question].repo3 = this.state.rep3
+        //     console.log(answerTab)
+        // }
+        // else {
+        //     answerTab[this.state.question].repo1 = this.state.rep1
+        //     answerTab[this.state.question].repo2 = this.state.rep2
+        //     answerTab[this.state.question].repo3 = this.state.rep3
+        //     console.log(answerTab)   
+        // }
