@@ -4,6 +4,7 @@ import { Container, Row, Col, Button,
     Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 import './TxtATrou.css'
 import game from '../Images/txtATrou.png'
+import jwt_decode from 'jwt-decode'
 import axios from 'axios';
 
 var answerTab = {"niv": null,
@@ -150,6 +151,15 @@ class TxtATrou extends Component {
             })        
     }
     
+    goBackTo(){
+        const token = sessionStorage.usertoken
+  
+        if(token){
+        const decoded = jwt_decode(token)
+        const link = "/user/" + decoded.id
+        return link
+        }
+      }
 
   render() {
       
@@ -211,7 +221,7 @@ class TxtATrou extends Component {
             </Row>
         </div>
         <Row>
-            <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>
+            <Col sm={{size: 4}}><Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button></Col>
             <Col sm={{size: 4}}><Button onClick={this.handleSubmit} className="footerRight">Valider</Button></Col>
         </Row>
 
