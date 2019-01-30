@@ -20,6 +20,7 @@ import PremierePrescription from './Pro/Profil/AjoutPatient/PremierePrescription
 import BonneImage from './Jeux/BonneImage';
 import Result from './Jeux/Result';
 
+
 class App extends Component {
   render() {
     return (
@@ -38,7 +39,6 @@ class App extends Component {
           <Route exact path='/user/:user_id/statistiques' component={Statistiques} />
           <Route exact path='/user/inscription' component={UserInscription} />
           <Route exact path='/txtATrou' component={TxtATrou} />
-          <Route exact path='/bneImage' component={BonneImage} />
           <Route exact path='/user/:user_id/txtATrou' component={TxtATrou} /> 
           <Route exact path='/user/:user_id/jeuImage' component={JeuImage} /> 
           <Route exact path='/jeuImage' component={JeuImage} />

@@ -3,7 +3,8 @@ import { Container, Row, Col, FormGroup, Button, Input, Label, Form } from 'reac
 import './AjoutPatient.css';
 import ChoixExercice from './ChoixExercice/ChoixExercice'
 import jwt_decode from 'jwt-decode'
-import { createUser, mailToUser } from '../../../utils/API';
+import { createUser } from '../../../utils/API';
+//import { mailToUser } from '../../../utils/API';
 
 
 class AjoutPatient extends Component {
@@ -33,9 +34,9 @@ class AjoutPatient extends Component {
     createUser(newUser)
     .then(res => {
       console.log(res.data)      
-      mailToUser(res.data)
-      console.log('Email sent to' + res.data.firstname)
-      //window.location=this.gotoFirstPrescription(id, res.data.id)
+      //mailToUser(res.data)
+      //console.log('Email sent to' + res.data.firstname)
+      window.location=this.gotoFirstPrescription(id, res.data.id)
     })
   }
 
