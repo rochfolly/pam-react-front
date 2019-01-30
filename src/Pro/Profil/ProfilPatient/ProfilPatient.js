@@ -53,7 +53,7 @@ class ProfilPatient extends Component {
   }
 
   logout(){
-    localStorage.clear()
+    sessionStorage.clear()
     window.location = '/'
   }
   

@@ -46,12 +46,12 @@ class Accueil extends Component {
             <Form onSubmit={this.handleSubmit}>
               <FormGroup row >
                 <Col sm={12}>
-                  <Input onKeyPress={this.handleKeySubmit} type="email" value={this.state.email} name="email" id="email" placeholder="Email" onChange={this.handleChange} required/>
+                  <Input type="email" value={this.state.email} name="email" id="email" placeholder="Email" onChange={this.handleChange} required={true}/>
                 </Col>
               </FormGroup>
               <FormGroup row>
                 <Col sm={12}>
-                  <Input onKeyPress={this.handleKeySubmit} type="password" value={this.state.password} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChange} required/>
+                  <Input type="password" value={this.state.password} name="password" id="password" placeholder="Mot de passe" onChange={this.handleChange} required={true}/>
                 </Col>
               </FormGroup>
               <FormGroup check row>
