@@ -23,7 +23,7 @@ class TxtATrou extends Component {
 
     constructor(props){
         super(props);
-        this.state = {niv:3, question:0, part1:'', part2:'',
+        this.state = {niv:3, user_id:'', question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
                     rep1:'', rep2:'', rep3:'', rep4:'',
                     modal: false}
@@ -55,7 +55,7 @@ class TxtATrou extends Component {
         answerTab[this.state.question].repu = this.state.answer
         answerTab[this.state.question].rept = this.state.reponse[this.state.question].rept
 
-
+        
 
         if(this.state.question<4)
         {
@@ -83,9 +83,11 @@ class TxtATrou extends Component {
                 {method: 'POST', data: tab, header: {"Content-Type": "application/json"}})
                 .then(res => {
                     res.data.exo = "Texte à trou"
+                    res.data.exo_id = 1
+                    res.data.level = this.state.niv
                     const finaltab = JSON.stringify(res.data)
                     sessionStorage.setItem("resultat", finaltab)
-                    window.location = '/result'          
+                    window.location = '/result/'+ this.state.user_id         
                 })
         }
         console.log(JSON.stringify(answerTab))
@@ -106,12 +108,14 @@ class TxtATrou extends Component {
     }
 
     componentDidMount(){
+        const { user_id } = this.props.match.params
         niveau.niv = this.state.niv
         axios("https://pfepam.azurewebsites.net/exo1",
                 {method: 'POST', data:niveau, header: {"Content-Type": "application/json"}})
         .then(res => {
             console.log(res.data)
             this.setState({reponse: res.data,
+                user_id: user_id,
                 part1: res.data[this.state.question].part1,
                 part2: res.data[this.state.question].part2,
                 rep1: res.data[this.state.question].rep1,

@@ -89,13 +89,9 @@ export function updatePrescription (exo_id, user_id) {
     return axios.post(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id )
 } 
 
-
-export const updateSettings = newSettings => {
-
-}
-
-export function saveScore(user_id, score) {
-    return axios.post(backurl+ '/user/'+ user_id + '/result/' + score)
+export function saveScore (score) {
+   // return axios.post(backurl+ '/user/'+ user_id + '/' + exo_id +'/result/' + score)
+   return axios.post(backurl+ '/user/result', {score: score})
 }
 
 
@@ -114,4 +110,8 @@ export const logout = _ => {
 export function updatePrescription (level, exo_id, user_id) {
     return axios.post(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id + '/' + level )
 } 
+
+export const updateSettings = newSettings => {
+
+}
 */

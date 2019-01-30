@@ -8,10 +8,14 @@ class ChoixExercice extends Component {
   goToExo = exo_id => {
 
     const link1 = "/user/" + this.props.exo.user_id + "/txtATrou", 
-          link2 = "/user/" + this.props.exo.user_id + "/jeuImage"
+          link2 = "/user/" + this.props.exo.user_id + "/jeuImage",
+          link3 = "/user/" + this.props.exo.user_id + "/bneImage"
+
 
     if(exo_id === 1){ return link1 }
-    else if(exo_id === 2) {return link2} 
+    else if(exo_id === 2) {return link2}
+    else if(exo_id === 3) {return link3} 
+    
   }
 
   render() {
