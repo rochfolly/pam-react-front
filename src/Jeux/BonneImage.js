@@ -83,7 +83,7 @@ class BonneImage extends Component {
                .then(res => {
                    res.data.exo = "La bonne image"
                    const finaltab = JSON.stringify(res.data)
-                   localStorage.setItem("resultat", finaltab)            
+                   sessionStorage.setItem("resultat", finaltab)            
                    window.location = '/result' 
                 })
         }

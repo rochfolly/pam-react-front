@@ -18,8 +18,8 @@ class Result extends Component {
 
     componentDidMount(){
         //Récupère résultats de la partie
-        const resultat = localStorage.getItem("resultat") 
-        //localStorage.clear("resultat")
+        const resultat = sessionStorage.getItem("resultat") 
+        //sessionStorage.clear("resultat")
         if(resultat){
         var scoreTotal = 0
         const veryfinal = JSON.parse(resultat) //traduit en tableau json
