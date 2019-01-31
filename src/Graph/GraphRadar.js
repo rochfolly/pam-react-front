@@ -6,7 +6,7 @@ class GraphRadar extends Component {
     super(props);
 
     this.data = {
-      labels: ['Jeu 1', 'Jeu 2', 'Jeu 3', 'Jeu 4', 'Jeu 5', 'Jeu 6', 'Jeu 7'],
+      labels: this.props.jeux,
       datasets: [
         {
           label: 'Décembre',
@@ -16,7 +16,7 @@ class GraphRadar extends Component {
           pointBorderColor: '#f4cdb3',
           pointHoverBackgroundColor: '#f4cdb3',
           pointHoverBorderColor: 'rgba(244,205,179,1)',
-          data: [65, 59, 60, 51, 56, 55, 63]
+          data: this.props.scores
         },
         {
           label: 'Janvier',
@@ -26,10 +26,15 @@ class GraphRadar extends Component {
           pointBorderColor: '#eb7842',
           pointHoverBackgroundColor: '#eb7842',
           pointHoverBorderColor: 'rgba(235,120,66,1)',
-          data: [60, 55, 45, 67, 58, 60, 75]
+          data: this.props.scores
         }
       ]
     }
+  }
+
+  componentDidMount(){
+    const test = (this.props.jeux) ? this.props.jeux[1] : 'nope'
+    console.log(test)
   }
 
 
@@ -41,4 +46,5 @@ class GraphRadar extends Component {
     );
   }
 }
+
 export default GraphRadar;

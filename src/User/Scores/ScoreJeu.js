@@ -12,16 +12,16 @@ class ScoreJeu extends Component {
       <Row>
       <Col sm={3}><img src={game} alt="jeu" class="GameLogo"/></Col>
       <Col sm={9}>
-      <Row>Titre</Row>
-      <Row>Parties jouées : X</Row>
-      <Row>Meilleur score : X</Row>
-      <Row>Dernière partie : 00/00/0000</Row>
-      <Row>Score : X/X</Row>
+      <Row><b>{this.props.exo.title}</b></Row>
+      <Row>Parties jouées : {this.props.exo.plays}</Row>
+      <Row>Meilleur score : {this.props.exo.bestScore}</Row>
+      <Row>Dernière partie : {this.props.exo.lastPlay}</Row>
+      <Row>Score : {this.props.exo.lastScore}</Row>
       </Col>
       </Row>
       <br/>
       <Row>
-      <Col><GraphLineaire /></Col>
+      <Col><GraphLineaire exercice={this.props.exo} /></Col>
       </Row>
       </Container>
     );

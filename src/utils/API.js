@@ -78,7 +78,11 @@ export const getOtherExos = user_id => {
 }
 
 export const getStats = user_id => {
-    return axios.get(backurl + '/stats/' + user_id)
+    return axios.get(backurl + '/user/' + user_id + '/stats' )
+}
+
+export const getGlobalStats = user_id => {
+    return axios.get(backurl + '/user/' + user_id + '/global' )
 }
 
 export const mailToUser = newUser => {

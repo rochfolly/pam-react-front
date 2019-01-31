@@ -6,7 +6,7 @@ class GraphLineaire extends Component {
     super(props);
 
     this.data = {
-      labels: ['11/01', '13/01', '15/01', '17/01', '19/01', '20/01', '21/01'],
+      labels: this.props.exercice.dates,
       datasets: [
         {
           label: 'Résultats des dernières parties',
@@ -23,13 +23,14 @@ class GraphLineaire extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [23, 33, 25, 28, 34, 32, 29]
+          data: this.props.exercice.values
         }
       ]
     }
   }
 
   render() {
+    console.log(this.props.exercice.dates)
     return (
       <div>
         <Line data={this.data} />
