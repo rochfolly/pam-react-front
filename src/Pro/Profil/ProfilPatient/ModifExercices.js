@@ -69,7 +69,8 @@ class ModifExercices extends Component {
     const text = "new"
 
     const edit = this.state.exos.map((exo) => 
-    <Row>
+    <div>
+      <Row>
     <Input type="checkbox" defaultChecked/>
     <Col sm={3}><img src={require(`../../../Images/exo${exo.exo_id}.png`)} alt="jeu" className="Game-logo"/></Col>
     <Col sm={8}>
@@ -85,11 +86,13 @@ class ModifExercices extends Component {
       </Row>
       <br/>
     </Col>
-    <br/>
-    </Row> 
+    </Row>
+    <hr/>
+    </div>
     )
 
     const others = this.state.others.map((exo) => 
+    <div>
     <Row>
     <Input type="checkbox" value={true} name={exo.label} onChange={this.handleChange}/>
     <Col sm={3}><img src={require(`../../../Images/exo${exo.exo_id}.png`)} alt="jeu" className="Game-logo"/></Col>
@@ -107,13 +110,14 @@ class ModifExercices extends Component {
       <br/>
     </Col>
     <br/>
-    </Row>  
+    </Row>
+    <hr/> 
+    </div> 
     )
     
     return (
       <Container>
       <br/>
-      <Form onSubmit={this.handleSubmit}>
         <Row>
         <Col sm={{size: 10}}><h3 class="titlePAM">Modification</h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton">
@@ -126,24 +130,19 @@ class ModifExercices extends Component {
         </Row>
         <br/>
         <Row>
-          <FormGroup>
-          {edit}
-          </FormGroup>
+          <Col sm={{size:"8", offset:"3"}}>
+          <Form onSubmit={this.handleSubmit}>
+            <hr/>
+              {edit}
+              {others}
+            <br/>
+            <Row>
+              <Button type="submit">Valider</Button>
+            </Row>
+          </Form>
+          </Col>
         </Row>
-        <br/>
-        <Row>
-        </Row>
-        <br/>
-        <Row>
-          <FormGroup>
-          {others}
-          </FormGroup>
-        </Row>
-        <br/>
-        <Row>
-           <Button type="submit">Valider</Button>
-        </Row>
-      </Form>
+        
       <br/>
       <br/>
       </Container>
