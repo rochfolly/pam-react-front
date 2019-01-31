@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button, 
     FormGroup, Input, Label} from 'reactstrap';
 import './BonneImage.css'
-import game from '../Images/bneImg.png'
+import game from '../Images/exo3.png'
+import jwt_decode from 'jwt-decode'
 import axios from 'axios';
 
 var answerTab = {"niv": null, id:'',
@@ -29,7 +30,7 @@ class BonneImage extends Component {
     }
 
     handleKeySubmit(event) {
-        if(event.key == 'Enter'){
+        if(event.key === 'Enter'){
             //alert('enter press here! ')
             this.handleSubmit()
         }
@@ -130,6 +131,16 @@ class BonneImage extends Component {
             })  
     }
 
+    goBackTo(){
+        const token = sessionStorage.usertoken
+  
+        if(token){
+        const decoded = jwt_decode(token)
+        const link = "/user/" + decoded.id
+        return link
+        }
+      }
+
   render() {
     
 
@@ -202,7 +213,7 @@ class BonneImage extends Component {
             </Row>
         </FormGroup>
         <Row>
-            <Col sm={{size: 4}}><Button className="footerLeft"><a href="/user">Quitter</a></Button></Col>
+            <Col sm={{size: 4}}><Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button></Col>
             <Col sm={{size: 4}}><Button onClick={this.handleSubmit} className="footerRight">Valider</Button></Col>
         </Row>
         

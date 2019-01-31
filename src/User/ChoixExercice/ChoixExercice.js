@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, FormGroup } from 'reactstrap';
+import { Container, Row, Col} from 'reactstrap';
 import './ChoixExercice.css';
-import game from '../../Images/dice.png';
 
 class ChoixExercice extends Component {
 
@@ -25,17 +24,20 @@ class ChoixExercice extends Component {
 
     return (
       <Container>
-      <FormGroup row>
       <a href={this.goToExo(this.props.exo.exo_id)}>
-      <Col sm={3}><img src={game} alt="jeu" class="GameLogo"/></Col>
-      <Col sm={9}>
-      <Row>{titre}</Row>
-      <Row>Niveau : {niveau}</Row>
-      <Row>Dernière partie : 00/00/0000</Row>
-      <Row>Score : X/X</Row>
-      </Col>
+      <Row>
+        <Col sm={3}>
+          <img src={require(`../../Images/exo${this.props.exo.exo_id}.png`)} alt="jeu" class="GameLogo"/>
+        </Col>
+        <Col sm={9}>
+          <Row>{titre}</Row>
+          <Row>Niveau : {niveau}</Row>
+          <Row>Dernière partie : 00/00/0000</Row>
+          <Row>Score : X/X</Row>
+        </Col>
+      </Row>
       </a>
-      </FormGroup>
+      <br/>
       </Container>
     );
   }
