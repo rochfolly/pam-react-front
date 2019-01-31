@@ -6,6 +6,11 @@ import './Statistiques.css'
 
 class Statistiques extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {exos:''};
+  }
+
   goBackTo(){
     const {user_id} = this.props.match.params
     const link = "/user/" + user_id
@@ -15,6 +20,10 @@ class Statistiques extends Component {
   logout(){
     sessionStorage.clear()
     window.location = '/'
+  }
+
+  componentDidMount(){
+    const { user_id } = this.props.match.params
   }
 
   render() {

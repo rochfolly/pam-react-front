@@ -76,4 +76,5 @@ class Accueil extends Component {
   }
 }
 
+
 export default Accueil;

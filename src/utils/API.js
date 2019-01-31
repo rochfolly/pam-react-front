@@ -77,6 +77,10 @@ export const getOtherExos = user_id => {
     return axios.get(backurl + '/doctor/user/'+user_id+'/exercices/other' )
 }
 
+export const getStats = user_id => {
+    return axios.get(backurl + '/stats/' + user_id)
+}
+
 export const mailToUser = newUser => {
     return axios.post(backurl + '/user/new', {user: newUser})
 }
