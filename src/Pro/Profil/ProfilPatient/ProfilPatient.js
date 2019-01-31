@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import './ProfilPatient.css';
 import ExercicePatient from '../ExercicePatient/ExercicePatient'
+import GraphLineaire from '../../../Graph/GraphLineaire'
 //import jwt_decode from 'jwt-decode'
 import { showUser, fetchExos } from '../../../utils/API'
 
@@ -97,7 +98,7 @@ class ProfilPatient extends Component {
         <Modal isOpen={this.state.modal} size="lg" toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Statistiques du jeu TITRE</ModalHeader>
           <ModalBody>
-          <Row><Col>Line ou bar chart des stats de l'exo</Col></Row>
+          <Row><Col>< GraphLineaire /></Col></Row>
           </ModalBody>
         </Modal>
 
