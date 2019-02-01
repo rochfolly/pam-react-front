@@ -9,7 +9,7 @@ import { getGlobalStats, getTotalScore } from '../../../src/utils/API';
 class Statistiques extends Component {
   constructor(props){
     super(props);
-    this.state = {stats:[], labels:[], scores:[], total:''}
+    this.state = {stats:[], labels:[], scores:[], total:[], scoretotal:''}
 
     this.renderRadar = this.renderRadar.bind(this);
     this.radar = this.radar.bind(this);
@@ -56,6 +56,10 @@ class Statistiques extends Component {
     const test = this.state.stats.map((stat) => 
      {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores}/></div>)})
 
+    const jauge = this.state.stats.map((total) => 
+     {return (<div><Jauge score={this.state.total} /></div>)})
+     
+
     return (
       <Container>
       <br/>
@@ -77,7 +81,7 @@ class Statistiques extends Component {
               <Col sm={{size: 2}}><Button className="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
             </Row>
             <Row>
-            <Jauge score={this.state.total} />
+            {jauge}
             </Row> 
           </Col>
         </Row>

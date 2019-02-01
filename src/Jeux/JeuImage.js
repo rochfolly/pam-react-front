@@ -19,7 +19,7 @@ class JeuImage extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, niv: 1,
+        this.state = {question:0, niv: 3,
             lien:'images/0.png', user_id:'',
             word1:'', word2:'', word3:'', word4:'', word5:'',
             reponse:'', answer:''}
