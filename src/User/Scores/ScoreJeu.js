@@ -7,10 +7,13 @@ import GraphLineaire from '../../Graph/GraphLineaire.js'
 class ScoreJeu extends Component {
 
   render() {
+
+    console.log(this.props.exo.title+" : "+this.props)
+
     return (
       <Container>
       <Row>
-      <Col sm={3}><img src={game} alt="jeu" class="GameLogo"/></Col>
+      <Col sm={3}><img src={require(`../../Images/exo${this.props.exo.id}.png`)} alt="jeu" class="GameLogo"/></Col>
       <Col sm={9}>
       <Row><b>{this.props.exo.title}</b></Row>
       <Row>Parties jouées : {this.props.exo.plays}</Row>
