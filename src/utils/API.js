@@ -85,6 +85,10 @@ export const getGlobalStats = user_id => {
     return axios.get(backurl + '/user/' + user_id + '/global' )
 }
 
+export const getTotalScore = user_id => {
+    return axios.get(backurl + '/user/' + user_id + '/jauge' )
+}
+
 export const mailToUser = newUser => {
     return axios.post(backurl + '/user/new', {user: newUser})
 }

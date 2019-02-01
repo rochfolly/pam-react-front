@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Row, Col} from 'reactstrap';
 import './Jauge.css'
-
+import { getTotalScore } from '../../../utils/API';
 
 class Jauge extends Component {
+  constructor(props){
+    super(props);
+  }
+   
   render() {
     return (
       <Container>
@@ -16,6 +20,7 @@ class Jauge extends Component {
           </Col>
           <Col sm="9" className="scoreJauge">
           <p>Niveau 1 <br/> 5/10 </p>
+          <p>Total <br/> {this.props.score} </p>
           </Col>
         </Row>
       </Container>

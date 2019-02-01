@@ -3,13 +3,16 @@ import { Container, Row, Col, Button} from 'reactstrap';
 import Jauge from './Jauge/Jauge.js';
 import GraphRadar from '../../Graph/GraphRadar.js'
 import './Statistiques.css'
-import { getGlobalStats } from '../../../src/utils/API';
+import { getGlobalStats, getTotalScore } from '../../../src/utils/API';
+
 
 class Statistiques extends Component {
-
   constructor(props){
     super(props);
-    this.state = {stats:[]};
+    this.state = {stats:[], labels:[], scores:[], total:''}
+
+    this.renderRadar = this.renderRadar.bind(this);
+    this.radar = this.radar.bind(this);
   }
 
   goBackTo(){
@@ -26,23 +29,43 @@ class Statistiques extends Component {
   componentDidMount(){
     const { user_id } = this.props.match.params
     getGlobalStats(user_id).then(res => {
-      this.setState({stats: res.data}, () => console.log(this.state.stats))
-      
+      console.log(res.data[2].bestscores)
+      this.setState({stats:[1], labels: res.data[1].titles, scores: res.data[2].bestscores}, () => console.log(this.state.stats[0]))     
     })
+
+    getTotalScore(user_id).then(res => {
+      this.setState({total: res.data})
+    })
+  } 
+
+
+  
+  radar(){
+    
+  }
+
+
+  renderRadar(){
+    setTimeout(this.radar, 1000)
   }
 
   render() {
-    const games = this.state.stats[1]
-    console.log(games)
+
+    console.log(this.state.labels)
+
+    const test = this.state.stats.map((stat) => 
+     {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores}/></div>)})
+
     return (
       <Container>
       <br/>
         <Row>
           <Col sm="6">
             <h3 className="titlePAM">Votre évolution</h3>
-            <Row><div id="radar"></div></Row>
+            {test}
+            <Row><div id="radar">{this.radar()}</div></Row>
             <Row>
-              <Col><GraphRadar jeux={this.state.stats[1]} scores={this.state.stats[2]}/></Col>
+              <Col></Col>
             </Row>
           </Col>
           <Col sm="6">
@@ -54,7 +77,7 @@ class Statistiques extends Component {
               <Col sm={{size: 2}}><Button className="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
             </Row>
             <Row>
-            <Jauge />
+            <Jauge score={this.state.total} />
             </Row> 
           </Col>
         </Row>

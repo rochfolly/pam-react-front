@@ -4,6 +4,9 @@ import {Radar} from 'react-chartjs-2';
 class GraphRadar extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props)
+
+    this.state = {labels: [], scores:[]};
 
     this.data = {
       labels: this.props.jeux,
@@ -30,15 +33,18 @@ class GraphRadar extends Component {
         }
       ]
     }
-  }
+  } 
+
 
   componentDidMount(){
-    const test = (this.props.jeux) ? this.props.jeux[1] : 'nope'
-    console.log(test)
-  }
+      this.setState({labels: this.props.jeux, scores: this.props.scores}, () => {
+      console.log(this.state.scores)
+      })
 
+  } 
 
   render() {
+
     return (
       <div>
         <Radar data={this.data} height={500} width={1000} />

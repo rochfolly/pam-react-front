@@ -25,8 +25,7 @@ class Scores extends Component {
     const { user_id } = this.props.match.params
 
     getStats(user_id).then(res => {
-     this.setState({stats: res.data})
-     console.log(res.data)
+     this.setState({stats: res.data}, ()=> console.log(this.state.stats))  
     })
 
   }
