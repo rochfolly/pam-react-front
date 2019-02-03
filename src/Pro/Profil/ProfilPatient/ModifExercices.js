@@ -80,9 +80,9 @@ class ModifExercices extends Component {
       <br/>
       <Row>
         <Col sm={3} className="no-padding">Niveau</Col>
-        <Col sm={2}>1<Input type="radio" name="exo2" value={1} id="niv1" onChange={this.handleChange_2}/></Col>
-        <Col sm={2}>2<Input type="radio" name="exo2" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
-        <Col sm={2}>3<Input type="radio" name="exo2" value={3} id="niv3" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>1<Input type="radio" name={exo.exo_id} value={1} id="niv1" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>2<Input type="radio" name={exo.exo_id} value={2} id="niv2" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>3<Input type="radio" name={exo.exo_id} value={3} id="niv3" onChange={this.handleChange_2}/></Col>
       </Row>
       <br/>
     </Col>
@@ -103,9 +103,9 @@ class ModifExercices extends Component {
       <br/>
       <Row>
         <Col sm={3} className="no-padding">Niveau</Col>
-        <Col sm={2}>1<Input type="radio" name="exo2" value={1} id="niv1" onChange={this.handleChange_2}/></Col>
-        <Col sm={2}>2<Input type="radio" name="exo2" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
-        <Col sm={2}>3<Input type="radio" name="exo2" value={3} id="niv3" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>1<Input type="radio" name={exo.exo_id} value={1} id="niv1" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>2<Input type="radio" name={exo.exo_id} value={2} id="niv2" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>3<Input type="radio" name={exo.exo_id} value={3} id="niv3" onChange={this.handleChange_2}/></Col>
       </Row>
       <br/>
     </Col>
