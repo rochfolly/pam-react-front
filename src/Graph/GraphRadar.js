@@ -19,7 +19,7 @@ class GraphRadar extends Component {
           pointBorderColor: '#f4cdb3',
           pointHoverBackgroundColor: '#f4cdb3',
           pointHoverBorderColor: 'rgba(244,205,179,1)',
-          data: this.props.scores
+          data: this.props.ancient
         },
         {
           label: 'Janvier',

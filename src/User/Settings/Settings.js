@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Col, Form, FormGroup, Button, Input, Label,
     Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 import jwt_decode from 'jwt-decode'
-import { fetchUsers } from '../../utils/API'
-    
+import { updateUserSettings, updateDoctorSettings } from '../../utils/API'
+
+const changes = {name: '', firstname:'', email: '', password:'', conf:'', city:''}
+
 class Settings extends Component {
 
   constructor(props) {
@@ -15,7 +17,7 @@ class Settings extends Component {
   }
 
   componentDidMount () {
-    const token = sessionStorage.usertoken
+    const token = (sessionStorage.doctortoken) ? sessionStorage.doctortoken : sessionStorage.usertoken
   
     if(token){
       console.log('token:', token)
@@ -25,10 +27,6 @@ class Settings extends Component {
         email: decoded.email, city: decoded.city, birth: decoded.birth, gender: decoded.gender})
       console.log('decoded:', decoded)
 
-     fetchUsers(decoded.id).then(res => {
-        console.log(res.data)
-        this.setState({ users: res.data })
-      })
     }
     else console.log('No token')
 
@@ -41,8 +39,25 @@ class Settings extends Component {
     
   handleSubmit = event => {
     event.preventDefault();
+    if(this.state.password == this.state.conf)
+    {
+      const token = (sessionStorage.doctortoken) ? sessionStorage.doctortoken : sessionStorage.usertoken
+      console.log(token)
+      const decoded = jwt_decode(token)
 
-    console.log(this.state.firstname)
+      const news = {
+        id: this.state.id,
+        firstname: this.state.firstname,
+        name: this.state.name,
+        password: this.state.password,
+        city: this.state.city
+      }
+    
+      if(decoded.is_doctor == 1) {updateDoctorSettings(news).then(window.location = '/profil/'+this.state.id)}
+      else {updateUserSettings(news).then(window.location = '/user/'+this.state.id)}
+    }
+    else{alert('Veuillez confirmer votre nouveau mot de passe')}
+  
   }
 
   render() {
@@ -81,7 +96,7 @@ class Settings extends Component {
                 <FormGroup row>
                 <Label for="email" sm={2}>Email</Label>
                     <Col sm={4}>
-                    <Input type="email" value={this.state.email} name="email" id="email" onChange={this.handleChange}/>
+                    <Input type="email" value={this.state.email} name="email" id="email" readonly/>
                     </Col>
                 </FormGroup>
                 <br/>
@@ -102,19 +117,19 @@ class Settings extends Component {
                     </Col>
                     <Label for="city" sm={{size:2}}>Ville</Label>
                     <Col sm={4}>
-                    <Input type="text" value={this.state.city} name="city" id="city" placeholder="Paris" onChange={this.handleChange}/>
+                    <Input type="text" value={this.state.city} name="city" id="city" onChange={this.handleChange}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                 <Label for="birth" sm={2}>Date de naissance</Label>
                     <Col sm={4}>
-                    <Input type="date" value={this.state.birth} name="birth" id="birth" onChange={this.handleChange}/>
+                    <Input type="date" value={this.state.birth} name="birth" id="birth" readonly/>
                     </Col>
                 </FormGroup>       
                 </ModalBody>
                 <ModalFooter>
                     <FormGroup check>
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit" onClick={this.handleSubmit}>Valider</Button>
                     </FormGroup>
                 </ModalFooter>
                 </Modal>

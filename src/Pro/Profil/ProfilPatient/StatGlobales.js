@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import GraphRadar from '../../../Graph/GraphRadar.js'
 import './StatGlobales.css'
+import { getGlobalStats } from '../../../utils/API'
+
 
 class StatGlobales extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {stats:[], labels:[], scores:[], ancient:[], total:''}
 
     this.chartData = {
     labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
@@ -37,6 +41,15 @@ class StatGlobales extends Component {
 
   }
 
+  componentDidMount(){
+    const { user_id } = this.props.match.params
+    getGlobalStats(user_id).then(res => {
+      console.log(res.data[2].bestscores)
+      this.setState({stats:[1], labels: res.data[1].titles, scores: res.data[2].bestscores, ancient:res.data[3].oldscores}, () => console.log(this.state.stats[0]))     
+    })
+
+  } 
+
   goBackTo(){
     const { user_id } = this.props.match.params
     const { id } = this.props.match.params
@@ -51,6 +64,10 @@ class StatGlobales extends Component {
   
   
   render() {
+
+    const graph = this.state.stats.map((stat) => 
+     {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores} ancient={this.state.ancient}/></div>)})
+
     return (
       <Container>
       <br/>
@@ -63,7 +80,7 @@ class StatGlobales extends Component {
         </Row>
         <br/>
         <Row>
-          <div id="radar"><GraphRadar /></div>
+          <div id="radar">{graph}</div>
         </Row>
 
       </Container>

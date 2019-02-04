@@ -5,14 +5,11 @@ import GraphRadar from '../../Graph/GraphRadar.js'
 import './Statistiques.css'
 import { getGlobalStats, getTotalScore } from '../../../src/utils/API';
 
-
 class Statistiques extends Component {
   constructor(props){
     super(props);
-    this.state = {stats:[], labels:[], scores:[], total:''}
+    this.state = {stats:[], labels:[], scores:[], ancient:[], total:''}
 
-    this.renderRadar = this.renderRadar.bind(this);
-    this.radar = this.radar.bind(this);
   }
 
   goBackTo(){
@@ -30,7 +27,7 @@ class Statistiques extends Component {
     const { user_id } = this.props.match.params
     getGlobalStats(user_id).then(res => {
       console.log(res.data[2].bestscores)
-      this.setState({stats:[1], labels: res.data[1].titles, scores: res.data[2].bestscores}, () => console.log(this.state.stats[0]))     
+      this.setState({stats:[1], labels: res.data[1].titles, scores: res.data[2].bestscores, ancient:res.data[3].oldscores}, () => console.log(this.state.stats[0]))     
     })
 
     getTotalScore(user_id).then(res => {
@@ -38,23 +35,12 @@ class Statistiques extends Component {
     })
   } 
 
-
-  
-  radar(){
-    
-  }
-
-
-  renderRadar(){
-    setTimeout(this.radar, 1000)
-  }
-
   render() {
 
     console.log(this.state.labels)
 
-    const test = this.state.stats.map((stat) => 
-     {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores}/></div>)})
+    const graph = this.state.stats.map((stat) => 
+     {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores} ancient={this.state.ancient}/></div>)})
 
     return (
       <Container>
@@ -62,8 +48,7 @@ class Statistiques extends Component {
         <Row>
           <Col sm="6">
             <h3 className="titlePAM">Votre évolution</h3>
-            {test}
-            <Row><div id="radar">{this.radar()}</div></Row>
+            <Row><div id="radar">{graph}</div></Row>
             <Row>
               <Col></Col>
             </Row>

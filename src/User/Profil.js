@@ -6,6 +6,7 @@ import Settings from './Settings/Settings'
 import jwt_decode from 'jwt-decode'
 import { showUser, fetchExos } from '../utils/API'
 
+
 class ProfilUser extends Component {
 
   constructor(props) {
@@ -32,7 +33,7 @@ class ProfilUser extends Component {
         })
 
         fetchExos(user_id).then(res => {
-          this.setState({exos: res.data})
+          this.setState({exos: res.data}, () => console.log(this.state))
         })
       }
       else console.log('No token')
@@ -67,6 +68,7 @@ class ProfilUser extends Component {
     <Col onClick={this.toggle} sm="6"><ChoixExercice exo={exo} /></Col>
     )
 
+    
     return (
       <Container>
       <br/>

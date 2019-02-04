@@ -40,12 +40,6 @@ class Inscription extends Component {
     }
     else{alert('Mot de passe invalide')}
   }
-    
-  
-  /*testAxios = event => {
-    const working = 'axios marche!'
-    test(working)
-  }*/
 
 
   render() {

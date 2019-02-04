@@ -69,18 +69,40 @@ export const showUser = id => {
 
 //Afficher les exos déjà accessibles au patient
 export const fetchExos = user_id => {
-    return axios.get(backurl + '/doctor/user/'+user_id+'/exercices' )
+    return axios.get(backurl + '/doctor/user/'+user_id+'/exercices')
 }
 
+//Mettre à jour les infos du docteur
+export const updateDoctorSettings = newSettings => {
+    return axios.post(backurl + '/doctor/update', {data: newSettings})
+    .then(res => {
+        sessionStorage.setItem("doctortoken", res.data.token)
+        console.log(res.data)
+        return res.data
+    })
+}
 
+//Mettre à jour les infos du patient
+export const updateUserSettings = newSettings => {
+    return axios.post(backurl + '/user/update', {data: newSettings})
+    .then(res => {
+        sessionStorage.setItem("usertoken", res.data.token)
+        console.log(res.data)
+        return res.data
+    })
+}
+
+//Afficher les exos non accessibles au patient
 export const getOtherExos = user_id => {
     return axios.get(backurl + '/doctor/user/'+user_id+'/exercices/other' )
 }
 
+//Afficher les statitiques par exercice du patient
 export const getStats = user_id => {
     return axios.get(backurl + '/user/' + user_id + '/stats' )
 }
 
+//Afficher les statitiques globales du patient
 export const getGlobalStats = user_id => {
     return axios.get(backurl + '/user/' + user_id + '/global' )
 }

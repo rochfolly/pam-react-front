@@ -48,6 +48,7 @@ class ProfilPatient extends Component {
     return link
   }
 
+
   goToStats(){
     const link = "/profil/" + this.state.id + "/patient/global/" + this.state.user_id 
     return link
