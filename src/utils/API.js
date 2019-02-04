@@ -37,7 +37,12 @@ export const signup = newDoctor => {
             phone: newDoctor.phone
         })
         .then(res => {
-            console.log("Registered")
+            sessionStorage.setItem("doctortoken", res.data.token)
+            console.log(res.data)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
         })
     }
 
@@ -64,6 +69,10 @@ export const fetchUsers = doctor_id  => {
 
 export const showUser = id => {
     return axios.get(backurl + '/doctor/user/' + id)
+}
+
+export function createFirstPrescription (newuser_id, prescriptions){
+    return axios.post(backurl + '/user/' + newuser_id + '/first', {data: prescriptions})
 }
 
 

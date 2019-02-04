@@ -4,31 +4,25 @@ import txtATrou from '../../../../Images/exo1.png';
 import bneImg from '../../../../Images/exo3.png';
 import jeuImage from '../../../../Images/exo2.png';
 import '../../../../Jeux/JeuImage.css';
-import { showUser, createFirstPrescription } from '../../../../utils/API'
+import { showUser, fetchExos } from '../../../../utils/API'
 import './Prescription.css'
 
 const prescriptions = [
   {exo:'', level:'', name:'Texte à trous'}, {exo:'', level:'', name:"Jeu d'Images"}, {exo:'', level:'', name:'La Bonne Image'}
 ]
 
-class PremierePrescription extends Component {
+class ModifPrescription extends Component {
   constructor(props) {
     super(props);
-    this.state = { id: '', new_id:'', firstname:'', name:'', exos:[], ex1:false, ex2:false, ex3:false, ex1level:1, ex2level:1, ex3level:1};
+    this.state = { id: '', user_id:'', firstname:'', name:'', exos:[], ex1:false, ex2:false, ex3:false, ex1level:1, ex2level:1, ex3level:1};
 
   }
 
  componentDidMount(){
     const { id } = this.props.match.params    
-    const { newuser_id } = this.props.match.params
-    this.setState({id: id, new_id: newuser_id})    
-    showUser(newuser_id).then(res => {
-        this.setState({
-          firstname: res.data.firstname,
-          name: res.data.name,
-          email: res.data.email
-        })
-      })
+    const { user_id } = this.props.match.params
+    this.setState({id: id, user_id: user_id})    
+    
   } 
 
   goBackTo(){
@@ -74,7 +68,7 @@ class PremierePrescription extends Component {
     prescriptions[2].level = this.state.ex3level
 
     console.log(prescriptions)
-    createFirstPrescription(this.state.new_id, prescriptions).then(res => {
+    createFirstPrescription(this.state.user_id, prescriptions).then(res => {
       window.location = '/profil/' + this.state.id + '/patient/'+ res.data
     })
 
@@ -183,4 +177,4 @@ class PremierePrescription extends Component {
   }
 }
 
-export default PremierePrescription;
+export default ModifPrescription;
