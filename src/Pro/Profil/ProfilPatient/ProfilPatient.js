@@ -43,6 +43,11 @@ class ProfilPatient extends Component {
     return link
   }
 
+  goToGraph (user_id, exo_id) {
+    const link = "/profil/" +this.state.id+ "/patient/" + user_id + '/' + exo_id
+    return link
+  }
+
   goToModif(){
     const link = "/profil/" + this.state.id + "/patient/" + this.state.user_id + "/exercices"
     return link
@@ -63,7 +68,9 @@ class ProfilPatient extends Component {
 
     //console.log(this.state.exos[0])
     const exercices = this.state.exos.map((exo) => 
-    <Col onClick={this.toggle} sm="6"><ExercicePatient exo={exo} /></Col>
+    
+    <Col onClick={this.toggle} sm="6"><a href={this.goToGraph(this.state.user_id, exo.exo_id)}><ExercicePatient exo={exo} /></a></Col>
+    
     )
 
     return (

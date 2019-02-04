@@ -19,6 +19,7 @@ import JeuImage from './Jeux/JeuImage';
 import PremierePrescription from './Pro/Profil/AjoutPatient/PremierePrescription/PremierePrescription';
 import BonneImage from './Jeux/BonneImage';
 import Result from './Jeux/Result';
+import SingleScoreJeu from './User/Scores/SingleScoreJeu';
 
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
           <Route exact path='/profil/:id/patient/:user_id' component={ProfilPatient} />
           <Route exact path='/profil/:id/patient/:user_id/exercices' component={ModifExercices} />
           <Route exact path='/profil/:id/patient/global/:user_id' component={StatGlobales} />
+          <Route exact path='/profil/:id/patient/:user_id/:exo_id' component={SingleScoreJeu} />
           <Route exact path='/user/:user_id' component={ProfilUser} />
           <Route exact path='/user/:user_id/scores' component={Scores} />
           <Route exact path='/user/:user_id/statistiques' component={Statistiques} />

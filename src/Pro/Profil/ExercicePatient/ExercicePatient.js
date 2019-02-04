@@ -3,7 +3,7 @@ import { Container, Row, Col, FormGroup } from 'reactstrap';
 import './ExercicePatient.css';
 
 class ExercicePatient extends Component {
-  
+
   render() {
     const titre = (this.props.exo) ? this.props.exo.exo_name : 'Titre'
     const niveau = (this.props.exo) ? this.props.exo.level : '0'

@@ -102,6 +102,10 @@ export const getStats = user_id => {
     return axios.get(backurl + '/user/' + user_id + '/stats' )
 }
 
+export function getSingleStats(user_id, exo_id){
+    return axios.get(backurl + '/user/' + user_id + '/stats/' + exo_id )
+}
+
 //Afficher les statitiques globales du patient
 export const getGlobalStats = user_id => {
     return axios.get(backurl + '/user/' + user_id + '/global' )
