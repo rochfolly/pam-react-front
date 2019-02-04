@@ -66,7 +66,6 @@ class ProfilPatient extends Component {
   
   render() {
 
-    //console.log(this.state.exos[0])
     const exercices = this.state.exos.map((exo) => 
     
     <Col onClick={this.toggle} sm="6"><a href={this.goToGraph(this.state.user_id, exo.exo_id)}><ExercicePatient exo={exo} /></a></Col>

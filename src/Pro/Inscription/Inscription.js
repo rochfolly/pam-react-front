@@ -35,7 +35,7 @@ class Inscription extends Component {
      }
      
      signup(newDoctor).then(res => {
-       window.location = '/profil'
+       window.location = '/profil/' + res.type.id
      })
     }
     else{alert('Mot de passe invalide')}

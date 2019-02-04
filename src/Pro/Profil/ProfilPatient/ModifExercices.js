@@ -9,6 +9,8 @@ import { deletePrescription, updatePrescription } from '../../../utils/API'
 class ModifExercices extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { id: '', new_id:'', firstname:'', name:'', exos:[], ex1:false, ex2:false, ex3:false, ex1level:1, ex2level:1, ex3level:1}
     this.state = { id: '', user_id:'', firstname:'', exos:[], others:[], new:'', 
                    ex1:false, ex2:false, ex3:false};
 
