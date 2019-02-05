@@ -106,6 +106,10 @@ export const getOtherExos = user_id => {
     return axios.get(backurl + '/doctor/user/'+user_id+'/exercices/other' )
 }
 
+export const checkOther = user_id => {
+    return axios.get(backurl + '/doctor/user/'+user_id+'/exercices/checkOther' )
+}
+
 //Afficher les statitiques par exercice du patient
 export const getStats = user_id => {
     return axios.get(backurl + '/user/' + user_id + '/stats' )
@@ -132,9 +136,13 @@ export function deletePrescription (exo_id, user_id) {
     return axios.delete(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id )
 }
 
-export function updatePrescription (exo_id, user_id) {
-    return axios.post(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id )
+export function updatePrescription (user_id, prescriptions) {
+    return axios.post(backurl+ '/user/'+ user_id +'/prescription/update', {data: prescriptions} )
 } 
+
+export function addPrescription (user_id, prescriptions) {
+    return axios.post(backurl+ '/user/'+ user_id +'/prescription/add', {data: prescriptions} )
+}
 
 export function saveScore (score) {
    // return axios.post(backurl+ '/user/'+ user_id + '/' + exo_id +'/result/' + score)

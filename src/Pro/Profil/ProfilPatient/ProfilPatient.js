@@ -23,7 +23,7 @@ class ProfilPatient extends Component {
         firstname: res.data.firstname,
         name: res.data.name,
         email: res.data.email
-      })
+      }, () => sessionStorage.setItem("actualUser",this.state.user_id))
     })
 
     fetchExos(user_id).then(res => {

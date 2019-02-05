@@ -35,7 +35,7 @@ class App extends Component {
           <Route exact path='/profil/:id/patient/:user_id' component={ProfilPatient} />
           <Route exact path='/profil/:id/patient/:user_id/exercices' component={ModifExercices} />
           <Route exact path='/profil/:id/patient/global/:user_id' component={StatGlobales} />
-          <Route exact path='/profil/:id/patient/:user_id/:exo_id' component={SingleScoreJeu} />
+          <Route exact path='/profil/:id/patient/:user_id/graph/:exo_id' component={SingleScoreJeu} />
           <Route exact path='/user/:user_id' component={ProfilUser} />
           <Route exact path='/user/:user_id/scores' component={Scores} />
           <Route exact path='/user/:user_id/statistiques' component={Statistiques} />
