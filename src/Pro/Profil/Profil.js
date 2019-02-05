@@ -31,6 +31,7 @@ class ProfilPro extends Component {
   }
  
   componentDidMount () {
+   
     const token = sessionStorage.doctortoken
   
     if(token){
@@ -42,7 +43,7 @@ class ProfilPro extends Component {
 
      fetchUsers(decoded.id).then(res => {
         console.log(res.data)
-        this.setState({ users: res.data })
+        this.setState({ users: res.data }, () =>  sessionStorage.setItem("actualDoctor", decoded.id))
       })
     }
     else console.log('No token')

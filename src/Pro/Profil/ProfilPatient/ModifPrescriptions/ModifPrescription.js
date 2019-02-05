@@ -4,8 +4,8 @@ import txtATrou from '../../../../Images/exo1.png';
 import bneImg from '../../../../Images/exo3.png';
 import jeuImage from '../../../../Images/exo2.png';
 import '../../../../Jeux/JeuImage.css';
-import { showUser, fetchExos } from '../../../../utils/API'
-import './Prescription.css'
+import { updatePrescription } from '../../../../utils/API'
+import '../../AjoutPatient/PremierePrescription/Prescription.css'
 
 const prescriptions = [
   {exo:'', level:'', name:'Texte à trous'}, {exo:'', level:'', name:"Jeu d'Images"}, {exo:'', level:'', name:'La Bonne Image'}
@@ -14,21 +14,27 @@ const prescriptions = [
 class ModifPrescription extends Component {
   constructor(props) {
     super(props);
-    this.state = { id: '', user_id:'', firstname:'', name:'', exos:[], ex1:false, ex2:false, ex3:false, ex1level:1, ex2level:1, ex3level:1};
-
+    console.log(this.props)
+    this.state = { id: '', user_id:'', firstname:'', name:'', exos:[], ex1:false, ex2:false, ex3:false, ex1level:null, ex2level:null, ex3level:null};
+    //this.verifyPrescription = this.verifyPrescription.bind(this)
   }
 
  componentDidMount(){
-    const { id } = this.props.match.params    
-    const { user_id } = this.props.match.params
-    this.setState({id: id, user_id: user_id})    
+    this.props.exos.forEach((exo, index) => {
+        if(exo.exo_id == 1){this.setState({ex1:true, ex1level: exo.level})}
+        else if(exo.exo_id == 2){this.setState({ex2:true, ex2level: exo.level})}
+        else if(exo.exo_id == 3){this.setState({ex3:true, ex3level: exo.level})}
+    })
+    this.setState({id: sessionStorage.actualDoctor, user_id: sessionStorage.actualUser})
     
   } 
 
-  goBackTo(){
-    const {id} = this.props.match.params
-    const link = "/profil/" + id 
-    return link
+  verifyPrescription(exo_id, array){
+    var check = false
+    array.forEach((exo, index) => {       
+        if(exo.exo_id == exo_id) check = true
+    })
+    return check
   }
 
   handleCheck_1 = event => {
@@ -68,9 +74,10 @@ class ModifPrescription extends Component {
     prescriptions[2].level = this.state.ex3level
 
     console.log(prescriptions)
-    createFirstPrescription(this.state.user_id, prescriptions).then(res => {
+    updatePrescription(this.state.user_id, prescriptions)
+   /* createFirstPrescription(this.state.user_id, prescriptions).then(res => {
       window.location = '/profil/' + this.state.id + '/patient/'+ res.data
-    })
+    })*/
 
   }
 
@@ -80,23 +87,13 @@ class ModifPrescription extends Component {
   }
 
   render() {
+    console.log(this.verifyPrescription(1,this.props.exos))
+    console.log(this.verifyPrescription(2,this.props.exos))
+    console.log(this.verifyPrescription(3,this.props.exos))        
 
-
-    return (
-      <Container>
-        <br/>
-        <Row>
-        <Col sm={{size: 10}}><h3 className="titlePAM">Prescription d'exercices</h3></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
-        </Row>
-        <br/><br/>
-        <Row>
-          <Col sm={{size:"8", offset:"2"}}>
-          <Form onSubmit={this.handleSubmit}> 
-            <hr/>
-            <FormGroup row>
-            <Input type="checkbox" name="ex1" onChange={this.handleCheck_1} />
+    const display1 = (this.verifyPrescription(1,this.props.exos)) ? 
+        <FormGroup row>
+            <Input type="checkbox" name="ex1" onChange={this.handleCheck_1} defaultChecked/>
             <Col sm={3}><img src={txtATrou} alt="jeu" className="Game-logo"/></Col>
             <Col sm={8}>
             <Row>Exercice 1 : Texte à Trous</Row>
@@ -109,40 +106,48 @@ class ModifPrescription extends Component {
             </Row>
             <br/>
             <Row>
-            <Col sm={3} className="no-padding">Niveau</Col>
-            <Col sm={2}>1<Input type="radio" name="exo1"  value={1} id="niv1" onChange={this.handleChange_1}/></Col>
-            <Col sm={2}>2<Input type="radio" name="exo1" value={2} id="niv2" onChange={this.handleChange_1}/></Col>
-            <Col sm={2}>3<Input type="radio" name="exo1" value={3} id="niv3" onChange={this.handleChange_1}/></Col>
+              <Col sm={9} className="no-padding">Niveau actuel : <b>{this.state.ex1level}</b></Col> 
+            </Row>
+            <Row>
+              <Col sm={6} className="no-padding">Nouveau Niveau</Col>
+              <Col sm={2}>1<Input type="radio" name="exo1"  value={1} id="niv1" onChange={this.handleChange_1}/></Col>
+              <Col sm={2}>2<Input type="radio" name="exo1" value={2} id="niv2" onChange={this.handleChange_1}/></Col>
+              <Col sm={2}>3<Input type="radio" name="exo1" value={3} id="niv3" onChange={this.handleChange_1}/></Col>
             </Row>
             </Col>
-            </FormGroup>
             <hr/>
-
-            <FormGroup row>
-            <Input type="checkbox" name="ex2" onChange={this.handleCheck_2}/>
-            <Col sm={3}><img src={jeuImage} alt="jeu" className="Game-logo"/></Col>
-            <Col sm={8}>
-            <Row>Exercice 2 : Jeu d'Images</Row>
-            <br/>
-            <Row>
-              <small>Le joueur doit retrouver le mot correspondant à l'image affichée. <br/>
-              Au niveau 1 il a le choix entre 5 mots très différents,
-              niveau 2 entre 5 mots plus proches
-              niveau 3 il doit retrouver seul le mot.</small>
-            </Row>
-            <br/>
-            <Row>
-            <Col sm={3} className="no-padding">Niveau</Col>
-            <Col sm={2}>1<Input type="radio" name="exo2" value={1} id="niv1" onChange={this.handleChange_2}/></Col>
-            <Col sm={2}>2<Input type="radio" name="exo2" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
-            <Col sm={2}>3<Input type="radio" name="exo2" value={3} id="niv3" onChange={this.handleChange_2}/></Col>
-            </Row>
-            </Col>
-            </FormGroup>
-            <hr/>
-
-            <FormGroup row>
-            <Input type="checkbox" name="ex3" onChange={this.handleCheck_3} />
+        </FormGroup> : null
+    
+    const display2 = (this.verifyPrescription(2,this.props.exos)) ? 
+        <FormGroup row>
+        <Input type="checkbox" name="ex2" onChange={this.handleCheck_2} defaultChecked/>
+        <Col sm={3}><img src={jeuImage} alt="jeu" className="Game-logo"/></Col>
+        <Col sm={8}>
+        <Row>Exercice 2 : Jeu d'Images</Row>
+        <br/>
+        <Row>
+        <small>Le joueur doit retrouver le mot correspondant à l'image affichée. <br/>
+        Au niveau 1 il a le choix entre 5 mots très différents,
+        niveau 2 entre 5 mots plus proches
+        niveau 3 il doit retrouver seul le mot.</small>
+        </Row>
+        <br/>
+        <Row>
+              <Col sm={9} className="no-padding">Niveau actuel : <b>{this.state.ex2level}</b></Col> 
+        </Row>
+        <Row>
+        <Col sm={6} className="no-padding">Nouveau Niveau</Col>
+        <Col sm={2}>1<Input type="radio" name="exo2" value={1} id="niv1" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>2<Input type="radio" name="exo2" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
+        <Col sm={2}>3<Input type="radio" name="exo2" value={3} id="niv3" onChange={this.handleChange_2}/></Col>
+        </Row>
+        </Col>
+        <hr/>
+        </FormGroup> : null
+    
+    const display3 = (this.verifyPrescription(3,this.props.exos)) ? 
+        <FormGroup row>
+            <Input type="checkbox" name="ex3" onChange={this.handleCheck_3} defaultChecked/>
             <Col sm={3}><img src={bneImg} alt="jeu" className="Game-logo"/></Col>
             <Col sm={8}>
             <Row>Exercice 3 : La bonne image</Row>
@@ -152,14 +157,33 @@ class ModifPrescription extends Component {
               Au niveau 1 il a le choix entre 2 photos,
               au niveau 2 entre 4 photos.</small>
             </Row>
-            <br/>
             <Row>
-            <Col sm={3} className="no-padding">Niveau</Col>
+              <Col sm={9} className="no-padding">Niveau actuel : <b>{this.state.ex3level}</b></Col> 
+            </Row>
+            <Row>
+            <Col sm={6} className="no-padding">Nouveau Niveau</Col>
             <Col sm={2}>1<Input type="radio" name="exo3" value={1} id="niv1" onChange={this.handleChange_3}/></Col>
             <Col sm={2}>2<Input type="radio" name="exo3" value={2} id="niv2" onChange={this.handleChange_3}/></Col>
             </Row>
             </Col>
-            </FormGroup>
+            <hr/>
+        </FormGroup> : null
+
+             
+
+    return (
+      <Container>
+        <hr/>
+        
+        <br/><br/>
+        <Row>
+          <Col sm={{size:"8", offset:"2"}}>
+          <Form onSubmit={this.handleSubmit}> 
+             {display1}
+           
+             {display2}           
+            
+             {display3}                        
             <hr/>
 
             <Row>
@@ -168,7 +192,7 @@ class ModifPrescription extends Component {
             </Col>
             </Row>
 
-            </Form>
+          </Form>
           </Col>
         </Row>
         <br/>
