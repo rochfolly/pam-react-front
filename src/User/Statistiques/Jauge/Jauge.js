@@ -48,6 +48,9 @@ class Jauge extends Component {
    
   render() {
 
+    const niveau = parseInt(this.props.score/this.state.maxScore) + 1
+    const restant = this.props.score % this.state.maxScore
+
     return (
       <Container>
       <br/>
@@ -58,9 +61,9 @@ class Jauge extends Component {
           </div>
           </Col>
           <Col sm="9" className="scoreJauge">
-          <p>Niveau {this.state.niv} <br/> {this.state.rest}/{this.state.maxScore} </p>
+          <p>Niveau {niveau} <br/> {restant}/{this.state.maxScore} </p>
           </Col>
-          <p>{this.props.score}</p>
+          {/* <p>{this.props.score}</p> */}
         </Row>
         {/* {myMove()} */}
       </Container>
