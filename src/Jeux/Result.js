@@ -73,7 +73,7 @@ class Result extends Component {
         }
         else if (title === "Jeu d'image") {
         //vert //rouge //orange
-        return [<h3  style={{color: this.state.reponse[i].score === 100 ? "#267326": this.state.reponse[i].score === 0 ? "#cc3300":"#EB7842"}}>{this.state.reponse[i].repU}</h3>]
+        return [<h3  style={{color: this.state.reponse[i].score === 50 ? "#267326": this.state.reponse[i].score === 0 ? "#cc3300":"#EB7842"}}>{this.state.reponse[i].repU}</h3>]
         }
         else if (title === "La bonne image") {
         return [<img height="100" width="100" alt="" style={{objectFit:"cover", boxShadow: this.state.reponse[i].score === 100 ? "2px 2px 2px 2px #267326" : "2px 2px 2px 2px #cc3300"}} src={require(`./../Images/${this.state.reponse[i].repU}`)}></img>]
@@ -169,7 +169,7 @@ class Result extends Component {
                         <td></td>
                         <td></td>
                         <td><h4 className="titlePAM">Total :</h4></td>
-                        <td><h2 className="titlePAM">{final}</h2></td>
+                        <td><h2 className="titlePAM">{final}/500</h2></td>
                     </tr>
                     </tbody>
                     </Table>

@@ -26,6 +26,7 @@ class ScoreJeu extends Component {
       <Row>
       <Col><GraphLineaire exercice={this.props.exo} /></Col>
       </Row>
+      <br/>
       </Container>
     );
   }

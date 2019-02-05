@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, 
-    FormGroup, Input, Label,
+    Form, FormGroup, Input, Label,
     Modal, ModalBody  } from 'reactstrap';
 import './TxtATrou.css'
 import game from '../Images/exo1.png'
@@ -24,7 +24,7 @@ class TxtATrou extends Component {
 
     constructor(props){
         super(props);
-        this.state = {niv:1, user_id:'', question:0, part1:'', part2:'',
+        this.state = {niv:3, user_id:'', question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
                     rep1:'', rep2:'', rep3:'', rep4:'',
                     modal: false}
@@ -45,11 +45,11 @@ class TxtATrou extends Component {
     handleKeySubmit(event) {
         if(event.key === 'Enter'){
             //alert('enter press here! ')
-            this.handleSubmit()
+            this.handleSubmit(event)
         }
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
 
         answerTab[this.state.question].part1 = this.state.reponse[this.state.question].part1
         answerTab[this.state.question].part2 = this.state.reponse[this.state.question].part2
@@ -92,6 +92,7 @@ class TxtATrou extends Component {
                 })
         }
         console.log(JSON.stringify(answerTab))
+        e.preventDefault();
     }
 
     handleChange(event) {
@@ -156,6 +157,7 @@ class TxtATrou extends Component {
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="txtATrouLogo"/></Col>
         </Row>
         <br/><br/>
+        <Form onSubmit={this.handleSubmit}>
         <div id="phrase">
             <FormGroup row>
                 <Col sm={{size: 6, offset:3}}>
@@ -196,9 +198,11 @@ class TxtATrou extends Component {
             </Row>
         </div>
         <Row>
-            <Col sm={{size: 4}}><Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button></Col>
-            <Col sm={{size: 4}}><Button onClick={this.handleSubmit} className="footerRight">Valider</Button></Col>
+            <Col sm={{size: 4}}><Button type="submit" className="footerRight">Valider</Button></Col>
         </Row>
+        </Form>
+        <Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button>
+
 
         <Modal isOpen={this.state.modal} toggle={this.toggle} backdrop="static">
           <ModalBody>

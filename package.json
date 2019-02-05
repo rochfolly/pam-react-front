@@ -11,7 +11,10 @@
     "cors": "^2.8.5",
     "express-session": "^1.15.6",
     "font-awesome": "^4.7.0",
+    "fs": "0.0.1-security",
     "jwt-decode": "^2.2.0",
+    "lodash.chunk": "^4.2.0",
+    "microsoft-cognitiveservices-speech-sdk": "^1.2.1",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.6",
     "react": "^16.5.2",
@@ -22,7 +25,10 @@
     "react-scripts": "^2.1.3",
     "react-toolbox": "^2.0.0-beta.13",
     "reactstrap": "^6.5.0",
-    "styled-components": "^4.1.3"
+    "readline-sync": "^1.4.9",
+    "request": "^2.88.0",
+    "styled-components": "^4.1.3",
+    "xmlbuilder": "^10.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
