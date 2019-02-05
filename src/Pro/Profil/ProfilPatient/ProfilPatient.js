@@ -14,6 +14,7 @@ class ProfilPatient extends Component {
     this.toggle = this.toggle.bind(this);
   }
 
+  
   componentDidMount(){
     const { user_id } = this.props.match.params
     showUser(user_id).then(res => {
@@ -44,7 +45,7 @@ class ProfilPatient extends Component {
   }
 
   goToGraph (user_id, exo_id) {
-    const link = "/profil/" +this.state.id+ "/patient/" + user_id + '/' + exo_id
+    const link = "/profil/" +this.state.id+ "/patient/" + user_id + '/graph/' + exo_id
     return link
   }
 
