@@ -61,7 +61,7 @@ class Statistiques extends Component {
           </Col>
           <Col sm="6">
             <Row>
-              <Col sm="8">
+              <Col sm="8">   
                 <h3 className="titlePAM">Jauge progression</h3>
               </Col>
               <Col sm={{size: 2}}><Button className="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>

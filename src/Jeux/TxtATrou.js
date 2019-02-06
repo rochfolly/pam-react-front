@@ -3,6 +3,7 @@ import { Container, Row, Col, Button,
     Form, FormGroup, Input, Label,
     Modal, ModalBody  } from 'reactstrap';
 import './TxtATrou.css'
+import Voice from  './Voice';
 import game from '../Images/exo1.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
@@ -19,6 +20,7 @@ var niveau = { "niv": null}
 //Niv 1 = 4 mots très différents
 //Niv 2 = 4 mots similaires
 //Niv 3 = 1 input à remplir
+
 
 class TxtATrou extends Component {
 
@@ -48,6 +50,7 @@ class TxtATrou extends Component {
             this.handleSubmit(event)
         }
     }
+    
 
     handleSubmit(e) {
 
@@ -156,7 +159,7 @@ class TxtATrou extends Component {
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="txtATrouLogo"/></Col>
         </Row>
-        <br/><br/>
+        <Row><Col style={{textAlign: "center"}}><Voice /></Col></Row><br/>
         <Form onSubmit={this.handleSubmit}>
         <div id="phrase">
             <FormGroup row>
@@ -202,7 +205,6 @@ class TxtATrou extends Component {
         </Row>
         </Form>
         <Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button>
-
 
         <Modal isOpen={this.state.modal} toggle={this.toggle} backdrop="static">
           <ModalBody>
