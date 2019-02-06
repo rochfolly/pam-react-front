@@ -52,6 +52,7 @@ class Statistiques extends Component {
         <Row>
           <Col sm="6">
             <h3 className="titlePAM">Votre évolution</h3>
+            <br/><br/><br/>
             <Row><div id="radar">{graph}</div></Row>
             <Row>
               <Col></Col>

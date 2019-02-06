@@ -17,6 +17,11 @@ button {
   border-color: #EB7842 !important;
 }
 
+button a{
+  color: white !important;
+}
+
+
 /* FOR SMALL BUTTONS ON RIGHT TOP CORNER */
 .smallButton {
   background-color: #EB7842 !important;

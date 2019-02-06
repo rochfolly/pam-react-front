@@ -16,22 +16,7 @@ class Jauge extends Component {
     console.log("state", this.state)
   }
 
-  componentDidMount(){
-  {
-    var elem = this.refs.jaugevide
-    var pos = 512;
-    var id = setInterval(frame, 0.5);
-      function frame() {
-        if (pos == 100) {
-          clearInterval(id);
-        } else {
-          pos--; 
-          elem.style.height =  pos + 'px';
-        }
-      }
-    }
-  }
-
+  
   /* Calcul de la hauteur de la jauge :
     - minimum = 0
     - maximum = 1000
@@ -42,9 +27,26 @@ class Jauge extends Component {
 
     Pour savoir quelle est la hauteur de la jaugevide :
     hauteur = (hauteur - marge_bas) - ((note - minimum) / (maximum - minimum)) * (hauteur - marge_bas - marge_haut)
-
-    donc hauteur = 400 - x/10 * 380 ( soit 210 pour une note de 5)
     */
+
+  componentDidMount(){
+  {
+    var elem = this.refs.jaugevide
+    var pos = 512;
+    var hauteur = Math.trunc(this.state.hauteur)
+    console.log(hauteur)
+    var id = setInterval(frame, 0.5);
+      function frame() {
+        if (pos === hauteur) {
+          clearInterval(id);
+        } else {
+          pos--; 
+          elem.style.height =  pos + 'px';
+        }
+      }
+    }
+  }
+
    
   render() {
 
@@ -63,12 +65,9 @@ class Jauge extends Component {
           <Col sm="9" className="scoreJauge">
           <p>Niveau {niveau} <br/> {restant}/{this.state.maxScore} </p>
           </Col>
-          {/* <p>{this.props.score}</p> */}
         </Row>
-        {/* {myMove()} */}
       </Container>
     );
   }
 }
-// style={{height:`${hauteur}px`}}
 export default Jauge;
