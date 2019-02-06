@@ -6,6 +6,7 @@ import './TxtATrou.css'
 import game from '../Images/exo1.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
+import { getLevel } from '../utils/API';
 
 var answerTab = {"niv": null,
                 "0":{part1:"",part2:"",repu:"",rept:""},
@@ -24,7 +25,7 @@ class TxtATrou extends Component {
 
     constructor(props){
         super(props);
-        this.state = {niv:3, user_id:'', question:0, part1:'', part2:'',
+        this.state = {niv:'', exo:1, user_id:'', question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
                     rep1:'', rep2:'', rep3:'', rep4:'',
                     modal: false}
@@ -111,20 +112,24 @@ class TxtATrou extends Component {
 
     componentDidMount(){
         const { user_id } = this.props.match.params
-        niveau.niv = this.state.niv
-        axios("https://pfepam.azurewebsites.net/exo1",
-                {method: 'POST', data:niveau, header: {"Content-Type": "application/json"}})
-        .then(res => {
-            console.log(res.data)
-            this.setState({reponse: res.data,
-                user_id: user_id,
-                part1: res.data[this.state.question].part1,
-                part2: res.data[this.state.question].part2,
-                rep1: res.data[this.state.question].rep1,
-                rep2: res.data[this.state.question].rep2,
-                rep3: res.data[this.state.question].rep3,
-                rep4: res.data[this.state.question].rep4})
-            })        
+        getLevel(user_id, this.state.exo).then(response => {
+        niveau.niv = response.data.level
+        this.setState({niv: niveau.niv}, () => {
+            axios("https://pfepam.azurewebsites.net/exo1",
+                    {method: 'POST', data:niveau, header: {"Content-Type": "application/json"}})
+            .then(res => {
+                console.log(res.data)
+                this.setState({reponse: res.data,
+                    user_id: user_id,
+                    part1: res.data[this.state.question].part1,
+                    part2: res.data[this.state.question].part2,
+                    rep1: res.data[this.state.question].rep1,
+                    rep2: res.data[this.state.question].rep2,
+                    rep3: res.data[this.state.question].rep3,
+                    rep4: res.data[this.state.question].rep4})
+                })  
+            }) 
+        })     
     }
     
     goBackTo(){

@@ -17,7 +17,7 @@ class Settings extends Component {
   }
 
   componentDidMount () {
-    const token = (sessionStorage.doctortoken) ? sessionStorage.doctortoken : sessionStorage.usertoken
+    const token = sessionStorage.usertoken
   
     if(token){
       console.log('token:', token)
@@ -41,7 +41,7 @@ class Settings extends Component {
     event.preventDefault();
     if(this.state.password == this.state.conf)
     {
-      const token = (sessionStorage.doctortoken) ? sessionStorage.doctortoken : sessionStorage.usertoken
+      const token =  sessionStorage.usertoken
       console.log(token)
       const decoded = jwt_decode(token)
 
@@ -53,8 +53,7 @@ class Settings extends Component {
         city: this.state.city
       }
     
-      if(decoded.is_doctor == 1) {updateDoctorSettings(news).then(window.location = '/profil/'+this.state.id)}
-      else {updateUserSettings(news).then(window.location = '/user/'+this.state.id)}
+      updateUserSettings(news).then(window.location = '/user/'+this.state.id)
     }
     else{alert('Veuillez confirmer votre nouveau mot de passe')}
   

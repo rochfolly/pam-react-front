@@ -5,6 +5,7 @@ import './BonneImage.css'
 import game from '../Images/exo3.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
+import { getLevel } from '../utils/API';
 
 var answerTab = {"niv": null, id:'',
                 "0":{src:"",label:""},"1":{src:"",label:""},"2":{src:"",label:""},
@@ -18,7 +19,7 @@ class BonneImage extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, niv: 2,
+        this.state = {question:0, niv: '', exo:3,
             label:'',
             src_1:'images/0.png', src_2:'images/0.png', src_3:'images/0.png', src_4:'images/0.png',
             reponse:'', answer:''}
@@ -110,26 +111,30 @@ class BonneImage extends Component {
     
     componentDidMount() {
         const {user_id} = this.props.match.params
-        niveau.niv = this.state.niv
-        axios("https://pfepam.azurewebsites.net/exo3",
-                {method: 'POST', data: niveau, header: {"Content-Type": "application/json"}})
-        .then(res => {
-            console.log(res.data)
-            if(this.state.niv === 1){
-                this.setState({ reponse: res.data,
-                    id: user_id,
-                    label: res.data[this.state.question].label,
-                    src_1: res.data[this.state.question].src_1,
-                    src_2: res.data[this.state.question].src_2})
-            } else {
-                this.setState({ reponse: res.data,
-                    label: res.data[this.state.question].label,
-                    src_1: res.data[this.state.question].src_1,
-                    src_2: res.data[this.state.question].src_2,
-                    src_3: res.data[this.state.question].src_3,
-                    src_4: res.data[this.state.question].src_4 })
-            }
-            })  
+        getLevel(user_id, this.state.exo).then(response => {
+        niveau.niv = response.data.level
+        this.setState({niv: niveau.niv}, () => {
+            axios("https://pfepam.azurewebsites.net/exo3",
+                    {method: 'POST', data: niveau, header: {"Content-Type": "application/json"}})
+            .then(res => {
+                console.log(res.data)
+                if(this.state.niv === 1){
+                    this.setState({ reponse: res.data,
+                        id: user_id,
+                        label: res.data[this.state.question].label,
+                        src_1: res.data[this.state.question].src_1,
+                        src_2: res.data[this.state.question].src_2})
+                } else {
+                    this.setState({ reponse: res.data,
+                        label: res.data[this.state.question].label,
+                        src_1: res.data[this.state.question].src_1,
+                        src_2: res.data[this.state.question].src_2,
+                        src_3: res.data[this.state.question].src_3,
+                        src_4: res.data[this.state.question].src_4 })
+                }
+                })
+            })
+        })  
     }
 
     goBackTo(){
