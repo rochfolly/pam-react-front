@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import GraphRadar from '../../../Graph/GraphRadar.js'
 import './StatGlobales.css'
-import { getGlobalStats, getStats } from '../../../utils/API'
+import { getGlobalStats, getStats, showUser } from '../../../utils/API'
 import ScoreJeu from '../../../User/Scores/ScoreJeu'
 
 
@@ -10,7 +10,7 @@ class StatGlobales extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {stats:[], labels:[], scores:[], ancient:[], lines:[], total:''}
+    this.state = {firstname:'', stats:[], labels:[], scores:[], previous:[], ancient:[], lines:[], total:''}
 
     this.chartData = {
     labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
@@ -42,15 +42,20 @@ class StatGlobales extends Component {
 
   }
 
+
   componentDidMount(){
     const { user_id } = this.props.match.params
     getGlobalStats(user_id).then(res => {
-      console.log(res.data[2].bestscores)
-      this.setState({stats:[1], labels: res.data[1].titles, scores: res.data[2].bestscores, ancient:res.data[3].oldscores}, () => console.log(this.state.stats[0]))     
+      console.log(res.data)
+      this.setState({stats:[1], labels: res.data[1].titles, scores: res.data[2].bestscores, previous:res.data[3].previouscores, ancient:res.data[4].oldscores}, () => console.log(this.state))     
     })
 
     getStats(user_id).then(res => {
       this.setState({lines: res.data}, ()=> console.log(this.state.lines))  
+     })
+
+     showUser(user_id).then(res=>{
+       this.setState({firstname: res.data.firstname})
      })
 
   } 
@@ -75,13 +80,13 @@ class StatGlobales extends Component {
     )
 
     const graph = this.state.stats.map((stat) => 
-     {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores} ancient={this.state.ancient}/></div>)})
+     {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores} previous={this.state.previous} ancient={this.state.ancient}/></div>)})
 
     return (
       <Container>
       <br/>
         <Row>
-        <Col sm={{size: 10}}><h3 className="titlePAM">Statistiques globales du patient</h3></Col>
+        <Col sm={{size: 10}}><h3 className="titlePAM">Statistiques globales de {this.state.firstname}</h3></Col>
         <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}>
           <h2><i className="fa fa-arrow-left"></i></h2>
         </a></Button></Col>

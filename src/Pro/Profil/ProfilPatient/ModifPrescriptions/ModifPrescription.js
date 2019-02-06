@@ -94,27 +94,27 @@ class ModifPrescription extends Component {
     const display1 = (this.verifyPrescription(1,this.props.exos)) ? 
         <FormGroup row>
             <Input type="checkbox" name="ex1" onChange={this.handleCheck_1} defaultChecked/>
-            <Col sm={3}><img src={txtATrou} alt="jeu" className="Game-logo"/></Col>
-            <Col sm={8}>
-            <Row>Exercice 1 : Texte à Trous</Row>
-            <br/>
-            <Row>
-              <small>Le joueur doit retrouver le mot manquant d'une phrase.<br/>
-              Au niveau 1 il a le choix entre 4 mots très différents,
-              niveau 2 entre 4 mots plus proches,
-              niveau 3 il doit retrouver seul le mot.</small>
-            </Row>
-            <br/>
-            <Row>
-              <Col sm={9} className="no-padding">Niveau actuel : <b>{this.state.ex1level}</b></Col> 
-            </Row>
-            <Row>
-              <Col sm={6} className="no-padding">Nouveau Niveau</Col>
-              <Col sm={2}>1<Input type="radio" name="exo1"  value={1} id="niv1" onChange={this.handleChange_1}/></Col>
-              <Col sm={2}>2<Input type="radio" name="exo1" value={2} id="niv2" onChange={this.handleChange_1}/></Col>
-              <Col sm={2}>3<Input type="radio" name="exo1" value={3} id="niv3" onChange={this.handleChange_1}/></Col>
-            </Row>
-            </Col>
+              <Col sm={3}><img src={txtATrou} alt="jeu" className="Game-logo"/></Col>
+              <Col sm={9}>
+              <Row>Exercice 1 : Texte à Trous</Row>
+              <br/>
+              <Row>
+                <small>Le joueur doit retrouver le mot manquant d'une phrase.<br/>
+                Au niveau 1 il a le choix entre 4 mots très différents,
+                niveau 2 entre 4 mots plus proches,
+                niveau 3 il doit retrouver seul le mot.</small>
+              </Row>
+              <br/>
+              <Row>
+                <Col sm={12} className="no-padding">Niveau actuel : <b>{this.state.ex1level}</b></Col> 
+              </Row>
+              <Row>
+                <Col sm={6} className="no-padding">Nouveau Niveau</Col>
+                <Col sm={2}>1<Input type="radio" name="exo1"  value={1} id="niv1" onChange={this.handleChange_1}/></Col>
+                <Col sm={2}>2<Input type="radio" name="exo1" value={2} id="niv2" onChange={this.handleChange_1}/></Col>
+                <Col sm={2}>3<Input type="radio" name="exo1" value={3} id="niv3" onChange={this.handleChange_1}/></Col>
+              </Row>
+              </Col>
             <hr/>
         </FormGroup> : null
     

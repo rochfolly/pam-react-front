@@ -165,6 +165,7 @@ class AjoutPrescription extends Component {
 
     return (
       <Container>
+        <h5>Exercices non prescrits</h5>
           <hr/>
         <br/>
         <Row>
