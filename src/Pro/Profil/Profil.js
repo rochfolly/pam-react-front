@@ -66,12 +66,12 @@ class ProfilPro extends Component {
   }
 
   render() {
-    const potentialUsers = this.state.users.map((user) => 
+    const potentialUsers = (this.state.users.length > 0) ? this.state.users.map((user) => 
       <li><a href={this.goToProfile(user[0])} >
        <img src={usericon} className="User-logo" alt="user" />
        <span><b>{user[1]} {user[2]}</b></span>
-      </a></li>
-     )
+      </a></li> 
+     ) : <h5>Vous n'avez pas encore de patient enregistré</h5>
 
     const users = (this.state.users) ? potentialUsers : "none"
     console.log(this.state.users)

@@ -75,6 +75,7 @@ class PremierePrescription extends Component {
 
     console.log(prescriptions)
     createFirstPrescription(this.state.new_id, prescriptions).then(res => {
+      console.log(res.data)
       window.location = '/profil/' + this.state.id 
     })
 

@@ -8,7 +8,7 @@ import { getGlobalStats, getTotalScore } from '../../../src/utils/API';
 class Statistiques extends Component {
   constructor(props){
     super(props);
-    this.state = {stats:[], labels:[], scores:[], ancient:[], total:''}
+    this.state = {stats:[], labels:[], scores:[], previous:[], ancient:[], total:''}
 
   }
 
@@ -27,7 +27,7 @@ class Statistiques extends Component {
     const { user_id } = this.props.match.params
     getGlobalStats(user_id).then(res => {
       console.log(res.data[2].bestscores)
-      this.setState({stats:[1], labels: res.data[1].titles, scores: res.data[2].bestscores, ancient:res.data[3].oldscores}, () => console.log(this.state.stats[0]))     
+      this.setState({stats:[1], labels: res.data[1].titles, scores: res.data[2].bestscores, previous:res.data[3].previouscores, ancient:res.data[4].oldscores}, () => console.log(this.state.stats[0]))     
     })
 
     getTotalScore(user_id).then(res => {
@@ -35,12 +35,13 @@ class Statistiques extends Component {
     })
   } 
 
+  
   render() {
 
     console.log(this.state.labels)
 
     const graph = this.state.stats.map((stat) => 
-     {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores} ancient={this.state.ancient}/></div>)})
+     {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores} previous={this.state.previous} ancient={this.state.ancient}/></div>)})
 
     const jauge = this.state.stats.map((total) => 
      {return (<div><Jauge score={this.state.total} /></div>)})
