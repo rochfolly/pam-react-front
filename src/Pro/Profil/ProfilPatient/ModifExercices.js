@@ -111,15 +111,16 @@ class ModifExercices extends Component {
         </Row>
         <br/>
         <Row>
-          <Col sm={6}>
+        <Col sm={{size:"8", offset:"2"}}>
           <h5>Exercices déjà prescrits</h5>
               {edit}
             <br/>
           </Col>
-          <Col sm={6}>
-           {otherstitle}
-          
+        </Row>
+        <Row>
+        <Col sm={{size:"8", offset:"2"}}>
               {others}
+              <br/>
           </Col>
         </Row>
         
