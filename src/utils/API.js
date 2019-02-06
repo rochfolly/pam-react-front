@@ -132,6 +132,10 @@ export const mailToUser = newUser => {
     return axios.post(backurl + '/user/new', {user: newUser})
 }
 
+export function getLevel (user_id, exo_id) {
+    return axios.get(backurl+ '/user/'+ user_id +'/level/' + exo_id)
+}
+
 export function deletePrescription (exo_id, user_id) {
     return axios.delete(backurl+ '/user/'+ user_id +'/prescription/'+ exo_id )
 }
@@ -147,6 +151,11 @@ export function addPrescription (user_id, prescriptions) {
 export function saveScore (score) {
    // return axios.post(backurl+ '/user/'+ user_id + '/' + exo_id +'/result/' + score)
    return axios.post(backurl+ '/user/result', {score: score})
+}
+
+export const CallTextToSpeech = phrase => {
+    console.log(phrase)
+    axios.post(backurl+ '/textts', {txt : phrase})
 }
 
 

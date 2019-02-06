@@ -6,6 +6,7 @@ import './Profil.css';
 import { fetchUsers } from '../../utils/API'
 import Settings from './Settings/Settings'
 
+
 class ProfilPro extends Component {
 
   constructor(props) {
@@ -74,7 +75,6 @@ class ProfilPro extends Component {
      ) : <h5>Vous n'avez pas encore de patient enregistré</h5>
 
     const users = (this.state.users) ? potentialUsers : "none"
-    console.log(this.state.users)
 
     return (
       <Container>

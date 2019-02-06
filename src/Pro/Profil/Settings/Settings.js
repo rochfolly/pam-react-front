@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Col, Form, FormGroup, Button, Input, Label,
     Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 import jwt_decode from 'jwt-decode'
-import { fetchUsers } from '../../../utils/API'
+import { fetchUsers, updateDoctorSettings } from '../../../utils/API'
+
 
 class Settings extends Component {
 
@@ -34,6 +35,7 @@ class Settings extends Component {
 
   }
    
+
   handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
     }
@@ -41,8 +43,22 @@ class Settings extends Component {
     
   handleSubmit = event => {
     event.preventDefault();
+    console.log('submitted')
 
-    console.log(this.state.firstname)
+    if(this.state.password == this.state.conf)
+    {
+      const news = {
+        id: this.state.id,
+        firstname: this.state.firstname,
+        name: this.state.name,
+        password: this.state.password,
+        city: this.state.city
+      }
+    
+      updateDoctorSettings(news).then(window.location = '/profil/'+this.state.id)
+    }
+    else{alert('Veuillez confirmer votre nouveau mot de passe')}
+  
   }
 
   render() {
@@ -108,7 +124,7 @@ class Settings extends Component {
                 </ModalBody>
                 <ModalFooter>
                     <FormGroup check>
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit" onClick={this.handleSubmit}>Enregistrer</Button>
                     </FormGroup>
                 </ModalFooter>
                 </Modal>

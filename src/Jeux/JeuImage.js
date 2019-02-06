@@ -4,6 +4,7 @@ import './JeuImage.css'
 import game from '../Images/exo2.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
+import { getLevel } from '../utils/API';
 
 
 var answerTab = {"niv": null,
@@ -20,7 +21,7 @@ class JeuImage extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, niv: 3,
+        this.state = {question:0, exo:2, niv: '',
             lien:'images/0.png', user_id:'',
             word1:'', word2:'', word3:'', word4:'', word5:'',
             reponse:'', answer:''}
@@ -94,23 +95,29 @@ class JeuImage extends Component {
         }
         return lvl
     }
-    
+
+
     componentDidMount() {
         const { user_id } = this.props.match.params
-        niveau.niv = this.state.niv
-        axios("https://pfepam.azurewebsites.net/exo2",
-                {method: 'POST', data: niveau, header: {"Content-Type": "application/json"}})
-        .then(res => {
-            console.log(res.data)
-            this.setState({ reponse: res.data,
-            user_id: user_id,
-            lien: res.data[this.state.question].src,
-            word1: res.data[this.state.question].word_1,
-            word2: res.data[this.state.question].word_2,
-            word3: res.data[this.state.question].word_3,
-            word4: res.data[this.state.question].word_4,
-            word5: res.data[this.state.question].word_5 })
-            })  
+        getLevel(user_id, this.state.exo).then(response => {
+        console.log(response.data)
+        niveau.niv = response.data.level
+        this.setState({niv: niveau.niv}, () => {
+            axios("https://pfepam.azurewebsites.net/exo2",
+                    {method: 'POST', data: niveau, header: {"Content-Type": "application/json"}})
+            .then(res => {
+                console.log(res.data)
+                this.setState({ reponse: res.data,
+                user_id: user_id,
+                lien: res.data[this.state.question].src,
+                word1: res.data[this.state.question].word_1,
+                word2: res.data[this.state.question].word_2,
+                word3: res.data[this.state.question].word_3,
+                word4: res.data[this.state.question].word_4,
+                word5: res.data[this.state.question].word_5 })
+                })  
+            })
+        })
     }
 
     goBackTo(){

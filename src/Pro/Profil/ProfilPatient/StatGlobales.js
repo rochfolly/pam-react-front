@@ -42,7 +42,6 @@ class StatGlobales extends Component {
 
   }
 
-
   componentDidMount(){
     const { user_id } = this.props.match.params
     getGlobalStats(user_id).then(res => {
