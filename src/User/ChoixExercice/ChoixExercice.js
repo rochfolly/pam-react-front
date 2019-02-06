@@ -30,7 +30,7 @@ class ChoixExercice extends Component {
           <img src={require(`../../Images/exo${this.props.exo.exo_id}.png`)} alt="jeu" class="GameLogo"/>
         </Col>
         <Col sm={9}>
-          <Row>{titre}</Row>
+          <Row><b>{titre}</b></Row>
           <Row>Niveau : {niveau}</Row>
           <Row>Dernière partie : 00/00/0000</Row>
           <Row>Score : X/X</Row>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, FormGroup, Input, Label} from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import './JeuImage.css'
 import game from '../Images/exo2.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
+
 
 var answerTab = {"niv": null,
                 "0":{src:"",rep:""},"1":{src:"",rep:""},"2":{src:"",rep:""},
@@ -32,13 +33,12 @@ class JeuImage extends Component {
 
     handleKeySubmit(event) {
         if(event.key === 'Enter'){
-            //alert('enter press here! ')
-            this.handleSubmit()
+            this.handleSubmit(event)
         }
     }
 
-    handleSubmit() {
-        
+    handleSubmit(e) {
+       
         if(this.state.question<9)
         {
             answerTab[this.state.question].src = this.state.reponse[this.state.question].src
@@ -61,6 +61,7 @@ class JeuImage extends Component {
         else {
             answerTab[this.state.question].src = this.state.reponse[this.state.question].src
             answerTab[this.state.question].rep = this.state.answer
+            answerTab.niv = this.state.niv
 
             const tab = JSON.stringify(answerTab)
             console.log(tab)
@@ -76,6 +77,7 @@ class JeuImage extends Component {
                 })
         }
         console.log(JSON.stringify(answerTab))
+        e.preventDefault();
     }
 
 
@@ -141,6 +143,7 @@ class JeuImage extends Component {
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="jeuImageLogo"/></Col>
         </Row>
+        <Form onSubmit={this.handleSubmit}>
         <FormGroup check>
         <Row>
             <Col sm={{size: 3, offset:3}}>
@@ -150,7 +153,7 @@ class JeuImage extends Component {
             <div style={{display: this.isLastLevel() ? "none": "block"}}>
                 <Row>
                     <Label check className="jeuSol" >
-                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange}/>{this.state.word1}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange} required={!this.isLastLevel()}/>{this.state.word1}
                     <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
@@ -179,15 +182,18 @@ class JeuImage extends Component {
             <Input onKeyPress={this.handleKeySubmit} 
                 type="text" name="answer" id="trou" 
                 value={this.state.answer} placeholder="________________" 
-                onChange={this.handleChange} style={{width: "100%"}}/>
+                onChange={this.handleChange} style={{width: "100%"}} required={this.isLastLevel()}/>
             </div>
             </Col>
         </Row>
         </FormGroup>
         <Row>
-            <Col sm={{size: 4}}><Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button></Col>
-            <Col sm={{size: 4}}><Button onClick={this.handleSubmit} className="footerRight">Valider</Button></Col>
+            <Col sm={{size: 4}}><Button type="submit" className="footerRight">Valider</Button></Col>
         </Row>
+        </Form>
+        <Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button>
+
+
         
       </Container>
     );

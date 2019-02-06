@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, 
-    FormGroup, Input, Label} from 'reactstrap';
+    Form, FormGroup, Input, Label} from 'reactstrap';
 import './BonneImage.css'
 import game from '../Images/exo3.png'
 import jwt_decode from 'jwt-decode'
@@ -18,7 +18,7 @@ class BonneImage extends Component {
 
     constructor(props){
         super(props);
-        this.state = {question:0, niv: 1,
+        this.state = {question:0, niv: 2,
             label:'',
             src_1:'images/0.png', src_2:'images/0.png', src_3:'images/0.png', src_4:'images/0.png',
             reponse:'', answer:''}
@@ -32,11 +32,11 @@ class BonneImage extends Component {
     handleKeySubmit(event) {
         if(event.key === 'Enter'){
             //alert('enter press here! ')
-            this.handleSubmit()
+            this.handleSubmit(event)
         }
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
         if(this.state.question<4)
         {
             answerTab[this.state.question].src = this.state.answer
@@ -91,6 +91,7 @@ class BonneImage extends Component {
                 })
         }
         console.log(JSON.stringify(answerTab))
+        e.preventDefault();
     }
 
     handleChange(event) {
@@ -155,19 +156,20 @@ class BonneImage extends Component {
             </Row>
             <Row>
                 <Col sm={{size: 5, offset:5}}>
-                <h5 className="sous-titre" style={{marginBottom: "0px", textAlign: "center"}}>A quel image correspond ce mot ?</h5>
+                <h5 className="sous-titre" style={{marginBottom: "0px", textAlign: "center"}}>Cliquez sur l'image correspondant au mot ci-dessous.</h5>
                 </Col>
             </Row>
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="jeuImageLogo"/></Col>
         </Row>
+        <Form onSubmit={this.handleSubmit} >
         <FormGroup check>
         <div style={{display: this.isFirstLevel() ? "none": "block"}}>
         <br/>
             <Row>
                 <Col sm="3">
                     <Label check className="jeuSol" >
-                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange} required={!this.isFirstLevel()}/>
                     <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
                     </Label>
                 </Col>
@@ -195,7 +197,7 @@ class BonneImage extends Component {
             <Row>
                 <Col sm={{size:4, offset:2}}>
                     <Label check className="jeuSol" >
-                    <Input onKeyPress={this.handleKeySubmit}  type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit}  type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange} required={this.isFirstLevel()}/>
                     <img height="250" width="250" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
                     </Label>
                 </Col>
@@ -213,10 +215,13 @@ class BonneImage extends Component {
             </Row>
         </FormGroup>
         <Row>
-            <Col sm={{size: 4}}><Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button></Col>
-            <Col sm={{size: 4}}><Button onClick={this.handleSubmit} className="footerRight">Valider</Button></Col>
+            <Col sm={{size: 4}}><Button type="submit" className="footerRight">Valider</Button></Col>
         </Row>
+        </Form>
         
+        <Button className="footerLeft"><a href={this.goBackTo()}>Quitter</a></Button>
+
+
       </Container>
     );
   }

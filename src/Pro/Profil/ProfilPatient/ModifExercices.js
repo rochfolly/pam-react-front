@@ -81,7 +81,6 @@ class ModifExercices extends Component {
 
   
   render() {
-
     
     const { user_id } = this.props.match.params
 
