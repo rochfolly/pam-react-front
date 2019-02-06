@@ -62,7 +62,7 @@ class ModifPrescription extends Component {
     this.setState({ ex3level: event.target.value }, () => console.log(this.state.ex3level))
   }
  
-  
+   
   handleSubmit = event => {
     event.preventDefault();
 
@@ -180,7 +180,7 @@ class ModifPrescription extends Component {
         
         <br/><br/>
         <Row>
-          <Col sm={{size:"8", offset:"2"}}>
+          
           <Form onSubmit={this.handleSubmit}> 
              {display1}
            
@@ -195,8 +195,7 @@ class ModifPrescription extends Component {
             </Col>
             </Row>
 
-          </Form>
-          </Col>
+          </Form> 
         </Row>
         <br/>
       </Container>
