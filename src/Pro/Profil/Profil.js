@@ -6,7 +6,6 @@ import './Profil.css';
 import { fetchUsers } from '../../utils/API'
 import Settings from './Settings/Settings'
 
-
 class ProfilPro extends Component {
 
   constructor(props) {
