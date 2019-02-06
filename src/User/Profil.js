@@ -83,11 +83,11 @@ class ProfilUser extends Component {
         />
         <br/>
         <Row>
-        <Col sm={{size:3, offset:3}}>
-          <Button><a href={this.goTo("statistiques", this.state.id)}>Accéder à votre profil global</a></Button>
+        <Col sm={{size:2, offset:4}}>
+          <Button><a href={this.goTo("statistiques", this.state.id)}>Statistiques</a></Button>
         </Col>
-        <Col sm={{size:3}}>
-          <Button><a href={this.goTo("scores", this.state.id)}>Accéder à vos scores</a></Button>
+        <Col sm={{size:2}}>
+          <Button><a href={this.goTo("scores", this.state.id)}>Progression</a></Button>
         </Col>
         </Row>
         <br/>
