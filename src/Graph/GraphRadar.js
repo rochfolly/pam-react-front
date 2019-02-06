@@ -12,14 +12,14 @@ class GraphRadar extends Component {
       labels: this.props.jeux,
       datasets: [
         {
-          label: 'Décembre',
+          label: 'Février',
           backgroundColor: 'rgba(244,205,179,0.2)',
           borderColor: 'rgb(244,205,179)',
           pointBackgroundColor: 'rgba(244,205,179,1)',
           pointBorderColor: '#f4cdb3',
           pointHoverBackgroundColor: '#f4cdb3',
           pointHoverBorderColor: 'rgba(244,205,179,1)',
-          data: this.props.ancient
+          data: this.props.scores
         },
         {
           label: 'Janvier',
@@ -29,7 +29,17 @@ class GraphRadar extends Component {
           pointBorderColor: '#eb7842',
           pointHoverBackgroundColor: '#eb7842',
           pointHoverBorderColor: 'rgba(235,120,66,1)',
-          data: this.props.scores
+          data: this.props.previous
+        },
+        {
+          label: 'Décembre',
+          backgroundColor: 'rgba(235,120,66,0.2)',
+          borderColor: 'rgba(235,120,66,1)',
+          pointBackgroundColor: 'rgba(235,120,66,1)',
+          pointBorderColor: '#eb7842',
+          pointHoverBackgroundColor: '#eb7842',
+          pointHoverBorderColor: 'rgba(235,120,66,1)',
+          data: this.props.ancient
         }
       ]
     }
