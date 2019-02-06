@@ -21,9 +21,9 @@ class ModifPrescription extends Component {
 
  componentDidMount(){
     this.props.exos.forEach((exo, index) => {
-        if(exo.exo_id == 1){this.setState({ex1:true, ex1level: exo.level})}
-        else if(exo.exo_id == 2){this.setState({ex2:true, ex2level: exo.level})}
-        else if(exo.exo_id == 3){this.setState({ex3:true, ex3level: exo.level})}
+        if(exo.exo_id === 1){this.setState({ex1:true, ex1level: exo.level})}
+        else if(exo.exo_id === 2){this.setState({ex2:true, ex2level: exo.level})}
+        else if(exo.exo_id === 3){this.setState({ex3:true, ex3level: exo.level})}
     })
     this.setState({id: sessionStorage.actualDoctor, user_id: sessionStorage.actualUser})
     
@@ -32,7 +32,7 @@ class ModifPrescription extends Component {
   verifyPrescription(exo_id, array){
     var check = false
     array.forEach((exo, index) => {       
-        if(exo.exo_id == exo_id) check = true
+        if(exo.exo_id === exo_id) check = true
     })
     return check
   }
@@ -62,6 +62,7 @@ class ModifPrescription extends Component {
     this.setState({ ex3level: event.target.value }, () => console.log(this.state.ex3level))
   }
  
+  
   handleSubmit = event => {
     event.preventDefault();
 
@@ -75,6 +76,8 @@ class ModifPrescription extends Component {
 
     console.log(prescriptions)
     updatePrescription(this.state.user_id, prescriptions)
+    window.location = '/profil/' + this.state.id + '/patient/'+ this.state.user_id
+
    /* createFirstPrescription(this.state.user_id, prescriptions).then(res => {
       window.location = '/profil/' + this.state.id + '/patient/'+ res.data
     })*/

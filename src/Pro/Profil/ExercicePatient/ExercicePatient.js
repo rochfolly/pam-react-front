@@ -7,8 +7,8 @@ class ExercicePatient extends Component {
   render() {
     const titre = (this.props.exo) ? this.props.exo.exo_name : 'Titre'
     const niveau = (this.props.exo) ? this.props.exo.level : '0'
-    const lastPlay = (this.props.exo.lastPlay != "Invalid date") ? this.props.exo.lastPlay : 'Aucune'
-    const lastScore = (this.props.exo.lastScore != null) ? this.props.exo.lastScore : 'Aucun'
+    const lastPlay = (this.props.exo.lastPlay !== "Invalid date") ? this.props.exo.lastPlay : 'Aucune'
+    const lastScore = (this.props.exo.lastScore !== null) ? this.props.exo.lastScore : 'Aucun'
 
     console.log(this.props.exo)
 

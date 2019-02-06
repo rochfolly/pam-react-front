@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Col, Form, FormGroup, Button, Input, Label,
     Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 import jwt_decode from 'jwt-decode'
-import { updateUserSettings, updateDoctorSettings } from '../../utils/API'
+import { updateUserSettings } from '../../utils/API'
 
-const changes = {name: '', firstname:'', email: '', password:'', conf:'', city:''}
+//const changes = {name: '', firstname:'', email: '', password:'', conf:'', city:''}
 
 class Settings extends Component {
 
@@ -39,11 +39,11 @@ class Settings extends Component {
     
   handleSubmit = event => {
     event.preventDefault();
-    if(this.state.password == this.state.conf)
+    if(this.state.password === this.state.conf)
     {
       const token =  sessionStorage.usertoken
       console.log(token)
-      const decoded = jwt_decode(token)
+    //   const decoded = jwt_decode(token)
 
       const news = {
         id: this.state.id,

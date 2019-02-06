@@ -72,7 +72,7 @@ class TxtATrou extends Component {
                 rep3: this.state.reponse[this.state.question+1].rep3,
                 rep4: this.state.reponse[this.state.question+1].rep4,
             }, ()=>{
-                    CallTextToSpeech(this.state.part1 +'......'+ this.state.part2)
+                    // CallTextToSpeech(this.state.part1 +'......'+ this.state.part2)
                     this.setState({question: this.state.question+1, 
                     answer: ''}, ()=>{
                         console.log(this.state.question)
@@ -130,8 +130,9 @@ class TxtATrou extends Component {
                     rep1: res.data[this.state.question].rep1,
                     rep2: res.data[this.state.question].rep2,
                     rep3: res.data[this.state.question].rep3,
-                    rep4: res.data[this.state.question].rep4}, () => {
-                    CallTextToSpeech(this.state.part1 + '......' + this.state.part2)})
+                    rep4: res.data[this.state.question].rep4}
+                    // , () => {CallTextToSpeech(this.state.part1 + '......' + this.state.part2)}
+                    )
                 })  
             }) 
         }) 
@@ -168,7 +169,7 @@ class TxtATrou extends Component {
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="txtATrouLogo"/></Col>
         </Row>
-        <Row><Col style={{textAlign: "center"}}><Voice /></Col></Row><br/>
+        <Row><Col style={{textAlign: "center"}}><Voice question={this.state.question+1}/></Col></Row><br/>
         <Form onSubmit={this.handleSubmit}>
         <div id="phrase">
             <FormGroup row>

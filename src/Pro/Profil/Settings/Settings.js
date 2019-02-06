@@ -45,7 +45,7 @@ class Settings extends Component {
     event.preventDefault();
     console.log('submitted')
 
-    if(this.state.password == this.state.conf)
+    if(this.state.password === this.state.conf)
     {
       const news = {
         id: this.state.id,

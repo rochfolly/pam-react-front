@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, FormGroup, Button, Input, Label, Form } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import './Scores.css';
 import GraphLineaire from '../../Graph/GraphLineaire.js'
 import { getSingleStats } from '../../utils/API';
@@ -13,7 +13,6 @@ class SingleScoreJeu extends Component {
   }
 
   componentDidMount(){
-    const { id } = this.props.match.params
     const { user_id } = this.props.match.params
     const { exo_id } = this.props.match.params
 

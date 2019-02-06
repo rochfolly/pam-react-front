@@ -16,17 +16,11 @@ class AjoutPrescription extends Component {
     super(props);
     console.log(this.props)
     this.state = { id: '', user_id:'', firstname:'', name:'', exos:[], ex1:false, ex2:false, ex3:false, ex1level:1, ex2level:1, ex3level:1};
-    //this.verifyPrescription = this.verifyPrescription.bind(this)
   }
 
  componentDidMount(){
      console.log(sessionStorage.actualUser)
-    /*this.props.exos.forEach((exo, index) => {
-        console.log(exo)
-        if(exo.exo_id == 1){this.setState({ex1:false, ex1level: exo.level})}
-        else if(exo.exo_id == 2){this.setState({ex2:false, ex2level: exo.level})}
-        else if(exo.exo_id == 3){this.setState({ex3:false, ex3level: exo.level})}
-    })*/
+    
     this.setState({id: sessionStorage.actualDoctor, user_id: sessionStorage.actualUser})
     
     
@@ -35,7 +29,7 @@ class AjoutPrescription extends Component {
   verifyPrescription(exo_id, array){
     var check = true
     array.forEach((exo, index) => {       
-        if(exo.exo_id == exo_id) check = false
+        if(exo.exo_id === exo_id) check = false
     })
     return check
   }

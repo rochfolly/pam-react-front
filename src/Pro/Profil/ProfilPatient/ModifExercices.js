@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Row, Form, Col, Button, Input, FormGroup } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import './ModifExercices.css';
-//import ChoixExercice from '.././AjoutPatient/ChoixExercice/ChoixExercice'
+import ChoixExercice from '.././AjoutPatient/ChoixExercice/ChoixExercice'
 import { checkOther, fetchExos, getOtherExos } from '../../../utils/API'
-//import { deletePrescription, updatePrescription } from '../../../utils/API'
+import { deletePrescription, updatePrescription } from '../../../utils/API'
 import ModifPrescription from './ModifPrescriptions/ModifPrescription';
 import AjoutPrescription from './ModifPrescriptions/AjoutPrescription';
 
@@ -111,7 +111,7 @@ class ModifExercices extends Component {
         </Row>
         <br/>
         <Row>
-        <Col sm={{size:"8", offset:"2"}}>
+        <Col sm={{size:"10", offset:"1"}}>
           <h5>Exercices déjà prescrits</h5>
               {edit}
             <br/>

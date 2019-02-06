@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import './Scores.css';
-import game from '../../Images/dice.png';
 import GraphLineaire from '../../Graph/GraphLineaire.js'
 
 class ScoreJeu extends Component {
