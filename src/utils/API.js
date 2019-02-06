@@ -153,6 +153,11 @@ export function saveScore (score) {
    return axios.post(backurl+ '/user/result', {score: score})
 }
 
+export const CallTextToSpeech = phrase => {
+    console.log(phrase)
+    axios.post(backurl+ '/textts', {txt : phrase})
+}
+
 
 export const test = working => {
     return axios.get(backurl + '/user/signup', {working})

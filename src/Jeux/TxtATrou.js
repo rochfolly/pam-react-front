@@ -6,7 +6,7 @@ import './TxtATrou.css'
 import game from '../Images/exo1.png'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
-import { getLevel } from '../utils/API';
+import { getLevel, CallTextToSpeech } from '../utils/API';
 
 var answerTab = {"niv": null,
                 "0":{part1:"",part2:"",repu:"",rept:""},
@@ -69,6 +69,7 @@ class TxtATrou extends Component {
                 rep3: this.state.reponse[this.state.question+1].rep3,
                 rep4: this.state.reponse[this.state.question+1].rep4,
             }, ()=>{
+                    CallTextToSpeech(this.state.part1 +'......'+ this.state.part2)
                     this.setState({question: this.state.question+1, 
                     answer: ''}, ()=>{
                         console.log(this.state.question)
@@ -126,10 +127,13 @@ class TxtATrou extends Component {
                     rep1: res.data[this.state.question].rep1,
                     rep2: res.data[this.state.question].rep2,
                     rep3: res.data[this.state.question].rep3,
-                    rep4: res.data[this.state.question].rep4})
+                    rep4: res.data[this.state.question].rep4}, () => {
+                    CallTextToSpeech(this.state.part1 + '......' + this.state.part2)})
                 })  
             }) 
-        })     
+        }) 
+        
+        
     }
     
     goBackTo(){
