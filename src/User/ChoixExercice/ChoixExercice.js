@@ -17,9 +17,12 @@ class ChoixExercice extends Component {
     
   }
 
+
   render() {
     const titre = (this.props.exo) ? this.props.exo.exo_name : 'Titre'
     const niveau = (this.props.exo) ? this.props.exo.level : '0'
+    const lastPlay = (this.props.exo) ? this.props.exo.lastPlay : '0'
+    const lastScore = (this.props.exo) ? this.props.exo.lastScore : '0'
     console.log(this.props.exo)
 
     return (
@@ -32,8 +35,8 @@ class ChoixExercice extends Component {
         <Col sm={9}>
           <Row><b>{titre}</b></Row>
           <Row>Niveau : {niveau}</Row>
-          <Row>Dernière partie : 00/00/0000</Row>
-          <Row>Score : X/X</Row>
+          <Row>Dernière partie : {lastPlay}</Row>
+          <Row>Dernier score : {lastScore} </Row>
         </Col>
       </Row>
       </a>

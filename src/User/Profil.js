@@ -28,11 +28,11 @@ class ProfilUser extends Component {
         console.log('decoded:', decoded)
   
        showUser(user_id).then(res => {
-          console.log(res.data)
           this.setState({id: user_id, firstname: res.data.firstname, name: res.data.name, email: res.data.email})
         })
 
         fetchExos(user_id).then(res => {
+          console.log(res.data)
           this.setState({exos: res.data}, () => console.log(this.state))
         })
       }
