@@ -169,7 +169,7 @@ class BonneImage extends Component {
             <Row>
                 <Col sm="3">
                     <Label check className="jeuSol" >
-                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange} required={!this.isFirstLevel()}/>
                     <img height="200" width="200" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
                     </Label>
                 </Col>
@@ -197,7 +197,7 @@ class BonneImage extends Component {
             <Row>
                 <Col sm={{size:4, offset:2}}>
                     <Label check className="jeuSol" >
-                    <Input onKeyPress={this.handleKeySubmit}  type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange}/>
+                    <Input onKeyPress={this.handleKeySubmit}  type="radio" className="radio-btn" checked={this.state.answer === this.state.src_1} value={this.state.src_1} onChange={this.handleChange} required={this.isFirstLevel()}/>
                     <img height="250" width="250" alt="" src={require(`./../Images/${this.state.src_1}`)} className="imgExo"></img>
                     </Label>
                 </Col>

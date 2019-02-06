@@ -153,7 +153,7 @@ class JeuImage extends Component {
             <div style={{display: this.isLastLevel() ? "none": "block"}}>
                 <Row>
                     <Label check className="jeuSol" >
-                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange}/>{this.state.word1}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.word1} value={this.state.word1} onChange={this.handleChange} required={!this.isLastLevel()}/>{this.state.word1}
                     <span className="checkmark"></span></Label>
                 </Row>
                 <Row>
@@ -182,7 +182,7 @@ class JeuImage extends Component {
             <Input onKeyPress={this.handleKeySubmit} 
                 type="text" name="answer" id="trou" 
                 value={this.state.answer} placeholder="________________" 
-                onChange={this.handleChange} style={{width: "100%"}} required/>
+                onChange={this.handleChange} style={{width: "100%"}} required={this.isLastLevel()}/>
             </div>
             </Col>
         </Row>

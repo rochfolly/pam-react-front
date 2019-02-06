@@ -165,7 +165,7 @@ class TxtATrou extends Component {
                 <Input onKeyPress={this.handleKeySubmit}
                 type="text" name="answer" id="trou" 
                 value={this.state.answer} placeholder="________________" 
-                onChange={this.handleChange} disabled={!this.isLastLevel()}/>
+                onChange={this.handleChange} disabled={!this.isLastLevel()} required={!this.isLastLevel()}/>
                 {this.state.part2}</h2>
                 </Col>
             </FormGroup>
@@ -175,7 +175,7 @@ class TxtATrou extends Component {
             <Row>
                 <Col sm={{size:3, offset:4}}>
                     <Label check className="jeuSol" >
-                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.rep1} value={this.state.rep1} onChange={this.handleChange}/>{this.state.rep1}
+                    <Input onKeyPress={this.handleKeySubmit} type="radio" className="radio-btn" checked={this.state.answer === this.state.rep1} value={this.state.rep1} onChange={this.handleChange} required={this.isLastLevel()}/>{this.state.rep1}
                     <span className="checkmark"></span></Label>
                 </Col>
                 <Col sm={{size:3}}>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, FormGroup, Button, Input, Label, Form } from 'reactstrap';
-import './AjoutPatient.css';
 // import ChoixExercice from './ChoixExercice/ChoixExercice'
 // import jwt_decode from 'jwt-decode'
 import { createUser } from '../../../utils/API';

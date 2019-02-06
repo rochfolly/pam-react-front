@@ -81,55 +81,6 @@ class ModifExercices extends Component {
 
   
   render() {
-//     const text = "new"
-
-//     const edit = this.state.exos.map((exo) => 
-//     <div>
-//       <Row>
-//     <Input type="checkbox" defaultChecked/>
-//     <Col sm={3}><img src={require(`../../../Images/exo${exo.exo_id}.png`)} alt="jeu" className="Game-logo"/></Col>
-//     <Col sm={8}>
-//       <Row><b>Exercice {exo.exo_id} : {exo.exo_name}</b></Row>
-//       <br/>
-//       <Row><small>Description à sortir de la bdd</small></Row>
-//       <br/>
-//       <Row>
-//         <Col sm={3} className="no-padding">Niveau</Col>
-//         <Col sm={2}>1<Input type="radio" name={exo.exo_id} value={1} id="niv1" onChange={this.handleChange_2}/></Col>
-//         <Col sm={2}>2<Input type="radio" name={exo.exo_id} value={2} id="niv2" onChange={this.handleChange_2}/></Col>
-//         <Col sm={2}>3<Input type="radio" name={exo.exo_id} value={3} id="niv3" onChange={this.handleChange_2}/></Col>
-//       </Row>
-//       <br/>
-//     </Col>
-//     </Row>
-//     <hr/>
-//     </div>
-//     )
-
-//     const others = this.state.others.map((exo) => 
-//     <div>
-//     <Row>
-//     <Input type="checkbox" value={true} name={exo.label} onChange={this.handleChange}/>
-//     <Col sm={3}><img src={require(`../../../Images/exo${exo.exo_id}.png`)} alt="jeu" className="Game-logo"/></Col>
-//     <Col sm={8}>
-//       <Row><b>Exercice {exo.exo_id} : {exo.exo_name}</b></Row>
-//       <br/>
-//       <Row><small>Description à sortir de la bdd</small></Row>
-//       <br/>
-//       <Row>
-//         <Col sm={3} className="no-padding">Niveau</Col>
-//         <Col sm={2}>1<Input type="radio" name={exo.exo_id} value={1} id="niv1" onChange={this.handleChange_}/></Col>
-//         <Col sm={2}>2<Input type="radio" name={exo.exo_id} value={2} id="niv2" onChange={this.handleChange_2}/></Col>
-//         <Col sm={2}>3<Input type="radio" name={exo.exo_id} value={3} id="niv3" onChange={this.handleChange_2}/></Col>
-//       </Row>
-//       <br/>
-//     </Col>
-//     <br/>
-//     </Row>
-//     <hr/> 
-//     </div> 
-//     )
-
     
     const { user_id } = this.props.match.params
 
