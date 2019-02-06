@@ -130,13 +130,16 @@ class TxtATrou extends Component {
                     rep1: res.data[this.state.question].rep1,
                     rep2: res.data[this.state.question].rep2,
                     rep3: res.data[this.state.question].rep3,
-                    rep4: res.data[this.state.question].rep4}
-                    // , () => {CallTextToSpeech(this.state.part1 + '......' + this.state.part2)}
-                    )
+                    rep4: res.data[this.state.question].rep4}, () => {
                 })  
+                for(var i=1; i<6; i++){
+                    CallTextToSpeech(res.data[i-1].part1 + '......' + res.data[i-1].part2, i)
+                }
             }) 
         }) 
         
+
+      })   
         
     }
     
