@@ -71,6 +71,7 @@ class TxtATrou extends Component {
                 rep2: this.state.reponse[this.state.question+1].rep2,
                 rep3: this.state.reponse[this.state.question+1].rep3,
                 rep4: this.state.reponse[this.state.question+1].rep4,
+                audio_path: `https://csbc76a4c973141x47e5x844.blob.core.windows.net/audio/sample${this.state.question+1}.wav`
             }, ()=>{
                     //CallTextToSpeech(this.state.part1 +'......'+ this.state.part2)
                     this.setState({question: this.state.question+1, 
