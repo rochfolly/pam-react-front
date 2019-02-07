@@ -35,17 +35,9 @@ class SingleScoreJeu extends Component {
 
   render() {
 
-    const displayed = this.state.exo.map((exo) => 
+    const displayed = ( this.state.exo[1]) ? this.state.exo.map((exo) => 
      {return (
-     <Container>
-       <br/>
-        <Row>
-        <Col sm={{size: 10}}><h3 className="titlePAM">Statistiques de {exo.title}</h3></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
-        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
-        </Row>
-        <br/>
-      <Row>
+       <Container>
         <Col sm={4}>
           <br/><br/>
           <Row><h4>Parties jouées : <span className="sous-titre">{exo.plays}</span></h4></Row><br/>
@@ -53,16 +45,29 @@ class SingleScoreJeu extends Component {
           <Row><h4>Dernière partie :<br/> <span className="sous-titre">{exo.lastPlay}</span></h4></Row><br/>
           <Row><h4>Score : <span className="sous-titre">{exo.lastScore}</span></h4></Row><br/>
         </Col>
+        <Col sm={{size: 10}}><h3 className="titlePAM">Statistiques de {exo.title}</h3></Col>
         <Col sm={8}>
           <GraphLineaire exercice={exo} />
         </Col>
-      </Row>
-    </Container>)})
+        </Container>
+    )}) : <h4>Aucune partie enregistrée pour ce jeu</h4>
 
     console.log(this.state)
 
 
-    return (<div>{displayed}</div>);
+    return (
+      <Container>
+      <br/>
+       <Row>
+       
+       <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
+       <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
+       </Row>
+       <br/>
+      <Row>
+        {displayed}
+       </Row>
+      </Container>);
   }
 }
 

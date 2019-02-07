@@ -30,10 +30,11 @@ class Scores extends Component {
 
   }
 
+
   render() {
     const displayed = this.state.stats.map((exercice) => 
       <Col sm="6"><ScoreJeu exo={exercice}/></Col>
-    )
+    ) 
 
     return (
       <Container>
