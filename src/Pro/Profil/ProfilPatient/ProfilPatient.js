@@ -92,16 +92,17 @@ class ProfilPatient extends Component {
         </Row>
         <br/>
         <Row>
-
+        <Col sm={{size:1}}></Col>
         <Col sm={{size:4}}>
           <Button><a href={this.goToModif()}>Modifier l'accès aux exercices</a></Button>
         </Col>
         <Col sm={{size:4}}>
           <Button><a href={this.goToStats()}>Voir les statistiques globales</a></Button>
         </Col>
-        <Col sm={{size:4}}>
+        <Col sm={{size:3}}>
           <Button onClick={this.deletePatient}>Supprimer ce patient</Button>
         </Col>
+        <Col sm={{size:1}}></Col>
         </Row>
         <br/>
         <Row>
