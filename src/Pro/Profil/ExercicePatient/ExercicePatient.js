@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, FormGroup } from 'reactstrap';
 import './ExercicePatient.css';
 
+
 class ExercicePatient extends Component {
 
   render() {
