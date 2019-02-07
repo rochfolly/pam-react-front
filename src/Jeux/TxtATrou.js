@@ -30,7 +30,7 @@ class TxtATrou extends Component {
         this.state = {niv:'', exo:1, user_id:'', question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
                     rep1:'', rep2:'', rep3:'', rep4:'',
-                    modal: true, audio_path:''}
+                    modal: false}
         
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleKeySubmit = this.handleKeySubmit.bind(this)
@@ -71,9 +71,8 @@ class TxtATrou extends Component {
                 rep2: this.state.reponse[this.state.question+1].rep2,
                 rep3: this.state.reponse[this.state.question+1].rep3,
                 rep4: this.state.reponse[this.state.question+1].rep4,
-                audio_path: `https://csbc76a4c973141x47e5x844.blob.core.windows.net/audio/sample${this.state.question+1}.wav`
             }, ()=>{
-                    // CallTextToSpeech(this.state.part1 +'......'+ this.state.part2)
+                    CallTextToSpeech(this.state.part1 +'......'+ this.state.part2)
                     this.setState({question: this.state.question+1, 
                     answer: ''}, ()=>{
                         console.log(this.state.question)
@@ -131,15 +130,17 @@ class TxtATrou extends Component {
                     rep1: res.data[this.state.question].rep1,
                     rep2: res.data[this.state.question].rep2,
                     rep3: res.data[this.state.question].rep3,
-                    rep4: res.data[this.state.question].rep4,
-                    audio_path: `https://csbc76a4c973141x47e5x844.blob.core.windows.net/audio/sample${this.state.question}.wav`,
-                    modal: false}, () => {
-                    })  
+                    rep4: res.data[this.state.question].rep4}, () => {
+                })  
             }) 
         }) 
         
+        for(var i=1; i<6; i++){
+            CallTextToSpeech(this.state.part1 + '......' + this.state.part2, i)
+        }
 
       })   
+        
     }
     
     goBackTo(){
@@ -155,7 +156,6 @@ class TxtATrou extends Component {
   render() {
       
     return (
-        
       <Container>
       <br/>
         <Row>
@@ -172,7 +172,7 @@ class TxtATrou extends Component {
         </Col>
         <Col sm={{size: 1, offset:1}}><img src={game} alt="jeu" className="txtATrouLogo"/></Col>
         </Row>
-        <Row><Col style={{textAlign: "center"}}><Voice audio={this.state.audio_path}/></Col></Row><br/>
+        <Row><Col style={{textAlign: "center"}}><Voice /></Col></Row><br/>
         <Form onSubmit={this.handleSubmit}>
         <div id="phrase">
             <FormGroup row>
@@ -221,7 +221,7 @@ class TxtATrou extends Component {
 
         <Modal isOpen={this.state.modal} toggle={this.toggle} backdrop="static">
           <ModalBody>
-            {this.state.question === 0? <span>Nous chargeons vos questions ! </span> : <span>Nous calculons votre score ! </span>}Veuillez attendre quelques instants...
+            Nous calculons votre score ! Veuillez attendre quelques instants...
           </ModalBody>
         </Modal>
 

@@ -37,15 +37,7 @@ class ChoixExercice extends Component {
 
 
   render() {
-    const level1 = (this.props.exo.level >= 1) ? 
-    <Input type="checkbox" value={1} id="niv1" onChange={this.handleChange} defaultChecked/> : <Input type="checkbox" value={1} id="niv1" onChange={this.handleChange}/>
     
-    const level2 = (this.props.exo.level >= 2) ? 
-    <Input type="checkbox" value={2} id="niv2" onChange={this.handleChange} defaultChecked/> : <Input type="checkbox" value={2} id="niv2" onChange={this.handleChange}/>
-    
-    const level3 = (this.props.exo.level === 3) ? 
-    <Input type="checkbox" value={3} id="niv3" onChange={this.handleChange} defaultChecked/> : <Input type="checkbox" value={3} id="niv3" onChange={this.handleChange}/>
-
     return (
       <Container>
       <FormGroup row>

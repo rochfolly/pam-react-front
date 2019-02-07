@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import './ModifExercices.css';
-import ChoixExercice from '.././AjoutPatient/ChoixExercice/ChoixExercice'
 import { checkOther, fetchExos, getOtherExos } from '../../../utils/API'
-import { deletePrescription, updatePrescription } from '../../../utils/API'
 import ModifPrescription from './ModifPrescriptions/ModifPrescription';
 import AjoutPrescription from './ModifPrescriptions/AjoutPrescription';
 
@@ -88,8 +86,6 @@ class ModifExercices extends Component {
     
     const edit = this.state.root.map((cas) => 
     {return(<ModifPrescription exos={this.state.exos}/>)}) 
-
-    const otherstitle = (this.verifyOther(user_id)) ? <h5>Exercices non prescrits</h5> : ''
 
     const others = (this.verifyOther(user_id)) ? this.state.root.map((cas) => 
     {return(<AjoutPrescription exos={this.state.others}/>)}) : ''
