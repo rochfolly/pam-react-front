@@ -18,7 +18,7 @@ class Voice extends Component {
                 style={{borderRadius:"100px"}}><h3><i className="fa fa-volume-up"></i></h3></Button>
 
         <Sound
-        url={require(`../samples/sample${this.props.question}.wav`)}
+        url={this.props.audio}
         playStatus={this.state.playStatus}
         autoLoad
         volume={100}
