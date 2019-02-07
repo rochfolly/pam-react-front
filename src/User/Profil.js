@@ -6,7 +6,6 @@ import Settings from './Settings/Settings'
 import jwt_decode from 'jwt-decode'
 import { showUser, fetchExos } from '../utils/API'
 
-
 class ProfilUser extends Component {
 
   constructor(props) {
@@ -51,6 +50,7 @@ class ProfilUser extends Component {
     });
   }
 
+
   showModal() {
     this.setState({
       isModalOpen: true
@@ -62,12 +62,12 @@ class ProfilUser extends Component {
     window.location = '/'
   }
 
+ 
   render() {
 
     const exercices = this.state.exos.map((exo) => 
     <Col sm="6"><ChoixExercice exo={exo} /></Col>
     )
-
     
     return (
       <Container>

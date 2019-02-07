@@ -18,7 +18,7 @@ class ScoreJeu extends Component {
       <Row>Parties jouées : {this.props.exo.plays}</Row>
       <Row>Meilleur score : {this.props.exo.bestScore}</Row>
       <Row>Dernière partie : {this.props.exo.lastPlay}</Row>
-      <Row>Score : {this.props.exo.lastScore}</Row>
+      <Row>Score : {this.props.exo.lastScore}/500</Row>
       </Col>
       </Row>
       <br/>

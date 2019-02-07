@@ -18,7 +18,7 @@ class SingleScoreJeu extends Component {
     const { exo_id } = this.props.match.params
 
     getSingleStats(user_id, exo_id).then(res => {
-        this.setState({exo: res.data})
+        this.setState({exo: res.data}, () => {console.log(this.state.exo)})
     })
   }
 
@@ -34,6 +34,7 @@ class SingleScoreJeu extends Component {
     window.location = '/'
   }
 
+  
   render() {
 
     const displayed = this.state.exo.map((exo) => 
@@ -53,18 +54,14 @@ class SingleScoreJeu extends Component {
         </Container>
     )}) 
 
-    console.log(this.state)
-
 
     return (
       <Container>
       <br/>
-       <Row>
-       
+       <Row>   
        <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
     
-       <br/>
 
         {displayed}
        </Row>

@@ -61,6 +61,9 @@ export const isAuth = _ => {
     return (sessionStorage.getItem('usertoken') !== null)
 }
 
+export function deleteUser (doctor_id, user_id) {
+    return axios.delete(backurl+ '/doctor/' + doctor_id + '/user/'+ user_id )
+}
 
 export const fetchUsers = doctor_id  => {
     return axios.get(backurl + '/doctor/users/' + doctor_id)

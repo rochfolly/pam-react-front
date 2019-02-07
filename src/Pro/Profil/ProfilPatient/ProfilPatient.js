@@ -4,7 +4,7 @@ import './ProfilPatient.css';
 import ExercicePatient from '../ExercicePatient/ExercicePatient'
 import GraphLineaire from '../../../Graph/GraphLineaire'
 //import jwt_decode from 'jwt-decode'
-import { showUser, fetchExos } from '../../../utils/API'
+import { showUser, fetchExos, deleteUser } from '../../../utils/API'
 
 class ProfilPatient extends Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class ProfilPatient extends Component {
     this.state = { modal: false, id: '', user_id:'', firstname:'', name:'', email:'', exos:[]};
 
     this.toggle = this.toggle.bind(this);
+    this.deletePatient = this.deletePatient.bind(this);
   }
 
   
@@ -31,6 +32,12 @@ class ProfilPatient extends Component {
       this.setState({ exos: res.data })
     })
     
+  }
+
+  deletePatient(){
+
+    deleteUser(this.state.id, this.state.user_id)
+    window.location = "/profil/" + this.state.id 
   }
 
   toggle() {
@@ -85,12 +92,15 @@ class ProfilPatient extends Component {
         </Row>
         <br/>
         <Row>
-        <Col sm="2"></Col>
+
         <Col sm={{size:4}}>
           <Button><a href={this.goToModif()}>Modifier l'accès aux exercices</a></Button>
         </Col>
         <Col sm={{size:4}}>
           <Button><a href={this.goToStats()}>Voir les statistiques globales</a></Button>
+        </Col>
+        <Col sm={{size:4}}>
+          <Button onClick={this.deletePatient}>Supprimer ce patient</Button>
         </Col>
         </Row>
         <br/>
