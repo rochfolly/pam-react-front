@@ -107,18 +107,16 @@ class ModifExercices extends Component {
         <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
         </Row>
         <br/>
-        <Row>
-        </Row>
         <br/>
         <Row>
-        <Col sm={{size:"10", offset:"1"}}>
-          <h5>Exercices déjà prescrits</h5>
-              {edit}
-            <br/>
+          <Col sm={{size:"8", offset:"2"}}>
+            <h5>Exercices déjà prescrits</h5>
+                {edit}
+              <br/>
           </Col>
         </Row>
         <Row>
-        <Col sm={{size:"8", offset:"2"}}>
+          <Col sm={{size:"8", offset:"2"}}>
               {others}
               <br/>
           </Col>
