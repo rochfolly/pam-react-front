@@ -12,6 +12,7 @@ class SingleScoreJeu extends Component {
 
   }
 
+
   componentDidMount(){
     const { user_id } = this.props.match.params
     const { exo_id } = this.props.match.params
@@ -35,7 +36,7 @@ class SingleScoreJeu extends Component {
 
   render() {
 
-    const displayed = ( this.state.exo[1]) ? this.state.exo.map((exo) => 
+    const displayed = this.state.exo.map((exo) => 
      {return (
        <Container>
         <Col sm={4}>
@@ -50,7 +51,7 @@ class SingleScoreJeu extends Component {
           <GraphLineaire exercice={exo} />
         </Col>
         </Container>
-    )}) : <h4>Aucune partie enregistrée pour ce jeu</h4>
+    )}) 
 
     console.log(this.state)
 
@@ -62,9 +63,9 @@ class SingleScoreJeu extends Component {
        
        <Col sm={{size: 1}}><Button className ="smallButton"><a href={this.goBackTo()}><h2><i className="fa fa-arrow-left"></i></h2></a></Button></Col>
        <Col sm={{size: 1}}><Button className ="smallButton" onClick={this.logout}><h2><i className="fa fa-power-off"></i></h2></Button></Col>
-       </Row>
+    
        <br/>
-      <Row>
+
         {displayed}
        </Row>
       </Container>);
