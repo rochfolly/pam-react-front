@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import GraphRadar from '../../../Graph/GraphRadar.js'
 import './StatGlobales.css'
 import { getGlobalStats, getStats, showUser } from '../../../utils/API'
-import ScoreJeu from '../../../User/Scores/ScoreJeu'
+// import ScoreJeu from '../../../User/Scores/ScoreJeu'
 
 
 class StatGlobales extends Component {
@@ -74,9 +74,9 @@ class StatGlobales extends Component {
   
   render() {
 
-    const displayed = this.state.lines.map((exercice) => 
-      <Col sm="6"><ScoreJeu exo={exercice}/></Col>
-    )
+    // const displayed = this.state.lines.map((exercice) => 
+    //   <Col sm="6"><ScoreJeu exo={exercice}/></Col>
+    // )
 
     const graph = this.state.stats.map((stat) => 
      {return (<div><GraphRadar jeux={this.state.labels} scores={this.state.scores} previous={this.state.previous} ancient={this.state.ancient}/></div>)})

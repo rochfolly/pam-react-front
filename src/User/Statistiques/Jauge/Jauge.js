@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Container, Row, Col} from 'reactstrap';
 import './Jauge.css'
 

@@ -16,17 +16,11 @@ class AjoutPrescription extends Component {
     super(props);
     console.log(this.props)
     this.state = { id: '', user_id:'', firstname:'', name:'', exos:[], ex1:false, ex2:false, ex3:false, ex1level:1, ex2level:1, ex3level:1};
-    //this.verifyPrescription = this.verifyPrescription.bind(this)
   }
 
  componentDidMount(){
      console.log(sessionStorage.actualUser)
-    /*this.props.exos.forEach((exo, index) => {
-        console.log(exo)
-        if(exo.exo_id == 1){this.setState({ex1:false, ex1level: exo.level})}
-        else if(exo.exo_id == 2){this.setState({ex2:false, ex2level: exo.level})}
-        else if(exo.exo_id == 3){this.setState({ex3:false, ex3level: exo.level})}
-    })*/
+    
     this.setState({id: sessionStorage.actualDoctor, user_id: sessionStorage.actualUser})
     
     
@@ -35,7 +29,7 @@ class AjoutPrescription extends Component {
   verifyPrescription(exo_id, array){
     var check = true
     array.forEach((exo, index) => {       
-        if(exo.exo_id == exo_id) check = false
+        if(exo.exo_id === exo_id) check = false
     })
     return check
   }
@@ -96,7 +90,7 @@ class AjoutPrescription extends Component {
         <FormGroup row>
             <Input type="checkbox" name="ex1" onChange={this.handleCheck_1} />
             <Col sm={3}><img src={txtATrou} alt="jeu" className="Game-logo"/></Col>
-            <Col sm={8}>
+            <Col sm={9}>
             <Row>Exercice 1 : Texte à Trous</Row>
             <br/>
             <Row>
@@ -107,7 +101,7 @@ class AjoutPrescription extends Component {
             </Row>
             <br/>
             <Row>
-              <Col sm={5} className="no-padding">Niveau</Col>
+              <Col sm={3} className="no-padding">Niveau</Col>
               <Col sm={2}>1<Input type="radio" name="exo1"  value={1} id="niv1" onChange={this.handleChange_1}/></Col>
               <Col sm={2}>2<Input type="radio" name="exo1" value={2} id="niv2" onChange={this.handleChange_1}/></Col>
               <Col sm={2}>3<Input type="radio" name="exo1" value={3} id="niv3" onChange={this.handleChange_1}/></Col>
@@ -120,7 +114,7 @@ class AjoutPrescription extends Component {
         <FormGroup row>
         <Input type="checkbox" name="ex2" onChange={this.handleCheck_2} />
         <Col sm={3}><img src={jeuImage} alt="jeu" className="Game-logo"/></Col>
-        <Col sm={8}>
+        <Col sm={9}>
         <Row>Exercice 2 : Jeu d'Images</Row>
         <br/>
         <Row>
@@ -131,7 +125,7 @@ class AjoutPrescription extends Component {
         </Row>
         <br/>
         <Row>
-        <Col sm={5} className="no-padding">Niveau</Col>
+        <Col sm={3} className="no-padding">Niveau</Col>
         <Col sm={2}>1<Input type="radio" name="exo2" value={1} id="niv1" onChange={this.handleChange_2}/></Col>
         <Col sm={2}>2<Input type="radio" name="exo2" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
         <Col sm={2}>3<Input type="radio" name="exo2" value={3} id="niv3" onChange={this.handleChange_2}/></Col>
@@ -144,16 +138,16 @@ class AjoutPrescription extends Component {
         <FormGroup row>
             <Input type="checkbox" name="ex3" onChange={this.handleCheck_3} />
             <Col sm={3}><img src={bneImg} alt="jeu" className="Game-logo"/></Col>
-            <Col sm={8}>
+            <Col sm={9}>
             <Row>Exercice 3 : La bonne image</Row>
             <br/>
             <Row>
               <small>Le joueur doit retrouver l'image correspondant au mot affiché.<br/>
               Au niveau 1 il a le choix entre 2 photos,
               au niveau 2 entre 4 photos.</small>
-            </Row>
+            </Row><br/>
             <Row>
-            <Col sm={4} className="no-padding">Niveau</Col>
+            <Col sm={3} className="no-padding">Niveau</Col>
             <Col sm={2}>1<Input type="radio" name="exo3" value={1} id="niv1" onChange={this.handleChange_3}/></Col>
             <Col sm={2}>2<Input type="radio" name="exo3" value={2} id="niv2" onChange={this.handleChange_3}/></Col>
             </Row>
@@ -169,7 +163,7 @@ class AjoutPrescription extends Component {
           <hr/>
         <br/>
         <Row>
-          <Col sm={{size:"8", offset:"2"}}>
+          <Col sm={{size:"12"}}>
           <Form onSubmit={this.handleSubmit}> 
              {display1}
            

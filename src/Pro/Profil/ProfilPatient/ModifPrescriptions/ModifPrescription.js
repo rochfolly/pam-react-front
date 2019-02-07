@@ -21,9 +21,9 @@ class ModifPrescription extends Component {
 
  componentDidMount(){
     this.props.exos.forEach((exo, index) => {
-        if(exo.exo_id == 1){this.setState({ex1:true, ex1level: exo.level})}
-        else if(exo.exo_id == 2){this.setState({ex2:true, ex2level: exo.level})}
-        else if(exo.exo_id == 3){this.setState({ex3:true, ex3level: exo.level})}
+        if(exo.exo_id === 1){this.setState({ex1:true, ex1level: exo.level})}
+        else if(exo.exo_id === 2){this.setState({ex2:true, ex2level: exo.level})}
+        else if(exo.exo_id === 3){this.setState({ex3:true, ex3level: exo.level})}
     })
     this.setState({id: sessionStorage.actualDoctor, user_id: sessionStorage.actualUser})
     
@@ -32,7 +32,7 @@ class ModifPrescription extends Component {
   verifyPrescription(exo_id, array){
     var check = false
     array.forEach((exo, index) => {       
-        if(exo.exo_id == exo_id) check = true
+        if(exo.exo_id === exo_id) check = true
     })
     return check
   }
@@ -62,6 +62,7 @@ class ModifPrescription extends Component {
     this.setState({ ex3level: event.target.value }, () => console.log(this.state.ex3level))
   }
  
+   
   handleSubmit = event => {
     event.preventDefault();
 
@@ -75,6 +76,8 @@ class ModifPrescription extends Component {
 
     console.log(prescriptions)
     updatePrescription(this.state.user_id, prescriptions)
+    window.location = '/profil/' + this.state.id + '/patient/'+ this.state.user_id
+
    /* createFirstPrescription(this.state.user_id, prescriptions).then(res => {
       window.location = '/profil/' + this.state.id + '/patient/'+ res.data
     })*/
@@ -109,20 +112,19 @@ class ModifPrescription extends Component {
                 <Col sm={12} className="no-padding">Niveau actuel : <b>{this.state.ex1level}</b></Col> 
               </Row>
               <Row>
-                <Col sm={6} className="no-padding">Nouveau Niveau</Col>
+                <Col sm={3} className="no-padding">Nouveau Niveau</Col>
                 <Col sm={2}>1<Input type="radio" name="exo1"  value={1} id="niv1" onChange={this.handleChange_1}/></Col>
                 <Col sm={2}>2<Input type="radio" name="exo1" value={2} id="niv2" onChange={this.handleChange_1}/></Col>
                 <Col sm={2}>3<Input type="radio" name="exo1" value={3} id="niv3" onChange={this.handleChange_1}/></Col>
               </Row>
               </Col>
-            <hr/>
         </FormGroup> : null
     
     const display2 = (this.verifyPrescription(2,this.props.exos)) ? 
         <FormGroup row>
         <Input type="checkbox" name="ex2" onChange={this.handleCheck_2} defaultChecked/>
         <Col sm={3}><img src={jeuImage} alt="jeu" className="Game-logo"/></Col>
-        <Col sm={8}>
+        <Col sm={9}>
         <Row>Exercice 2 : Jeu d'Images</Row>
         <br/>
         <Row>
@@ -136,20 +138,19 @@ class ModifPrescription extends Component {
               <Col sm={9} className="no-padding">Niveau actuel : <b>{this.state.ex2level}</b></Col> 
         </Row>
         <Row>
-        <Col sm={6} className="no-padding">Nouveau Niveau</Col>
+        <Col sm={3} className="no-padding">Nouveau Niveau</Col>
         <Col sm={2}>1<Input type="radio" name="exo2" value={1} id="niv1" onChange={this.handleChange_2}/></Col>
         <Col sm={2}>2<Input type="radio" name="exo2" value={2} id="niv2" onChange={this.handleChange_2}/></Col>
         <Col sm={2}>3<Input type="radio" name="exo2" value={3} id="niv3" onChange={this.handleChange_2}/></Col>
         </Row>
         </Col>
-        <hr/>
         </FormGroup> : null
     
     const display3 = (this.verifyPrescription(3,this.props.exos)) ? 
         <FormGroup row>
             <Input type="checkbox" name="ex3" onChange={this.handleCheck_3} defaultChecked/>
             <Col sm={3}><img src={bneImg} alt="jeu" className="Game-logo"/></Col>
-            <Col sm={8}>
+            <Col sm={9}>
             <Row>Exercice 3 : La bonne image</Row>
             <br/>
             <Row>
@@ -161,12 +162,11 @@ class ModifPrescription extends Component {
               <Col sm={9} className="no-padding">Niveau actuel : <b>{this.state.ex3level}</b></Col> 
             </Row>
             <Row>
-            <Col sm={6} className="no-padding">Nouveau Niveau</Col>
+            <Col sm={3} className="no-padding">Nouveau Niveau</Col>
             <Col sm={2}>1<Input type="radio" name="exo3" value={1} id="niv1" onChange={this.handleChange_3}/></Col>
             <Col sm={2}>2<Input type="radio" name="exo3" value={2} id="niv2" onChange={this.handleChange_3}/></Col>
             </Row>
             </Col>
-            <hr/>
         </FormGroup> : null
 
              
@@ -175,16 +175,15 @@ class ModifPrescription extends Component {
       <Container>
         <hr/>
         
-        <br/><br/>
         <Row>
-          <Col sm={{size:"8", offset:"2"}}>
+          
           <Form onSubmit={this.handleSubmit}> 
              {display1}
-           
+           <hr/>
              {display2}           
-            
-             {display3}                        
             <hr/>
+             {display3} 
+            <hr/>    
 
             <Row>
             <Col sm={{size:2, offset:10}}>
@@ -192,10 +191,8 @@ class ModifPrescription extends Component {
             </Col>
             </Row>
 
-          </Form>
-          </Col>
+          </Form> 
         </Row>
-        <br/>
       </Container>
     );
   }

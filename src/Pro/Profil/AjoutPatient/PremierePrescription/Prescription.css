@@ -1,6 +1,6 @@
 .Game-logo {
     margin: 0 auto;
-    height: 150px;
+    height: 150px !important;
 }
 
 .no-padding {
