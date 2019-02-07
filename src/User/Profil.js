@@ -65,7 +65,7 @@ class ProfilUser extends Component {
   render() {
 
     const exercices = this.state.exos.map((exo) => 
-    <Col onClick={this.toggle} sm="6"><ChoixExercice exo={exo} /></Col>
+    <Col sm="6"><ChoixExercice exo={exo} /></Col>
     )
 
     
