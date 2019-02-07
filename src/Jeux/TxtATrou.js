@@ -30,7 +30,7 @@ class TxtATrou extends Component {
         this.state = {niv:'', exo:1, user_id:'', question:0, part1:'', part2:'',
                     reponse:'', answer:'', email:'', 
                     rep1:'', rep2:'', rep3:'', rep4:'',
-                    modal: false, audio_path:''}
+                    modal: true, audio_path:''}
         
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleKeySubmit = this.handleKeySubmit.bind(this)
@@ -132,17 +132,14 @@ class TxtATrou extends Component {
                     rep2: res.data[this.state.question].rep2,
                     rep3: res.data[this.state.question].rep3,
                     rep4: res.data[this.state.question].rep4,
-                    audio_path: `https://csbc76a4c973141x47e5x844.blob.core.windows.net/audio/sample${this.state.question}.wav`}, () => {
-                })  
-                // for(var i=1; i<6; i++){
-                //     CallTextToSpeech(res.data[i-1].part1 + '......' + res.data[i-1].part2, i)
-                // }
+                    audio_path: `https://csbc76a4c973141x47e5x844.blob.core.windows.net/audio/sample${this.state.question}.wav`,
+                    modal: false}, () => {
+                    })  
             }) 
         }) 
         
 
       })   
-        
     }
     
     goBackTo(){
@@ -158,6 +155,7 @@ class TxtATrou extends Component {
   render() {
       
     return (
+        
       <Container>
       <br/>
         <Row>
@@ -223,7 +221,7 @@ class TxtATrou extends Component {
 
         <Modal isOpen={this.state.modal} toggle={this.toggle} backdrop="static">
           <ModalBody>
-            Nous calculons votre score ! Veuillez attendre quelques instants...
+            {this.state.question === 0? <span>Nous chargeons vos questions ! </span> : <span>Nous calculons votre score ! </span>}Veuillez attendre quelques instants...
           </ModalBody>
         </Modal>
 
